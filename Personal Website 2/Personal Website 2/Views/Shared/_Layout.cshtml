@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Bob Ryzowicz</title>
+    <link href="/css/global-style.css" rel="stylesheet" type="text/css" media="screen">
+    <link rel="icon" href="/images/favicon.png" type="image/png"><!-- LayerSlider stylesheet -->
+    <link rel="stylesheet" href="/assets/layerslider/css/layerslider.css" type="text/css">
+    <link href="/Content/shCore.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/shThemeDefault.css" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+      <div class="top-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <span class="aux-text hidden-xs">
+                        Bob Ryzowicz
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header: Logo and Main Nav -->
+    <header>
+        <div id="navOne" class="navbar navbar-wp" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="active">
+                            <a href="@Url.Action( "Index", "Home")" class="redhover">Profile</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="@Url.Action( "About", "Home")" class="redhover">About</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="@Url.Action( "Resume", "Home")" class="redhover">Resume</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">Portfolio</a>
+                            <ul class="dropdown-menu dropdown-megamenu">
+                              <!--  <li> @Html.ActionLink("Portfolio", "Portfolio", "Home")</li>  -->
+                                <li>   <a href="@Url.Action( "JS_Exercises", "Home")" class="redhover">JS Exercises</a>  </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="@Url.Action( "Blog", "Home")" class="redhover">Blog</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="@Url.Action( "Contact", "Home")" class="redhover">Contact</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="@Url.Action( "Other", "Home")" class="redhover">Other</a>
+                        </li>
+                        
+                        
+                    </ul>
+
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+    </header>
+    <div>
+    @RenderBody()
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="col">
+                        <h4>Contact me</h4>
+                        <ul>
+                            <li>Email: <a href="mailto:raryz21@gmail.com" title="Email me">raryz21@gmail.com</a></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="col col-social-icons">
+                        
+                    </div>          
+                </div>
+
+                <div class="col-md-3">
+                    <div class="col col-social-icons">
+                        <h4>Follow me</h4>
+                        <a href="http://www.linkedin.com/in/bobryzowicz"><i class="fa fa-linkedin"></i>LinkedIn</a>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="col">
+                        
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            
+        </div>
+    </footer>
+    
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript" src="/js/modernizr.custom.js"></script>
+    <script type="text/javascript" src="/js/jquery.mousewheel-3.0.6.pack.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/jquery.easing.js"></script>
+    <script type="text/javascript" src="/js/shCore.js"></script>
+    <script type="text/javascript" src="/js/shBrushJScript.js"></script>
+    <script type="text/javascript" src="/js/PersonalWebsiteJS.js"></script>
+
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <!-- Plugins -->
+    <script type="text/javascript" src="/assets/hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+    <script type="text/javascript" src="/assets/masonry/masonry.js"></script>
+    <script type="text/javascript" src="/assets/page-scroller/jquery.ui.totop.min.js"></script>
+    <script type="text/javascript" src="/assets/mixitup/jquery.mixitup.js"></script>
+    <script type="text/javascript" src="/assets/mixitup/jquery.mixitup.init.js"></script>
+    <script type="text/javascript" src="/assets/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+    <script type="text/javascript" src="/assets/easy-pie-chart/jquery.easypiechart.js"></script>
+    <script type="text/javascript" src="/assets/waypoints/waypoints.min.js"></script>
+    <script type="text/javascript" src="/assets/sticky/jquery.sticky.js"></script>
+    <script type="text/javascript" src="/js/jquery.wp.custom.js"></script>
+    <script type="text/javascript" src="/js/jquery.wp.switcher.js"></script>
+    <script src="/assets/layerslider/js/greensock.js" type="text/javascript"></script>
+
+    <!-- LayerSlider script files -->
+    <script src="assets/layerslider/js/layerslider.transitions.js" type="text/javascript"></script>
+    <script src="assets/layerslider/js/layerslider.kreaturamedia.jquery.js" type="text/javascript"></script>
+    <!-- Initializing the slider -->
+    <script>
+		$("#layerslider").layerSlider({
+			pauseOnHover: true,
+			autoPlayVideos: false,
+			skinsPath: 'assets/layerslider/skins/',
+			responsive: false,
+			responsiveUnder: 1280,
+			layersContainer: 1280,
+			skin: 'borderlessdark3d',
+			hoverPrevNext: false,
+		});
+    </script>
+</body>
+</html>

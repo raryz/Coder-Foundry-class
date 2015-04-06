@@ -1,0 +1,792 @@
+﻿@{
+    ViewBag.Title = "JS Exercises";
+}
+<div class ="modal fade" id="max" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class ="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Max of Five</h1>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-4">
+                    
+                    <form id="Calcmax1">
+                        
+                            <label>
+                                Value 1 : <br />
+                                <input type="text" name="value1" required="required" />
+                            </label><br /><br />
+                            <label>
+                                Value 2 : <br />
+                                <input type="text" name="value2" required="required" />
+                            </label><br /><br />
+                            <label>
+                                Value 3 : <br />
+                                <input type="text" name="value3" required="required" />
+                            </label><br /><br />
+                            <label>
+                                Value 4 : <br />
+                                <input type="text" name="value4" required="required" />
+                            </label><br /><br />
+                            <label>
+                                Value 5 : <br />
+                                <input type="text" name="value5" required="required" />
+                            </label><br /><br />
+                        
+                        <div>
+                            <input type="button" name="submit" id="submit" value="Submit"
+                                   onclick="maxOfFive(this.form.value1.value, this.form.value2.value, this.form.value3.value,
+            this.form.value4.value,this.form.value5.value,'result');">
+                        </div>
+                        <br />
+                        <p id="result"></p>
+
+
+                    </form>
+                </div>
+                    
+                <div class="col-md-8">
+                    <pre class="brush: jstext">
+function maxOfFive(value1,value2,value3,value4,value5,resultElementName) {
+    var resultElement = document.getElementById(resultElementName);
+    var holdNumber = [] ;
+    var maxnumber;
+    holdNumber[0] = Number(value1);
+    holdNumber[1] = Number(value2);
+    holdNumber[2] = Number(value3);
+    holdNumber[3] = Number(value4);
+    holdNumber[4] = Number(value5);
+    maxnumber = holdNumber[0];
+    
+        for (var i = 0; i < 4; i++) {
+            if (maxnumber < holdNumber[i + 1]) {
+                maxnumber = holdNumber[i+1];
+            }
+            
+        }
+        
+        return resultElement.textContent = 'The maximum number is ' + maxnumber.toString();
+                
+}                        
+                    </pre>
+
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="sumM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Sum and Multiply</h1>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-4">
+
+                    <form id="sumMult1">
+
+                        <label>
+                            Value 1 : <br />
+                            <input type="text" name="value1" required="required" />
+                        </label><br />
+                        <label>
+                            Value 2 : <br />
+                            <input type="text" name="value2" required="required" />
+                        </label><br />
+                        <label>
+                            Value 3 : <br />
+                            <input type="text" name="value3" required="required" />
+                        </label><br />
+                        <label>
+                            Value 4 : <br />
+                            <input type="text" name="value4" required="required" />
+                        </label><br />
+                        <label>
+                            Value 5 : <br />
+                            <input type="text" name="value5" required="required" />
+                        </label><br />
+                       
+                        <div>
+                            <input type="button" name="submit" id="submit" value="Submit Sum Calculation"
+                                   onclick="sum(this.form.value1.value,this.form.value2.value,this.form.value3.value,
+            this.form.value4.value,this.form.value5.value,'resultS');">
+                        </div>
+
+                        <p id="resultS"></p>
+                        <div>
+                            <input type="button" name="submit2" id="submit2" value="Submit Multiply Calculation"
+                                   onclick="multiply(this.form.value1.value,this.form.value2.value,this.form.value3.value,
+            this.form.value4.value,this.form.value5.value,'resultM');">
+                        </div>
+                        <p id="resultM"></p>
+
+
+                    </form>
+                </div>
+
+                <div class="col-md-8">
+                    <pre class="brush: jstext">
+function sum(value1, value2, value3, value4, value5, resultElementName) {
+    var resultElement = document.getElementById(resultElementName);
+    var holdNumber = [];
+    var sumNumber = 0 ;
+    holdNumber[0] = Number(value1);
+    holdNumber[1] = Number(value2);
+    holdNumber[2] = Number(value3);
+    holdNumber[3] = Number(value4);
+    holdNumber[4] = Number(value5);
+    for (var i = 0; i < 5; i++) {
+        sumNumber += holdNumber[i];
+    }
+    return resultElement.textContent = 'The sum is ' + sumNumber.toString();
+}
+function multiply(value1, value2, value3, value4, value5, resultElementName) {
+    var resultElement = document.getElementById(resultElementName);
+    var holdNumber = [];
+    var multNumber = 1;
+    holdNumber[0] = Number(value1);
+    holdNumber[1] = Number(value2);
+    holdNumber[2] = Number(value3);
+    holdNumber[3] = Number(value4);
+    holdNumber[4] = Number(value5);
+    for (var i = 0; i < 5; i++) {
+        multNumber *= holdNumber[i];
+    }
+    return resultElement.textContent = 'The product is ' + multNumber.toString();                        
+                    </pre>
+
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="palD" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Palindrome</h1>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-4">
+                    <form>
+                    
+                    <br /><br />
+                    <p>  Enter a word to determine whether it is a palindrome</p><br />
+                            <label>
+                                Word : <br />
+                                <input type="text" name="valueP" required="required" />
+                            </label><br /><br />
+
+                        
+                        <div>
+                            <input type="button" name="submit" id="submitP" value="Submit"
+                                   onclick="palindrome(this.form.valueP.value,'resultP');">
+                        </div>
+                        <br />
+                     <p id="resultP"></p>
+
+                    </form>
+                    
+                </div>
+
+                <div class="col-md-8">
+                    <pre class="brush: jstext">
+function palindrome(value1, resultElementName) {
+    var resultElement = document.getElementById(resultElementName);
+    var sourceString = value1;
+    var lowSource = sourceString.toLowerCase();
+    var palTrue = true;
+    var lastIndex = lowSource.length - 1 ;
+    var startIndex = 0;
+    while((startIndex < lastIndex) & (palTrue))
+    if (lowSource[startIndex] == lowSource[lastIndex] ) {
+        startIndex++;
+        lastIndex--;
+    } else {
+      palTrue = false;
+    }
+    if (palTrue == true) {
+        return resultElement.textContent = sourceString + ' is a palindrome.';
+    }
+    else {
+        return resultElement.textContent = sourceString + ' is a not palindrome.';
+    }
+}                        
+                    </pre>
+
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="fact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Factorial</h1>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-4">
+                    <form id="Fact1">
+                        <br />
+                        <p>Enter a number in order to calculate the factorial of that number</p><br />
+                            <label>
+                                Positive Number : <br />
+                                <input type="text" name="value1" required="required" />
+                            </label><br /><br />
+
+                        
+                        <div>
+                            <input type="button" name="submit" id="submitF" value="Submit"
+                                   onclick="factorial(this.form.value1.value,'resultF');">
+                        </div>
+                        <br />
+                        <p id="resultF"></p>
+
+
+                    </form>
+
+                </div>
+
+                <div class="col-md-8">
+                    <pre class="brush: jstext">
+function factorial(value1, resultElementName) {
+  var resultElement = document.getElementById(resultElementName);
+  var num1 = Number(value1);
+  var answer = 1;
+  for (var i = 1; i <= num1 ; i++) {
+      answer *= i;
+  }
+  return resultElement.textContent = 'The result is ' + answer.toString();
+}                        
+                    </pre>
+
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Happy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Happy Numbers</h1>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-4">
+                    <br />
+                    <p>
+                        This program displays the first 5 Happy numbers. Happy numbers are those that can be reduced to 1 through the
+                        following process : start with any positive integer, replace the number with the sum of the square of its digits
+                        ( if the number has only one digit, then square that digit ), and repeat until the result is one or the result
+                        is an endless loop.
+                    </p>
+
+                    <div>
+                        <input type="button" name="submit" id="happyid" value="Execute"
+                               onclick="happy_test('happyResult');">
+                    </div>
+                    <br />
+                    <p id="happyResult"></p>
+
+                </div>
+
+                <div class="col-md-8">
+                    <pre class="brush: jstext">
+function happy_test(resultElementName) {
+    var resultElement = document.getElementById(resultElementName);
+    var isHappy = false;
+    var number = 1;
+    var found5 = false;
+    var happyCount = 0;
+    var holdHappy = [];
+    var digitcount = 0;
+    while (!found5) {
+        isHappy = checkHappy(number);
+        if (isHappy) {
+            holdHappy[happyCount] = number.toString();
+            happyCount += 1;
+        }
+        if (happyCount == 5) {
+            found5 = true;
+        }
+        number++;
+        isHappy = false;
+    }                       // end while !found5
+    function checkHappy(number) {
+        var i = 0;
+        var j = 0;
+        var sum = 0;
+        var holdPrevFound = [];
+        while (!isHappy) {
+            var output = [];
+            while (number) {
+             digitcount = output.unshift(number % 10);
+                number = Math.floor(number / 10);
+            }
+            while (i < digitcount) {
+                sum += Math.pow(output[i], 2);
+                i += 1;
+            }
+            if (sum == 1) {
+                isHappy = true;
+                return isHappy;
+            }
+            else {
+             for (var k = 0; k < holdPrevFound.length; k++) {
+                    if (sum == holdPrevFound[k]) {
+                        isHappy = false;
+                        return isHappy;
+                    }
+                }
+                number = sum;
+             holdPrevFound[holdPrevFound.length] = sum;
+                sum = 0;
+                i = 0;
+            }
+        }   // end while  ( !isHappy )
+    }    // end checkHappy
+    return resultElement.textContent = 'The first 5 Happy numbers are : ' + holdHappy.toString();
+}                          
+                    </pre>
+
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="findLongW" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Find Longest Word</h1>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-4">
+                    <br />
+                    <p>This program finds the longest word in a file.</p>
+
+                    <form>
+                        <!--      Select a file: <input type="file" id="files" name="files[]" onchange="findLongestWord('filename','ResultLW')"> -->
+                        Select a file: <input type="file" id="files" name="files[]">
+                    </form>
+
+                    <br />
+                    <p id="ResultLW"></p>
+                </div>
+
+                <div class="col-md-8">
+                    <pre class="brush: jstext">
+function findLongestWord(evt) {      
+    var output = [];
+ var resultElement = document.getElementById('ResultLW');
+    var f = evt.target.files[0];    
+    
+    if (f) {
+        var reader = new FileReader();         
+        reader.onload = function (e) {  
+            alert(reader.result);      
+           
+            var fullText = reader.result;
+            var fullLength = fullText.length;
+            var countLength = 0;
+            var startPos = 0;
+            var stopPos = 0;
+   var max = 0, maxstart = 0, maxstop = 0, i = 0, j = 0;
+            while (i < fullLength) {
+                j = startPos;
+ while ((fullText.charAt(j) != " ") && (j < fullLength)) {
+                    countLength += 1;
+                    stopPos += 1;
+                    j += 1;
+                }
+                if (stopPos < j) {
+                    stopPos += 1;
+                }
+                if (countLength > max) {
+                    max = countLength;
+                    maxstart = startPos;
+                    maxstop = stopPos - 1;
+                }
+                startPos = stopPos + 1;
+                countLength = 0;
+                i = startPos;
+            }                // end while i < fullLength
+            for (var k = maxstart; k <= maxstop; k++) {
+                output += fullText.charAt(k);
+            }
+    return resultElement.textContent = 'The longest word is ' + output;
+        }
+         
+        reader.readAsText(f);
+    }                            // end if(f)
+    else {
+        alert("Failed to load file");
+    }
+}
+document.getElementById('files').addEventListener('change', findLongestWord, false);
+
+                    </pre>
+
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="perfectN" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Perfect Numbers</h1>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-4">
+                    <br />
+                    <p>
+                        This program allows you to enter a number and determine whether it is a perfect number.  It also
+                        allows you to display the perfect numbers between 1 and 10,000.
+                    </p>
+                    <form id="perfForm">
+                        
+                            <br />
+                            <label>
+                                Value : <br />
+                                <input type="text" name="pNum" id="pNum1" />
+                            </label><br /><br />
+                        
+                        <br />
+                        <div>
+                            <input type="button" name="submit" id="perfectId" value="Check Number"
+                                   onclick="checkPerfect(this.form.pNum1.value,'perfectResult');">
+                        </div>
+                        <br />
+                        <p id="perfectResult"></p>
+
+                    </form>
+                    <br /><br />
+                    <form>
+                        <div>
+                            <input type="button" name="submit" id="perfectL" value="List Perfect Numbers"
+                                   onclick="dispPerfect('perfectList');">
+                        </div>
+                        <p id="perfectList"></p>
+                    </form>
+                </div>
+
+                <div class="col-md-8">
+                    <pre class="brush: jstext">
+ function checkPerfect(pNum1,resultElementName) {
+    var resultElement = document.getElementById(resultElementName);
+    var checkNum = Number(pNum1);
+    var sum = 0;
+    for (var i = 1; i < checkNum; i++) {
+        if ((checkNum % i) == 0) {
+            sum += i;
+        }
+    }
+    if (sum == checkNum) {
+        return resultElement.textContent = checkNum.toString() + ' is a Perfect number.'
+    }
+    else {
+        return resultElement.textContent = checkNum.toString() + ' is not a Perfect number.'
+    }
+}
+
+function dispPerfect(resultElementName) {
+    var resultElement = document.getElementById(resultElementName);
+    var checkNum = 1;
+    var sum = 0;
+    var holdResult = [];
+    var r = 1;
+    holdResult[0] = 'The Perfect numbers are ' ;
+    while (checkNum <= 10000) {
+        for (var i = 1; i < checkNum; i++) {
+        if ((checkNum % i) == 0) {
+            sum += i;
+        }
+    }
+    if (sum == checkNum) {
+        holdResult[r] = i.toString();
+        console.log(holdResult[r]);
+        r += 1;
+    }
+    sum = 0;
+    checkNum += 1;
+    }
+    return resultElement.textContent = holdResult;
+}
+  </pre>
+
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="iterateN" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Iterate Numbers</h1>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-4">
+                    <br />
+                    <p>This program iterates the integers from 1 to 100 sending the result to the screen.</p>
+                    <ul>
+                        <li>For each number that is a multiple of three, print &ldquo; Fizz &rdquo; instead of the number.</li>
+                        <li>For multiples of five print &ldquo; Buzz &rdquo; instead of the number.</li>
+                        <li>For numbers that are multiples of both three and five print &ldquo; FizzBuzz &rdquo;</li>
+                    </ul>
+                    <div>
+                        <input type="button" name="submit" id="submit5" value="Execute"
+                               onclick="iterate('iResult');">
+                    </div>
+                    <br />
+                    <p id="iResult"></p>
+</div>
+                <div class="col-md-8">
+                    <pre class="brush: jstext">
+function iterate(resultElementName) {
+  var resultElement = document.getElementById(resultElementName);
+  var holdresult = [];
+  holdresult[0] = 'Results = ';
+    for (var i = 1; i <= 100; i++) {
+        if ((i % 3 == 0) & (i % 5 == 0)) {
+            holdresult[i] = 'FizzBuzz';
+        } else if (i % 3 == 0) {
+            holdresult[i] = 'Fizz';
+        } else if (i % 5 == 0) {
+            holdresult[i] = 'Buzz';
+        } else {
+            holdresult[i] = i.toString();
+        }
+    }
+    return resultElement.textContent = holdresult;
+}
+  </pre>
+
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="armstrongN" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+                <h1 class="modal-title" id="myModalLabel">Armstrong Numbers</h1>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-4">
+                    <br />
+                    <p>
+                        This program displays all three digit Armstrong numbers. An Armstrong number is an integer such that the sum of the
+                        cubes of its digits is equal to the number itself.
+                    </p>
+
+                    <div>
+                        <input type="button" name="submit" id="armstrongid" value="Execute"
+                               onclick="armstrongCalc('armstrongResult');">
+                    </div>
+                    <br />
+                    <p id="armstrongResult"></p>
+                </div>
+                <div class="col-md-8">
+                    <pre class="brush: jstext">
+function armstrongCalc(resultElementName) {
+    var resultElement = document.getElementById(resultElementName);
+    var result = " ";
+    
+    
+    for (var i = 100; i < 1000 ; i++) {
+        var num = i;
+        var sum = 0;
+        var count = 1;
+        while (count <= 3) {
+            sum += Math.pow((num % 10),3);
+            num = Math.floor(num / 10);
+            count += 1;
+        }
+        if (sum == i) {
+            result = result + i.toString() + ', ';
+        }
+    }
+    var lastchar = result.length  ;
+    result = result.substring(0, (lastchar - 2));
+    return resultElement.textContent = 'The Armstrong numbers are : ' + result;
+}
+  </pre>
+
+                </div>
+            </div>
+            <div class="modal-footer no-margin">
+            </div>
+        </div>
+    </div>
+</div>
+
+                                <div class="JS_Exercise1 container">
+                                    <div class="row">
+
+                                        <div class="col-md-4 body-offwhite js-border">
+                                            <!--  <h2>@ViewBag.Title.</h2>  -->
+                                            <!--  <h3>@ViewBag.Message</h3>  -->
+                                            <h3>Maximum of 5 Numbers</h3>
+                                            <br />
+                                            <a href="" data-toggle="modal" data-target="#max"> <h4 class="disp-back btn btn-primary btn-large">Display </h4></a>
+
+         
+                                        </div>
+
+                                        <div class="col-md-4 body-offwhite js-border">
+
+                                            <!--  <h2>@ViewBag.Title.</h2>  -->
+                                            <!--  <h3>@ViewBag.Message</h3>  -->
+                                            <h3>Sum and Multiply</h3>
+                                            <br />
+                                            <a href="" data-toggle="modal" data-target="#sumM"><h4 class="disp-back btn btn-primary btn-large">Display </h4></a>
+
+                                           
+                                           
+                                        </div>
+
+                                        <div class="col-md-4 body-offwhite js-border">
+
+
+
+                                            <!--  <h2>@ViewBag.Title.</h2>  -->
+                                            <!--  <h3>@ViewBag.Message</h3>  -->
+                                            <h3>Palindrome</h3>
+                                              <br />
+                                            <a href="" data-toggle="modal" data-target="#palD"><h4 class="disp-back btn btn-primary btn-large">Display </h4></a>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <!-- Second row -->
+
+                                        <div class="col-md-4 body-offwhite js-border">
+                                            <!--  <h2>@ViewBag.Title.</h2>  -->
+                                            <!--  <h3>@ViewBag.Message</h3>  -->
+                                            <h3>Factorial</h3>
+                                            <br />
+                                            <a href="" data-toggle="modal" data-target="#fact"><h4 class="disp-back btn btn-primary btn-large">Display </h4></a>
+
+                                           
+                                        </div>
+
+                                        <div class="col-md-4 body-offwhite js-border">
+
+                                            <!--  <h2>@ViewBag.Title.</h2>  -->
+                                            <!--  <h3>@ViewBag.Message</h3>  -->
+                                            <h3>Happy Numbers</h3>
+                                            <br />
+                                            <a href="" data-toggle="modal" data-target="#Happy"><h4 class="disp-back btn btn-primary btn-large">Display </h4></a>
+
+                                           
+                                        </div>
+
+                                        <div class="col-md-4 body-offwhite js-border">
+
+
+
+                                            <!--  <h2>@ViewBag.Title.</h2>  -->
+                                            <!--  <h3>@ViewBag.Message</h3>  -->
+                                            <h3>Find Longest Word</h3>                                                                                             
+                                            <br />
+                                            <a href="" data-toggle="modal" data-target="#findLongW"><h4 class="disp-back btn btn-primary btn-large">Display </h4></a>
+                                           
+                                        </div>
+                                    </div>
+
+                               
+<div class="row">
+    <!-- Third row -->
+
+    <div class="col-md-4 body-offwhite js-border">
+        <!--  <h2>@ViewBag.Title.</h2>  -->
+        <!--  <h3>@ViewBag.Message</h3>  -->
+        <h3>Perfect Numbers</h3>
+        <br />
+        <a href="" data-toggle="modal" data-target="#perfectN"><h4 class="disp-back btn btn-primary btn-large">Display </h4></a>
+
+
+    </div>
+
+    <div class="col-md-4 body-offwhite js-border">
+
+        <!--  <h2>@ViewBag.Title.</h2>  -->
+        <!--  <h3>@ViewBag.Message</h3>  -->
+        <h3>Iterate</h3>
+        <br />
+        <a href="" data-toggle="modal" data-target="#iterateN"><h4 class="disp-back btn btn-primary btn-large">Display </h4></a>
+
+
+    </div>
+
+    <div class="col-md-4 body-offwhite js-border">
+
+
+
+        <!--  <h2>@ViewBag.Title.</h2>  -->
+        <!--  <h3>@ViewBag.Message</h3>  -->
+        <h3>Armstrong Numbers</h3>
+        <br />
+        <a href="" data-toggle="modal" data-target="#armstrongN"><h4 class="disp-back btn btn-primary btn-large">Display </h4></a>
+
+    </div>
+</div>
+
+                                </div>

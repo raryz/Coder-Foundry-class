@@ -1,0 +1,192 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.top-header .aux-text {
+  padding: 0px 0;
+  color: #000000;
+  font-size: 40px;
+}
+
+footer h4
+{margin-top:20px; color:#000000; margin-bottom:20px; text-transform:capitalize; font-size:14px;}
+
+body {
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #333333;
+  background-color: #87CEEB;
+}
+
+
+.top-header {
+  border-bottom: 0px solid #eee;
+  background: #87CEEB;
+}
+
+
+footer {
+  padding-top: 15px;
+  padding-bottom: 20px;
+  min-height: 30px;
+  background-color: #87CEEB;
+}
+
+footer .col ul li {
+  color: #000000;
+}
+
+footer .col ul li {
+  color: #000000;
+}
+
+.low-back {
+  background-color: #EEEEEE;
+  padding-left: 25px;
+ /* margin-left: 10px;  */
+}
+
+.img-about {
+    background-color: #87CEEB;
+    padding-left: 0px;
+}
+
+.p-about {
+  background-color: #EEEEEE;
+  padding-left: 25px;
+  font-size: 18px;
+  padding-right: 35px ;
+ /* margin-left: 10px;  */
+}
+
+.h-resume {
+  background-color: #EEEEEE;
+  padding-left: 25px;
+  font-size: 18px;
+  padding-right: 35px ;
+  padding-bottom: 0px;
+  text-align: center;
+  margin-bottom: 0px;
+ /* margin-left: 10px;  */
+}
+
+.h-row {
+  background-color: #EEEEEE;
+  padding-left: 25px;
+  font-size: 18px;
+  padding-right: 35px ;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  text-align: center;
+   /* margin-left: 10px;  */
+}
+.b-resume {
+  background-color: #EEEEEE;
+  padding-left: 25px;
+  padding-top: 0px;
+  font-size: 18px;
+  padding-right: 35px ;
+  text-align: left;
+  margin-left: 10px;  
+  margin-bottom: 0px; 
+  margin-top: 0px;
+}
+
+.s-resume {
+    padding-top: 0px;
+    margin-top: 0px;
+
+}
+.b-blog {
+  background-color: #EEEEEE;
+  padding-left: 25px;
+  padding-top: 0px;
+  font-size: 18px;
+  padding-right: 35px ;
+  text-align: left;
+  margin-left: 10px;  
+  margin-bottom: 0px; 
+  margin-top: 0px;
+}
+
+.text-center {
+  text-align: center;
+   /* margin-left: 10px;  */
+}
+
+#iResult {
+    width: 80%;
+    float: left;
+    margin: 1%;
+    overflow: scroll;
+}
+
+.jumbotron {
+        margin-bottom: 0px;
+}
+
+.body-offwhite {
+    background-color: #EEEEEE;
+}
+/*ul.nav li.dropdown:hover ul.dropdown-menu{
+    display: block;    
+}*/
+
+a.menu:after, .dropdown-toggle:after {
+  content: none;
+}
+
+ .redhover:hover {
+    color:white !important;
+  background-color: #e91b23!important;
+}
+
+ .modal-dialog {
+     position:initial!important;
+     width: 55%;
+}
+
+ .js-border {
+     border: 2px solid;
+     border-radius: 25px;
+ }
+
+  h4 .disp-back {
+     background-color: red!important;
+     border: 2px solid;
+     border-radius: 25px;
+ }
+
+  h4 .btn-success{
+     background-color: red!important;
+     border: 2px solid;
+     border-radius: 25px;
+  }
+
+  h4 .btn-large{
+     background-color: red;
+     border: 2px solid;
+     border-radius: 25px;
+  }
+  
