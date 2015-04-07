@@ -41,7 +41,8 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-left">
-                        <li class="active">
+               <!--        <li class="active">   --> 
+                        <li class="dropdown">
                             <a href="@Url.Action( "Index", "Home")" class="redhover">Profile</a>
                         </li>
                         <li class="dropdown">
@@ -58,7 +59,8 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="@Url.Action( "Blog", "Home")" class="redhover">Blog</a>
+                            <!--               <a href="@Url.Action( "Blog", "Home")" class="redhover">Blog</a>  -->
+                            <a href="@Url.Action("Index", "Posts")" class="redhover">Blog</a>
                         </li>
                         <li class="dropdown">
                             <a href="@Url.Action( "Contact", "Home")" class="redhover">Contact</a>
