@@ -4,12 +4,11 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2 class="b-blog text-center">Blog Post Details</h2>
 
 <div>
-    <h4>Post</h4>
-    <hr />
-    <dl class="dl-horizontal">
+
+    <dl class="dl-horizontal b-blog">
         <dt>
             @Html.DisplayNameFor(model => model.Created)
         </dt>
@@ -60,7 +59,21 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-left">
+                @if (User.IsInRole("Admin"))
+        {
+                    <li class="dropdown">
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class="redhover"})
+                     </li>   
+                         }
+        <li class="dropdown b-pad-left97">
+            <a href="@Url.Action("Index", "Posts")" class="redhover">Back to List</a>
+        </li>
+
+        
+
+
+   </ul>
+
+</div><!--/.nav-collapse -->

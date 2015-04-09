@@ -130,6 +130,21 @@ footer .col ul li {
   margin-top: 0px;
 }
 
+.b-log {
+    padding-top: 0px;
+}
+
+.b-m-bottom {
+    margin-bottom: 0px;
+}
+
+.b-pad-left{
+    padding-left: 90px;
+}
+
+.b-pad-left97{
+    padding-left: 97px;
+}
 .text-center {
   text-align: center;
    /* margin-left: 10px;  */

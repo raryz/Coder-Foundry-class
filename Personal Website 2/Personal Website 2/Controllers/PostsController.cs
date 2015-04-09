@@ -30,19 +30,21 @@ namespace Personal_Website_2.Controllers
 
         // GET: Posts/Details/5
         [AllowAnonymous]
-        public async Task<ActionResult> Details(int? id)
+        
+        public ActionResult Details(string Slug)
         {
-            if (id == null)
+            if (String.IsNullOrWhiteSpace(Slug))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = await db.Posts.FindAsync(id);
+            Post post = db.Posts.FirstOrDefault(p => p.Slug == Slug);
             if (post == null)
             {
                 return HttpNotFound();
             }
             return View(post);
         }
+
 
         // GET: Posts/Create
         public ActionResult Create()
@@ -55,17 +57,34 @@ namespace Personal_Website_2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Created,Updated,Title,Body,MediaURL,Slug")] Post post)
+        public ActionResult Create([Bind(Include = "Created,Body,Title,Published")] Post post, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
-                db.Posts.Add(post);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
+                var Slug = StringUtilities.URLFriendly(post.Title);
+                if (String.IsNullOrWhiteSpace(Slug))
+                {
+                    ModelState.AddModelError("Title", "Invalid title.");
+                    return View(post);
+                }
+                if (db.Posts.Any(p => p.Slug == Slug))
+                {
+                    ModelState.AddModelError("Title", "The title must be unique.");
+                    return View(post);
+                }
+                else
+                {
+                    post.Created = System.DateTimeOffset.Now;
+                    post.Slug = Slug;
 
+                    db.Posts.Add(post);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
             return View(post);
         }
+
 
         // GET: Posts/Edit/5
         public async Task<ActionResult> Edit(int? id)
