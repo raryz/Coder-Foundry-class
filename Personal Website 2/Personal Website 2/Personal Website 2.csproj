@@ -16,7 +16,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44300</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -321,6 +321,8 @@
     <Content Include="assets\waypoints\_notes\dwsync.xml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\shCore.css" />
+    <Content Include="Content\shThemeDefault.css" />
     <Content Include="css\global-style.css" />
     <Content Include="favicon.ico" />
     <Content Include="font-awesome\css\font-awesome.css" />
@@ -367,6 +369,7 @@
     <Content Include="images\clients\client-9.png" />
     <Content Include="images\clients\_notes\dwsync.xml" />
     <Content Include="images\favicon.png" />
+    <Content Include="images\Horse race1.jpg" />
     <Content Include="images\prv\about-img-1.jpg" />
     <Content Include="images\prv\about-img-2.jpg" />
     <Content Include="images\prv\banner-img-1.jpg" />
@@ -469,6 +472,7 @@
     <Content Include="images\slider\youtube-color.png" />
     <Content Include="images\slider\_notes\dwsync.xml" />
     <Content Include="images\_notes\dwsync.xml" />
+    <Content Include="js\Exercise 1 with links Max.js" />
     <Content Include="js\html5shiv.js" />
     <Content Include="js\jquery.cookie.js" />
     <Content Include="js\jquery.easing.js" />
@@ -481,6 +485,8 @@
     <Content Include="js\modernizr.custom.js" />
     <Content Include="js\PersonalWebsiteJS.js" />
     <Content Include="js\respond.min.js" />
+    <Content Include="js\shBrushJScript.js" />
+    <Content Include="js\shCore.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="css\buttons.less" />
@@ -650,6 +656,8 @@
     <Content Include="Scripts\tinymce\tinymce.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
     <Content Include="Views\Home\Resume.cshtml" />
+    <None Include="Properties\PublishProfiles\rryzowicz - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\rryzowicz - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\rryzowicz.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -747,7 +755,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49501</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49501/</IISUrl>
+          <IISUrl>https://localhost:44300/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

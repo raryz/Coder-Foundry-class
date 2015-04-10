@@ -4,9 +4,9 @@
     ViewBag.Title = "Index";
 }
 
-<h2 class="text-center">Blog Post Details</h2>
+<h2 class="text-center b-general">Blog Post Details</h2>
 
-<p>
+<p class="b-general">
    <!-- @Html.ActionLink("Create New", "Create")  -->
    <a href="@Url.Action("Create", "Posts")"class="btn btn-lg btn-two">Create New</a>
 </p>
@@ -47,7 +47,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Body)
-            </td>
+             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MediaURL)
             </td>

@@ -4,76 +4,131 @@
     ViewBag.Title = "Details";
 }
 
-<h2 class="b-blog text-center">Blog Post Details</h2>
+<!-- <h2 class="b-blog text-center">Blog Post Details</h2>  -->
 
-<div>
 
-    <dl class="dl-horizontal b-blog">
-        <dt>
-            @Html.DisplayNameFor(model => model.Created)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Created)
-        </dd>
+<section class="slice bg-3 animate-hover-slide">
+    <div class="w-section inverse blog-grid">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="w-box blog-post">
+                                <div class="figure">
+                                    <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                                    <!-- <img alt="" src="images/prv/wkp-img-1.jpg">  -->
+                                    <h2>@Html.DisplayFor(model => model.Title)</h2>
+                                    <ul class="meta-list">
+                                        <li>
+                                            <span>Written by</span>
+                                            <span class="bold">Bob Ryzowicz</span>
+                                        </li>
+                                        <li>
+                                            <span>-</span>
+                                            @Html.DisplayFor(model => model.Created)
+                                           <!-- <a href="#">October 30th, 2013</a>  -->
+                                        </li>
+                                    </ul>
+                                    @Html.Raw(Model.Body)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="w-box blog-post">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Updated)
-        </dt>
+                                <div class="comments-wr">
+                                    <h3 class="section-title">Comments</h3>
 
-        <dd>
-            @Html.DisplayFor(model => model.Updated)
-        </dd>
+                                    <div class="comment">
+                                        
+                                        <p>Lorem ipsum dolor sit amet</p>
+                                    </div>
+                                   
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="w-box w-box-inverse inner">
+                                <div class="comment-form">
+                                    <h3 class="section-title">Add your comment</h3>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+                                    <form class="form-light">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>First name</label>
+                                                    <input type="text" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Last name</label>
+                                                    <input type="text" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Email</label>
+                                                    <input type="email" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Website</label>
+                                                    <input type="text" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Comment</label>
+                                                    <textarea class="form-control" placeholder="Write your comment here" style="min-height:90px;"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Body)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Body)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MediaURL)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MediaURL)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Slug)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Slug)
-        </dd>
-
-    </dl>
-</div>
-<div class="navbar-collapse collapse">
-    <ul class="nav navbar-nav navbar-left">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-1">
+            
                 @if (User.IsInRole("Admin"))
-        {
-                    <li class="dropdown">
-                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class="redhover"})
-                     </li>   
-                         }
-        <li class="dropdown b-pad-left97">
-            <a href="@Url.Action("Index", "Posts")" class="redhover">Back to List</a>
-        </li>
+                {
+                    
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-two" })
+                    
+                }
+                </div>
+        <div class="col-sm-2">
+            <a href="@Url.Action("Index", "Posts")" class="btn btn-two">Back to List</a>
+            </div>
+        <div class="col-sm-9">
+            <div class="navbar-collapse collapse">
 
-        
+            </div><!--/.nav-collapse -->
+        </div>
 
-
-   </ul>
-
-</div><!--/.nav-collapse -->
+        </div>
+    </div>
+        <!--<li class="dropdown b-pad-left97">-->

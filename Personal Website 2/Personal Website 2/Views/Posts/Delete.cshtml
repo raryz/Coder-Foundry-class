@@ -4,13 +4,14 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h2 class="text-center low-back b-log b-general">
+    Delete Post
+</h2>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Post</h4>
-    <hr />
-    <dl class="dl-horizontal">
+
+    
+    <dl class="dl-horizontal low-back b-log">
         <dt>
             @Html.DisplayNameFor(model => model.Created)
         </dt>
@@ -61,12 +62,44 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+    <div class="form-actions no-color">
+        <div class="row">
+            <div class="col-sm-1">
+           <!--     <input type="submit" value="Delete" class="btn btn-default btn-two" />  -->
+            </div>
+            <div class="col-sm-1">
+           <!--     <input type="submit" value="Delete" class="btn btn-default btn-two" />  -->
+            </div>
+            <div class="col-sm-10">
+                <input type="submit" value="Delete" class="btn btn-default btn-two" />
+            </div>
         </div>
-    }
-</div>
+            </div>
+            }
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-1">
+
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-actions">
+                        <br />
+
+                            <a href="@Url.Action("Index", "Posts")" class="btn btn-two">Back to List</a>
+
+
+                        </div><!--/.nav-collapse -->
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="navbar-collapse collapse">
+
+                        </div><!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+
+
+        </div>

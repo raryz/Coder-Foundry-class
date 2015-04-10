@@ -113,6 +113,16 @@ footer .col ul li {
   margin-top: 0px;
 }
 
+.b-general {
+  background-color: #EEEEEE;
+  padding-left: 25px;
+  padding-top: 0px;
+  padding-right: 35px ;
+  margin-left: 10px;  
+  margin-bottom: 0px; 
+  margin-top: 0px;
+}
+
 .s-resume {
     padding-top: 0px;
     margin-top: 0px;
@@ -204,4 +214,8 @@ a.menu:after, .dropdown-toggle:after {
      border: 2px solid;
      border-radius: 25px;
   }
+  .b-pad-empty{
+    padding-left: 0px;
+    margin-left: 0px;
+}
   

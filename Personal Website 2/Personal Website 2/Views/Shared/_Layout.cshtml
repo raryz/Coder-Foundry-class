@@ -127,7 +127,6 @@
     
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 
     <script type="text/javascript" src="/js/modernizr.custom.js"></script>
     <script type="text/javascript" src="/js/jquery.mousewheel-3.0.6.pack.js"></script>
@@ -135,7 +134,7 @@
     <script type="text/javascript" src="/js/jquery.easing.js"></script>
     <script type="text/javascript" src="/js/shCore.js"></script>
     <script type="text/javascript" src="/js/shBrushJScript.js"></script>
-    <script type="text/javascript" src="/js/PersonalWebsiteJS.js"></script>
+    
 
     <!--[if lt IE 9]>
         <script src="js/html5shiv.js"></script>
@@ -156,8 +155,8 @@
     <script src="/assets/layerslider/js/greensock.js" type="text/javascript"></script>
 
     <!-- LayerSlider script files -->
-    <script src="assets/layerslider/js/layerslider.transitions.js" type="text/javascript"></script>
-    <script src="assets/layerslider/js/layerslider.kreaturamedia.jquery.js" type="text/javascript"></script>
+    <script src="/assets/layerslider/js/layerslider.transitions.js" type="text/javascript"></script>
+    <script src="/assets/layerslider/js/layerslider.kreaturamedia.jquery.js" type="text/javascript"></script>
     <!-- Initializing the slider -->
     <script>
 		$("#layerslider").layerSlider({
@@ -171,5 +170,6 @@
 			hoverPrevNext: false,
 		});
     </script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>
