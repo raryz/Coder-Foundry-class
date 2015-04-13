@@ -62,8 +62,10 @@ footer .col ul li {
 }
 
 .low-back {
-  background-color: #EEEEEE;
-  padding-left: 25px;
+  background-color: #FFFFFF;
+  padding: 30px;
+ /* background-color: #EEEEEE; */
+ /*  padding-left: 25px; */
  /* margin-left: 10px;  */
 }
 
@@ -73,15 +75,17 @@ footer .col ul li {
 }
 
 .p-about {
-  background-color: #EEEEEE;
+  background-color: #FFFFFF;
   padding-left: 25px;
   font-size: 18px;
   padding-right: 35px ;
  /* margin-left: 10px;  */
+ /*padding-left: 25px; */
+ /*padding-right: 35px ;*/
 }
 
 .h-resume {
-  background-color: #EEEEEE;
+  background-color: #FFFFFF;
   padding-left: 25px;
   font-size: 18px;
   padding-right: 35px ;
@@ -92,7 +96,7 @@ footer .col ul li {
 }
 
 .h-row {
-  background-color: #EEEEEE;
+  background-color: #FFFFFF;
   padding-left: 25px;
   font-size: 18px;
   padding-right: 35px ;
@@ -102,19 +106,20 @@ footer .col ul li {
    /* margin-left: 10px;  */
 }
 .b-resume {
-  background-color: #EEEEEE;
+  background-color: #FFFFFF;
   padding-left: 25px;
   padding-top: 0px;
   font-size: 18px;
   padding-right: 35px ;
   text-align: left;
-  margin-left: 10px;  
+  margin-left: 0px;  
   margin-bottom: 0px; 
   margin-top: 0px;
+  /*margin-left: 10px;  */
 }
 
 .b-general {
-  background-color: #EEEEEE;
+  background-color: #FFFFFF;
   padding-left: 25px;
   padding-top: 0px;
   padding-right: 35px ;
@@ -129,7 +134,7 @@ footer .col ul li {
 
 }
 .b-blog {
-  background-color: #EEEEEE;
+  background-color: #FFFFFF;
   padding-left: 25px;
   padding-top: 0px;
   font-size: 18px;
@@ -171,8 +176,8 @@ footer .col ul li {
         margin-bottom: 0px;
 }
 
-.body-offwhite {
-    background-color: #EEEEEE;
+.body-offwhite {                       /* changed to white */
+    background-color: #FFFFFF;
 }
 /*ul.nav li.dropdown:hover ul.dropdown-menu{
     display: block;    
