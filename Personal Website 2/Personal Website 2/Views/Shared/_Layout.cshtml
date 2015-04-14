@@ -43,34 +43,34 @@
                     <ul class="nav navbar-nav navbar-left">
                <!--        <li class="active">   --> 
                         <li class="dropdown">
-                            <a href="@Url.Action( "Index", "Home")" class="redhover">Profile</a>
+                            <a href="@Url.Action( "Index", "Home")" class="bluehover">Profile</a>
                         </li>
                         <li class="dropdown">
-                            <a href="@Url.Action( "About", "Home")" class="redhover">About</a>
+                            <a href="@Url.Action( "About", "Home")" class="bluehover">About</a>
                         </li>
                         <li class="dropdown">
-                            <a href="@Url.Action( "Resume", "Home")" class="redhover">Resume</a>
+                            <a href="@Url.Action( "Resume", "Home")" class="bluehover">Resume</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">Portfolio</a>
+                            <a href="#" class="dropdown-toggle bluehover" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">Portfolio</a>
                             <ul class="dropdown-menu dropdown-megamenu">
                               <!--  <li> @Html.ActionLink("Portfolio", "Portfolio", "Home")</li>  -->
-                                <li>   <a href="@Url.Action( "JS_Exercises", "Home")" class="redhover">JS Exercises</a>  </li>
+                                <li>   <a href="@Url.Action( "JS_Exercises", "Home")" class="bluehover">JS Exercises</a>  </li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <!--               <a href="@Url.Action( "Blog", "Home")" class="redhover">Blog</a>  -->
-                            <a href="@Url.Action("Index", "Posts")" class="redhover">Blog</a>
+                            <!--               <a href="@Url.Action( "Blog", "Home")" class="bluehover">Blog</a>  -->
+                            <a href="@Url.Action("Index", "Posts")" class="bluehover">Blog</a>
                         </li>
                         <li class="dropdown">
-                            <a href="@Url.Action( "Contact", "Home")" class="redhover">Contact</a>
+                            <a href="@Url.Action( "Contact", "Home")" class="bluehover">Contact</a>
                         </li>
                         <li class="dropdown">
-                            <a href="@Url.Action( "Other", "Home")" class="redhover">Other</a>
+                            <a href="@Url.Action( "Other", "Home")" class="bluehover">Other</a>
                         </li>
                         @if (User.IsInRole("Admin")){
                         <li class="dropdown">
-                            <a href="@Url.Action( "AdminIndex", "Posts")" class="redhover">Admin</a>
+                            <a href="@Url.Action( "AdminIndex", "Posts")" class="bluehover">Admin</a>
                         </li>
                         }
                         

@@ -95,6 +95,9 @@ footer .col ul li {
  /* margin-left: 10px;  */
 }
 
+.c-blue{
+    background-color: #00B5FF;
+}
 .h-row {
   background-color: #FFFFFF;
   padding-left: 25px;
@@ -124,6 +127,16 @@ footer .col ul li {
   padding-top: 0px;
   padding-right: 35px ;
   margin-left: 10px;  
+  margin-bottom: 0px; 
+  margin-top: 0px;
+}
+
+.b-general-2 {
+  background-color: #FFFFFF;
+  padding-left: 25px;
+  padding-top: 0px;
+  padding-right: 35px ;
+  margin-left: 90px;  
   margin-bottom: 0px; 
   margin-top: 0px;
 }
@@ -179,6 +192,15 @@ footer .col ul li {
 .body-offwhite {                       /* changed to white */
     background-color: #FFFFFF;
 }
+
+.body-white {                       /* changed to white */
+    background-color: #FFFFFF;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
 /*ul.nav li.dropdown:hover ul.dropdown-menu{
     display: block;    
 }*/
@@ -190,6 +212,11 @@ a.menu:after, .dropdown-toggle:after {
  .redhover:hover {
     color:white !important;
   background-color: #e91b23!important;
+}
+
+ .bluehover:hover {
+    color:white !important;
+  background-color: #00B5FF!important;
 }
 
  .modal-dialog {

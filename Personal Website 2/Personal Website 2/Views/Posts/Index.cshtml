@@ -7,27 +7,43 @@
 <!-- <h2>Index</h2>  -->
 
 
-<section class="slice bg-2">
-    <div class="w-section inverse">
-        <div class="container">
-            <div class="row">
+<!--<section class="slice c-blue">  -->
+ <!--   <div class="w-section inverse c-blue">  -->
+        <div class="container c-blue">
+            <div class="row c-blue">
                 <div class="col-md-12">
-                    <div class="text-center">
-                    <!--    <h4><i class="fa fa-comment fa-3x"></i></h4>  -->
+                    <div class="text-center c-blue">
+                        <!--    <h4><i class="fa fa-comment fa-3x"></i></h4>  -->
                         <h2>Welcome to my Blog</h2>
-                 <!--       <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas neque diam, luctus at laoreet in, auctor ut tellus.
-                            <br>
-                            Etiam enim lacus, ornare et tempor, rhoncus rhoncus sem.
-                        </p>  -->
+                        <!--       <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas neque diam, luctus at laoreet in, auctor ut tellus.
+                    <br>
+                    Etiam enim lacus, ornare et tempor, rhoncus rhoncus sem.
+                </p>  -->
                         <span class="clearfix"></span>
 
                     </div>
                 </div>
             </div>
         </div>
+ <!--   </div>  -->
+<!-- </section>  -->
+
+
+    
+    <div class="body-white">
+        <div class="row body-white">
+            <div class="col-md-8 body-white">
+                <br />
+            </div>   <!-- login blank space-->
+            <div class="col-md-4 body-white">
+                <br />
+                <a href="@Url.Action("Login", "Account")" class="btn c-blue">Login to Comment</a>
+            </div>   <!-- login blank space-->
+        </div>
     </div>
-</section>
+   
+
 
 <section class="slice bg-3">
     <div class="w-section inverse">
@@ -51,7 +67,7 @@
                                         @Html.Raw(post.Body)
                                     </div>
                                     <p>
-                                        <a href="@Url.Action("Details", new { Slug = post.Slug })" class="btn btn-xs btn-two pull-right">Read more</a>
+                                        <a href="@Url.Action("Details", new { Slug = post.Slug })" class="btn btn-xs c-blue pull-right">Read more</a>
                                     </p>
                                 </div>
                             </li>
@@ -76,7 +92,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search blog..." />
                                 <span class="input-group-btn">
-                                    <button class="btn btn-two" type="button">Go!</button>
+                                    <button class="btn c-blue" type="button">Go!</button>
                                 </span>
                             </div>
                         </form>
