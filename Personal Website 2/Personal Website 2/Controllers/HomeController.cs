@@ -23,7 +23,7 @@ namespace Personal_Website_2.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
+            ViewBag.MessageSent = TempData["MessageSent"];
             return View();
         }
         public ActionResult Resume()

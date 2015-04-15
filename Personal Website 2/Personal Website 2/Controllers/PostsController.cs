@@ -10,15 +10,15 @@ using System.Web.Mvc;
 using Personal_Website_2.Models;
 using PagedList;
 using PagedList.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace Personal_Website_2.Controllers
 {
-    [Authorize(Roles="Admin")]
+    
     public class PostsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        [AllowAnonymous]
         public ActionResult Index(int? page)
         {
             int pageSize = 3;
@@ -31,6 +31,7 @@ namespace Personal_Website_2.Controllers
         }
 
         // GET: Posts
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> AdminIndex()
         {
             return View(await db.Posts.ToListAsync());
@@ -55,6 +56,7 @@ namespace Personal_Website_2.Controllers
 
 
         // GET: Posts/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -65,6 +67,7 @@ namespace Personal_Website_2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "Created,Body,Title,Published")] Post post, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
@@ -95,6 +98,7 @@ namespace Personal_Website_2.Controllers
 
 
         // GET: Posts/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -114,6 +118,7 @@ namespace Personal_Website_2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit([Bind(Include = "Id,Created,Updated,Title,Body,MediaURL,Slug")] Post post)
         {
             if (ModelState.IsValid)
@@ -127,6 +132,7 @@ namespace Personal_Website_2.Controllers
         }
 
         // GET: Posts/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -144,6 +150,7 @@ namespace Personal_Website_2.Controllers
         // POST: Posts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Post post = await db.Posts.FindAsync(id);
@@ -151,7 +158,35 @@ namespace Personal_Website_2.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddComment(Comment commentMessage, string slug)
+        {
+            if (ModelState.IsValid)
+            {
+                var msgBody = commentMessage.Body;
+                if (string.IsNullOrWhiteSpace(msgBody))
+                {
+                    ModelState.AddModelError("Title", "Invalid comment.");
+                    return View();
+                }
+                else
+                {
+                    commentMessage.Created = System.DateTimeOffset.Now;
+                    //commentMessage.Updated = System.DateTimeOffset.Now;   // remove later if allow nulls
+                    commentMessage.UpdatedReason = " ";
+                    commentMessage.AuthorId = User.Identity.GetUserId();
 
+                    db.Comments.Add(commentMessage);
+                    db.SaveChanges();
+                    return RedirectToAction("Details", new { slug=slug });
+                }
+            }
+            return View();
+        }
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)
