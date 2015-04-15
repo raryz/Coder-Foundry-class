@@ -8,6 +8,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Personal_Website_2.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Personal_Website_2.Controllers
 {
@@ -17,9 +19,15 @@ namespace Personal_Website_2.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         [AllowAnonymous]
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.Posts.OrderByDescending(p => p.Created).Take(3).ToList());
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
+            return View(db.Posts.OrderByDescending(p => p.Created).ToPagedList(page ?? 1, 3));
+        //    return View(db.Posts.ToPagedList(pageNumber, pageSize));
+
+          //  return View(db.Posts.OrderByDescending(p => p.Created).Take(3).ToList());
         }
 
         // GET: Posts
@@ -111,6 +119,7 @@ namespace Personal_Website_2.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(post).State = EntityState.Modified;
+                post.Updated = System.DateTimeOffset.Now;           // added 4-14-2015
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

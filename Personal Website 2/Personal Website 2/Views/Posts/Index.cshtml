@@ -1,8 +1,15 @@
 ﻿
-@model List<Personal_Website_2.Models.Post>
+@using PagedList
+@using PagedList.Mvc
+@using Personal_Website_2.Models
+
+@model PagedList<Post>
+@* @model List<Personal_Website_2.Models.Post> *@
 @{
     ViewBag.Title = "Index";
 }
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 <!-- <h2>Index</h2>  -->
 
@@ -74,6 +81,9 @@
     
                         }
                     </ul>
+
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
                     
                <!--     <ul class="pagination">
                         <li><a href="#">&laquo;</a></li>
