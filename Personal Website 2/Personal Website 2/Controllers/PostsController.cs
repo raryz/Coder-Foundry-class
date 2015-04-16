@@ -213,10 +213,12 @@ namespace Personal_Website_2.Controllers
                 {
                     if (ModelState.IsValid)
                     {
+                        Post post = db.Posts.Find(comment.PostId);
                         db.Entry(comment).State = EntityState.Modified;
                         comment.Updated = System.DateTimeOffset.Now;           // added 4-14-2015
                         await db.SaveChangesAsync();
-                        return RedirectToAction("Index");
+                        
+                        return RedirectToAction("Details", new { slug = post.Slug });
                     }
                     return View(comment);
                 }
@@ -234,14 +236,46 @@ namespace Personal_Website_2.Controllers
                     {
                         return HttpNotFound();
                     }
+                    return View(comment);
+                }
+
+                // GET: Comments/Delete/5
+                [Authorize(Roles = "Moderator,Admin")]
+                [HttpPost]
+                public async Task<ActionResult> DeleteComment(int id)
+                {
+                    
+                    Comment comment = await db.Comments.FindAsync(id);
+                    Post post =  db.Posts.Find(comment.PostId); 
+                    if (comment == null)
+                    {
+                        return HttpNotFound();
+                    }
                     db.Comments.Remove(comment);
                     await db.SaveChangesAsync();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", new { slug = post.Slug });
                    
                 }
 
+                
+
+                // GET: Search
+                
+                [HttpPost]
+                public ActionResult DetailSearch(string findtext)
+                {
+
+                    var found = (db.Posts.Where(p => p.Title.Contains(findtext)))
+                          .Union(db.Posts.Where(p => p.Slug.Contains(findtext)))
+                          .Union(db.Posts.Where(p => p.Body.Contains(findtext)))
+                          .Union(db.Posts.Where(p => p.Comments.Any(c => c.Body.Contains(findtext)))).ToPagedList(1, 3);
+
+                   
+                  return View(found);  
+                    
+                }   
         
-        /*
+      /*
                 [Authorize(Roles = "Admin")]
                 [Authorize(Roles = "Moderator")]
                 [HttpPost]

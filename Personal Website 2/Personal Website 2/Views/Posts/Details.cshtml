@@ -81,7 +81,7 @@
                                                 @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
                                                 {
 
-                                                    @Html.ActionLink("Delete Comment", "CommentIndex", "Posts", new { id = comment.Id }, new { @class = "btn c-blue" })
+                                                    @Html.ActionLink("Delete Comment", "DeleteComment", "Posts", new { id = comment.Id }, new { @class = "btn c-blue" })
                                                     @Html.ActionLink("Edit Comment", "EditComment", "Posts", new { id = comment.Id }, new { @class = "btn c-blue" })
                                                 }
                                             </div>

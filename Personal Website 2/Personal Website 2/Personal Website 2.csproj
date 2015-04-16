@@ -746,6 +746,7 @@
     <Content Include="Views\Posts\Comments.cshtml" />
     <Content Include="Views\Posts\EditComment.cshtml" />
     <Content Include="Views\Posts\DeleteComment.cshtml" />
+    <Content Include="Views\Posts\DetailSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
