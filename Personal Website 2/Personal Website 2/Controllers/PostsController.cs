@@ -186,7 +186,119 @@ namespace Personal_Website_2.Controllers
             }
             return View();
         }
+
+        // GET: Comments/Edit/5
+        [Authorize(Roles = "Moderator,Admin")]
+        public async Task<ActionResult> EditComment(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Comment comment = await db.Comments.FindAsync(id);
+            if (comment == null)
+            {
+                return HttpNotFound();
+            }
+            return View(comment);
+        }
         
+                // POST: Comments/Edit/5
+                // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+                // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+                [HttpPost]
+                [ValidateAntiForgeryToken]
+                [Authorize(Roles = "Moderator,Admin")]
+                public async Task<ActionResult> EditComment([Bind(Include = "Id,PostId,AuthorId,Created,Updated,UpdatedReason,Body")] Comment comment)
+                {
+                    if (ModelState.IsValid)
+                    {
+                        db.Entry(comment).State = EntityState.Modified;
+                        comment.Updated = System.DateTimeOffset.Now;           // added 4-14-2015
+                        await db.SaveChangesAsync();
+                        return RedirectToAction("Index");
+                    }
+                    return View(comment);
+                }
+
+                // GET: Comments/Delete/5
+                [Authorize(Roles = "Moderator,Admin")]
+                public async Task<ActionResult> DeleteComment(int? id)
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    Comment comment = await db.Comments.FindAsync(id);
+                    if (comment == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    db.Comments.Remove(comment);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                   
+                }
+
+        
+        /*
+                [Authorize(Roles = "Admin")]
+                [Authorize(Roles = "Moderator")]
+                [HttpPost]
+                public async Task<ActionResult> CommentIndex(int PostId, string slug)
+                {
+                         
+             
+
+                     return View(await db.Comments.ToListAsync(PostId));
+
+
+                    // Task<comment> commentList = await db.Comments.Find(PostId);
+                    // return RedirectToAction("CommentIndex", new { slug = slug });
+                
+            
+                }*/
+                /*
+                        [Authorize(Roles = "Admin")]
+                        [Authorize(Roles = "Moderator")]
+                        [HttpPost]
+                        public async Task<ActionResult> DeleteComment(int PostId, string slug)
+                        {
+
+                            Comment comment =  db.Comments.FindAsync(PostId);
+                            db.Comments.Remove(comment);
+                            await db.SaveChangesAsync();
+            
+                            return RedirectToAction("Details", new { slug = slug });
+                        }
+         
+                        [Authorize(Roles = "Admin")]
+                        [Authorize(Roles = "Moderator")]
+                        [HttpPost]
+                        public async Task<ActionResult> EditComment(int PostId, string slug, comment Comment)
+                        {
+
+                            Comment commentDisplay =  db.Comments.FindAsync(Comment.Id);
+                    
+                            return RedirectToAction("EditCommentScreen", new { slug = slug });
+
+                        }
+           
+                 * [HttpPost]
+                [ValidateAntiForgeryToken]
+                [Authorize(Roles = "Admin")]
+                public async Task<ActionResult> Edit([Bind(Include = "Id,Created,Updated,Title,Body,MediaURL,Slug")] Post post)
+                {
+                    if (ModelState.IsValid)
+                    {
+                        db.Entry(post).State = EntityState.Modified;
+                        post.Updated = System.DateTimeOffset.Now;           // added 4-14-2015
+                        await db.SaveChangesAsync();
+                        return RedirectToAction("Index");
+                    }
+                    return View(post);
+                }
+                     */
         protected override void Dispose(bool disposing)
         {
             if (disposing)

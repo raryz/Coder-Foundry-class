@@ -28,7 +28,7 @@
                                         <li>
                                             <span>-</span>
                                             @Html.DisplayFor(model => model.Created)
-                                           <!-- <a href="#">October 30th, 2013</a>  -->
+                                            <!-- <a href="#">October 30th, 2013</a>  -->
                                         </li>
                                     </ul>
                                     @Html.Raw(Model.Body)
@@ -66,21 +66,29 @@
                                             </span>
                                         }
                                     </div>
-                                  
+
                                     @foreach (var comment in Model.Comments)
                                     {
                                         <div class="media">
-                                           
+
                                             <div class="media-body">
-                                                
-                                           <!--     <p>   <small>@comment.Author</small>  </p>  -->
-                                        <p>   <small>@comment.Created</small>  </p>
+
+                                                <!--     <p>   <small>@comment.Author</small>  </p>  -->
+                                                <p>   <small>@comment.Created</small>  </p>
                                                 @comment.Body
+                                            </div>
+                                            <div>
+                                                @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                                                {
+
+                                                    @Html.ActionLink("Delete Comment", "CommentIndex", "Posts", new { id = comment.Id }, new { @class = "btn c-blue" })
+                                                    @Html.ActionLink("Edit Comment", "EditComment", "Posts", new { id = comment.Id }, new { @class = "btn c-blue" })
+                                                }
                                             </div>
                                         </div>
                                     }
-                                   
-                                    
+
+
                                 </div>
                             </div>
                         </div>
@@ -94,20 +102,36 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-1">
-            
-                @if (User.IsInRole("Admin"))
-                {
-                    
-                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn c-blue" })
-                    
-                }
-                </div>
+        <div class="col-sm-2">
+
+            @if (User.IsInRole("Admin"))
+            {
+
+                @Html.ActionLink("Edit Post", "Edit", new { id = Model.Id }, new { @class = "btn c-blue" })
+
+            }
+        </div>
         <div class="col-sm-2">
             <a href="@Url.Action("Index", "Posts")" class="btn c-blue">Back to List</a>
-            </div>
-      
+        </div>
+ <!--       <div class="col-sm-2">
+            @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+            {
+
+                @Html.ActionLink("Edit Comment", "CommentIndex", "Posts", new { id = Model.Id }, new { @class = "btn c-blue" })
+
+            }
 
         </div>
+        <div class="col-sm-2">
+            @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+            {
+
+                @Html.ActionLink("Delete Comment", "CommentIndex", "Posts", new { id = Model.Id }, new { @class = "btn c-blue" })
+
+            }
+
+        </div>   -->
     </div>
-        <!--<li class="dropdown b-pad-left97">-->
+</div>
+<!--<li class="dropdown b-pad-left97">-->

@@ -1,0 +1,66 @@
+﻿@model Personal_Website_2.Models.Comment
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2 class="text-center b-general">Edit Comment</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal b-general">
+        <!--   <h4>Post</h4>  -->
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.PostId)
+        @Html.HiddenFor(model => model.AuthorId)
+        @Html.HiddenFor(model => model.Created)
+        @Html.HiddenFor(model => model.Updated)
+        @Html.HiddenFor(model => model.UpdatedReason)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Body, new { @class = "form-control", rows = "5" })
+                @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+      
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn c-blue" />
+            </div>
+        </div>
+
+    </div>
+}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-1">
+            <a href="/Posts/Index" class="btn c-blue">Back to List</a>
+        </div>
+        <div class="col-sm-2">
+
+        </div>
+        <div class="col-sm-9">
+            <div class="navbar-collapse collapse">
+
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/Scripts/tinymce/tinymce.min.js"></script>
+    <script src="/Scripts/tinymce/jquery.tinymce.min.js"></script>
+    <script>
+            $(document).ready(function () {
+                $('#editor').tinymce({});
+            });
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
