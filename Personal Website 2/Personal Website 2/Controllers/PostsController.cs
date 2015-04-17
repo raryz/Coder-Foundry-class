@@ -11,10 +11,11 @@ using Personal_Website_2.Models;
 using PagedList;
 using PagedList.Mvc;
 using Microsoft.AspNet.Identity;
+using System.IO;
 
 namespace Personal_Website_2.Controllers
 {
-    
+
     public class PostsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -22,31 +23,31 @@ namespace Personal_Website_2.Controllers
         public ActionResult Index(int? page, string findtext)
         {
             if (findtext == null)
-               { 
-             int pageSize = 3;
-            int pageNumber = (page ?? 1);
+            {
+                int pageSize = 3;
+                int pageNumber = (page ?? 1);
 
-            return View(db.Posts.OrderByDescending(p => p.Created).ToPagedList(pageNumber, pageSize));
-               }
+                return View(db.Posts.OrderByDescending(p => p.Created).ToPagedList(pageNumber, pageSize));
+            }
             else
             {
                 ViewBag.Query = findtext;
                 var t = db.Posts.Where(p => p.Title.Contains(findtext) || findtext == "" || findtext == null ||
               p.Body.Contains(findtext) || p.Comments.Any(c => c.Body.Contains(findtext) || c.Author.DisplayName.Contains(findtext)));
-              return View(t.OrderByDescending(p => p.Created).ToPagedList(page ?? 1, 3));
+                return View(t.OrderByDescending(p => p.Created).ToPagedList(page ?? 1, 3));
             }
-       }
+        }
 
-      /*  public ActionResult Index(int? page)
-        {
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
+        /*  public ActionResult Index(int? page)
+          {
+              int pageSize = 3;
+              int pageNumber = (page ?? 1);
 
-            return View(db.Posts.OrderByDescending(p => p.Created).ToPagedList(page ?? 1, 3));
-        //    return View(db.Posts.ToPagedList(pageNumber, pageSize));
+              return View(db.Posts.OrderByDescending(p => p.Created).ToPagedList(page ?? 1, 3));
+          //    return View(db.Posts.ToPagedList(pageNumber, pageSize));
 
-          //  return View(db.Posts.OrderByDescending(p => p.Created).Take(3).ToList());
-        } */
+            //  return View(db.Posts.OrderByDescending(p => p.Created).Take(3).ToList());
+          } */
 
         // GET: Posts
         [Authorize(Roles = "Admin")]
@@ -57,7 +58,7 @@ namespace Personal_Website_2.Controllers
 
         // GET: Posts/Details/5
         [AllowAnonymous]
-        
+
         public ActionResult Details(string Slug)
         {
             if (String.IsNullOrWhiteSpace(Slug))
@@ -86,11 +87,21 @@ namespace Personal_Website_2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Create([Bind(Include = "Created,Body,Title,Published")] Post post, HttpPostedFileBase image)
+        public ActionResult Create([Bind(Include = "Created,Body,Title,Published")] Post post, HttpPostedFileBase fileUpload)
         {
+            if (fileUpload != null && fileUpload.ContentLength > 0)
+            {
+                // check the file name to make sure
+                // it's an image type
+                var ext = Path.GetExtension(fileUpload.FileName);
+                if (ext != ".png" && ext != ".jpg")
+                    // oterwise, throw and error
+                    ModelState.AddModelError("image", "Invalid format.");
+            }
             if (ModelState.IsValid)
             {
                 var Slug = StringUtilities.URLFriendly(post.Title);
+
                 if (String.IsNullOrWhiteSpace(Slug))
                 {
                     ModelState.AddModelError("Title", "Invalid title.");
@@ -103,6 +114,18 @@ namespace Personal_Website_2.Controllers
                 }
                 else
                 {
+
+                    // relative server path
+                    var filePath = "/images/Blog/";
+                    //path on physical drive on server
+                    var absPath = Server.MapPath("~" + filePath);
+                    //media url for relative path
+                    post.MediaURL = filePath + fileUpload.FileName;
+                    //save image
+                    fileUpload.SaveAs(Path.Combine(absPath, fileUpload.FileName));
+
+
+
                     post.Created = System.DateTimeOffset.Now;
                     post.Slug = Slug;
 
@@ -113,6 +136,7 @@ namespace Personal_Website_2.Controllers
             }
             return View(post);
         }
+
 
 
         // GET: Posts/Edit/5
@@ -176,7 +200,7 @@ namespace Personal_Website_2.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-        
+
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -199,7 +223,7 @@ namespace Personal_Website_2.Controllers
 
                     db.Comments.Add(commentMessage);
                     db.SaveChanges();
-                    return RedirectToAction("Details", new { slug=slug });
+                    return RedirectToAction("Details", new { slug = slug });
                 }
             }
             return View();
@@ -220,160 +244,160 @@ namespace Personal_Website_2.Controllers
             }
             return View(comment);
         }
-        
-                // POST: Comments/Edit/5
-                // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-                // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-                [HttpPost]
-                [ValidateAntiForgeryToken]
-                [Authorize(Roles = "Moderator,Admin")]
-                public async Task<ActionResult> EditComment([Bind(Include = "Id,PostId,AuthorId,Created,Updated,UpdatedReason,Body")] Comment comment)
-                {
-                    if (ModelState.IsValid)
-                    {
-                        Post post = db.Posts.Find(comment.PostId);
-                        db.Entry(comment).State = EntityState.Modified;
-                        comment.Updated = System.DateTimeOffset.Now;           // added 4-14-2015
-                        await db.SaveChangesAsync();
-                        
-                        return RedirectToAction("Details", new { slug = post.Slug });
-                    }
-                    return View(comment);
-                }
 
-                // GET: Comments/Delete/5
-                [Authorize(Roles = "Moderator,Admin")]
-                public async Task<ActionResult> DeleteComment(int? id)
-                {
-                    if (id == null)
-                    {
-                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                    }
-                    Comment comment = await db.Comments.FindAsync(id);
-                    if (comment == null)
-                    {
-                        return HttpNotFound();
-                    }
-                    return View(comment);
-                }
+        // POST: Comments/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Moderator,Admin")]
+        public async Task<ActionResult> EditComment([Bind(Include = "Id,PostId,AuthorId,Created,Updated,UpdatedReason,Body")] Comment comment)
+        {
+            if (ModelState.IsValid)
+            {
+                Post post = db.Posts.Find(comment.PostId);
+                db.Entry(comment).State = EntityState.Modified;
+                comment.Updated = System.DateTimeOffset.Now;           // added 4-14-2015
+                await db.SaveChangesAsync();
 
-                // GET: Comments/Delete/5
-                [Authorize(Roles = "Moderator,Admin")]
-                [HttpPost]
-                public async Task<ActionResult> DeleteComment(int id)
-                {
-                    
-                    Comment comment = await db.Comments.FindAsync(id);
-                    Post post =  db.Posts.Find(comment.PostId); 
-                    if (comment == null)
-                    {
-                        return HttpNotFound();
-                    }
-                    db.Comments.Remove(comment);
-                    await db.SaveChangesAsync();
-                    return RedirectToAction("Details", new { slug = post.Slug });
-                   
-                }
+                return RedirectToAction("Details", new { slug = post.Slug });
+            }
+            return View(comment);
+        }
 
-                
+        // GET: Comments/Delete/5
+        [Authorize(Roles = "Moderator,Admin")]
+        public async Task<ActionResult> DeleteComment(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Comment comment = await db.Comments.FindAsync(id);
+            if (comment == null)
+            {
+                return HttpNotFound();
+            }
+            return View(comment);
+        }
 
-                // GET: Search
-                [AllowAnonymous]
-               
-                public ActionResult DetailSearch(int? page, string findtext)
-                {
-                    if (findtext == null)
-                    {
-                        int pageSize = 3;
-                        int pageNumber = (page ?? 1);
+        // GET: Comments/Delete/5
+        [Authorize(Roles = "Moderator,Admin")]
+        [HttpPost]
+        public async Task<ActionResult> DeleteComment(int id)
+        {
 
-                        return View(db.Posts.OrderByDescending(p => p.Created).ToPagedList(pageNumber, pageSize));
-                    }
-                    else
-                    {
-                        ViewBag.Query = findtext;
-                        var t = db.Posts.Where(p => p.Title.Contains(findtext) || findtext == "" || findtext == null ||
-                      p.Body.Contains(findtext) || p.Comments.Any(c => c.Body.Contains(findtext) || c.Author.DisplayName.Contains(findtext)));
-                        return View(t.OrderByDescending(p => p.Created).ToPagedList(page ?? 1, 3));
-                    }
-                 }
+            Comment comment = await db.Comments.FindAsync(id);
+            Post post = db.Posts.Find(comment.PostId);
+            if (comment == null)
+            {
+                return HttpNotFound();
+            }
+            db.Comments.Remove(comment);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Details", new { slug = post.Slug });
 
-   /*       var found = db.Posts.Where(p => p.Title.Contains(findtext) || p.Slug.Contains(findtext) ||
-                        p.Body.Contains(findtext) || p.Comments.Any(c => c.Body.Contains(findtext))).OrderByDescending(p => p.Created).ToPagedList(1, 3);
-
-                    ViewBag.Query = findtext;
-
-                    return View(found);  */
+        }
 
 
 
-                /*   ToPagedList(1, 3);
-                 * 
-                 * 
-                 *  var found = (db.Posts.Where(p => p.Title.Contains(findtext)))
-                                    .Union(db.Posts.Where(p => p.Slug.Contains(findtext)))
-                                    .Union(db.Posts.Where(p => p.Body.Contains(findtext)))
-                                    .Union(db.Posts.Where(p => p.Comments.Any(c => c.Body.Contains(findtext)))).ToPagedList(1, 3);
-                 * 
-                 * 
-                 * 
-                          [Authorize(Roles = "Admin")]
-                          [Authorize(Roles = "Moderator")]
-                          [HttpPost]
-                          public async Task<ActionResult> CommentIndex(int PostId, string slug)
-                          {
+        // GET: Search
+        [AllowAnonymous]
+
+        public ActionResult DetailSearch(int? page, string findtext)
+        {
+            if (findtext == null)
+            {
+                int pageSize = 3;
+                int pageNumber = (page ?? 1);
+
+                return View(db.Posts.OrderByDescending(p => p.Created).ToPagedList(pageNumber, pageSize));
+            }
+            else
+            {
+                ViewBag.Query = findtext;
+                var t = db.Posts.Where(p => p.Title.Contains(findtext) || findtext == "" || findtext == null ||
+              p.Body.Contains(findtext) || p.Comments.Any(c => c.Body.Contains(findtext) || c.Author.DisplayName.Contains(findtext)));
+                return View(t.OrderByDescending(p => p.Created).ToPagedList(page ?? 1, 3));
+            }
+        }
+
+        /*       var found = db.Posts.Where(p => p.Title.Contains(findtext) || p.Slug.Contains(findtext) ||
+                             p.Body.Contains(findtext) || p.Comments.Any(c => c.Body.Contains(findtext))).OrderByDescending(p => p.Created).ToPagedList(1, 3);
+
+                         ViewBag.Query = findtext;
+
+                         return View(found);  */
+
+
+
+        /*   ToPagedList(1, 3);
+         * 
+         * 
+         *  var found = (db.Posts.Where(p => p.Title.Contains(findtext)))
+                            .Union(db.Posts.Where(p => p.Slug.Contains(findtext)))
+                            .Union(db.Posts.Where(p => p.Body.Contains(findtext)))
+                            .Union(db.Posts.Where(p => p.Comments.Any(c => c.Body.Contains(findtext)))).ToPagedList(1, 3);
+         * 
+         * 
+         * 
+                  [Authorize(Roles = "Admin")]
+                  [Authorize(Roles = "Moderator")]
+                  [HttpPost]
+                  public async Task<ActionResult> CommentIndex(int PostId, string slug)
+                  {
                          
              
 
-                               return View(await db.Comments.ToListAsync(PostId));
+                       return View(await db.Comments.ToListAsync(PostId));
 
 
-                              // Task<comment> commentList = await db.Comments.Find(PostId);
-                              // return RedirectToAction("CommentIndex", new { slug = slug });
+                      // Task<comment> commentList = await db.Comments.Find(PostId);
+                      // return RedirectToAction("CommentIndex", new { slug = slug });
                 
             
-                          }*/
-                /*
-                        [Authorize(Roles = "Admin")]
-                        [Authorize(Roles = "Moderator")]
-                        [HttpPost]
-                        public async Task<ActionResult> DeleteComment(int PostId, string slug)
-                        {
-
-                            Comment comment =  db.Comments.FindAsync(PostId);
-                            db.Comments.Remove(comment);
-                            await db.SaveChangesAsync();
-            
-                            return RedirectToAction("Details", new { slug = slug });
-                        }
-         
-                        [Authorize(Roles = "Admin")]
-                        [Authorize(Roles = "Moderator")]
-                        [HttpPost]
-                        public async Task<ActionResult> EditComment(int PostId, string slug, comment Comment)
-                        {
-
-                            Comment commentDisplay =  db.Comments.FindAsync(Comment.Id);
-                    
-                            return RedirectToAction("EditCommentScreen", new { slug = slug });
-
-                        }
-           
-                 * [HttpPost]
-                [ValidateAntiForgeryToken]
+                  }*/
+        /*
                 [Authorize(Roles = "Admin")]
-                public async Task<ActionResult> Edit([Bind(Include = "Id,Created,Updated,Title,Body,MediaURL,Slug")] Post post)
+                [Authorize(Roles = "Moderator")]
+                [HttpPost]
+                public async Task<ActionResult> DeleteComment(int PostId, string slug)
                 {
-                    if (ModelState.IsValid)
-                    {
-                        db.Entry(post).State = EntityState.Modified;
-                        post.Updated = System.DateTimeOffset.Now;           // added 4-14-2015
-                        await db.SaveChangesAsync();
-                        return RedirectToAction("Index");
-                    }
-                    return View(post);
+
+                    Comment comment =  db.Comments.FindAsync(PostId);
+                    db.Comments.Remove(comment);
+                    await db.SaveChangesAsync();
+            
+                    return RedirectToAction("Details", new { slug = slug });
                 }
-                     */
+         
+                [Authorize(Roles = "Admin")]
+                [Authorize(Roles = "Moderator")]
+                [HttpPost]
+                public async Task<ActionResult> EditComment(int PostId, string slug, comment Comment)
+                {
+
+                    Comment commentDisplay =  db.Comments.FindAsync(Comment.Id);
+                    
+                    return RedirectToAction("EditCommentScreen", new { slug = slug });
+
+                }
+           
+         * [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Created,Updated,Title,Body,MediaURL,Slug")] Post post)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(post).State = EntityState.Modified;
+                post.Updated = System.DateTimeOffset.Now;           // added 4-14-2015
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(post);
+        }
+             */
         protected override void Dispose(bool disposing)
         {
             if (disposing)

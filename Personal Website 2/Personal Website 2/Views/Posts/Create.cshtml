@@ -7,28 +7,28 @@
 <h2 class="text-center b-general">
     Create Post
 </h2>
-@using (Html.BeginForm()) { 
+@using (Html.BeginForm("Create","Posts", FormMethod.Post, new { enctype = "Multipart/form-data"})) { 
     @Html.AntiForgeryToken()
     <div class="form-horizontal b-general">
         <!--  <h4>Post</h4>  -->
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Created, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-            <!--    @Html.HiddenFor(model => model.Created, new { htmlAttributes = new { @class = "form-control" } })  -->
+      @*<div class="form-group">*@
+            @*@Html.LabelFor(model => model.Created, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            @*<div class="col-md-10">*@
+                @*@Html.HiddenFor(model => model.Created, new { htmlAttributes = new { @class = "form-control" } })  
                 @Html.EditorFor(model => model.Created, new { htmlAttributes = new { @class = "form-control" } })   
-                @Html.ValidationMessageFor(model => model.Created, "", new { @class = "text-danger" })   
-            </div>
-        </div>
+                @Html.ValidationMessageFor(model => model.Created, "", new { @class = "text-danger" })*@   
+            @*</div>*@
+        @*</div>*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Updated, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-          <!--      @Html.HiddenFor(model => model.Updated, new { htmlAttributes = new { @class = "form-control" } })  -->
+        @*<div class="form-group">*@
+            @*@Html.LabelFor(model => model.Updated, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            @*<div class="col-md-10">*@
+                @*@Html.HiddenFor(model => model.Updated, new { htmlAttributes = new { @class = "form-control" } })  
                 @Html.EditorFor(model => model.Updated, new { htmlAttributes = new { @class = "form-control" } })    
-                @Html.ValidationMessageFor(model => model.Updated, "", new { @class = "text-danger" })   
-            </div>
-        </div>
+                @Html.ValidationMessageFor(model => model.Updated, "", new { @class = "text-danger" })*@   
+            @*</div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -47,10 +47,11 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MediaURL, htmlAttributes: new { @class = "control-label col-md-2" })
+            @*@Html.LabelFor(model => model.MediaURL, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            @Html.HiddenFor(model => model.MediaURL)
+            @Html.Label("Image Upload", htmlAttributes : new { @class = "form-control" } )
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MediaURL, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MediaURL, "", new { @class = "text-danger" })
+               <input type="file" id="fileUpload" name="fileUpload" />
             </div>
         </div>
 
