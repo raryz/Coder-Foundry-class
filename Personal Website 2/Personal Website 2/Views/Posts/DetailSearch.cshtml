@@ -76,30 +76,17 @@
                     </ul>
 
                     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                    @Html.PagedListPager(Model, p => Url.Action("DetailSearch", new { page=p , findtext = ViewBag.Query }))
+
+                   @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))    *@  
 
                   
                 </div>
-                <div class="col-md-4">
-                    <h3 class="section-title">Search</h3>
-                    <div class="widget">
-                        <form class="form-inline">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search blog..." />
-                                <span class="input-group-btn">
-                                    <button class="btn c-blue" type="button">Go!</button>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
-
-
-
-
-
-
-
-                </div>
+               
+            </div>
+            <br />
+            <div class="col-sm-2">
+                <a href="@Url.Action("Index", "Posts")" class="btn c-blue">Back to List</a>
             </div>
         </div>
     </div>

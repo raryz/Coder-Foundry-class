@@ -19,7 +19,25 @@ namespace Personal_Website_2.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string findtext)
+        {
+            if (findtext == null)
+               { 
+             int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
+            return View(db.Posts.OrderByDescending(p => p.Created).ToPagedList(pageNumber, pageSize));
+               }
+            else
+            {
+                ViewBag.Query = findtext;
+                var t = db.Posts.Where(p => p.Title.Contains(findtext) || findtext == "" || findtext == null ||
+              p.Body.Contains(findtext) || p.Comments.Any(c => c.Body.Contains(findtext) || c.Author.DisplayName.Contains(findtext)));
+              return View(t.OrderByDescending(p => p.Created).ToPagedList(page ?? 1, 3));
+            }
+       }
+
+      /*  public ActionResult Index(int? page)
         {
             int pageSize = 3;
             int pageNumber = (page ?? 1);
@@ -28,7 +46,7 @@ namespace Personal_Website_2.Controllers
         //    return View(db.Posts.ToPagedList(pageNumber, pageSize));
 
           //  return View(db.Posts.OrderByDescending(p => p.Created).Take(3).ToList());
-        }
+        } */
 
         // GET: Posts
         [Authorize(Roles = "Admin")]
@@ -260,38 +278,61 @@ namespace Personal_Website_2.Controllers
                 
 
                 // GET: Search
-                
-                [HttpPost]
-                public ActionResult DetailSearch(string findtext)
+                [AllowAnonymous]
+               
+                public ActionResult DetailSearch(int? page, string findtext)
                 {
+                    if (findtext == null)
+                    {
+                        int pageSize = 3;
+                        int pageNumber = (page ?? 1);
 
-                    var found = (db.Posts.Where(p => p.Title.Contains(findtext)))
-                          .Union(db.Posts.Where(p => p.Slug.Contains(findtext)))
-                          .Union(db.Posts.Where(p => p.Body.Contains(findtext)))
-                          .Union(db.Posts.Where(p => p.Comments.Any(c => c.Body.Contains(findtext)))).ToPagedList(1, 3);
+                        return View(db.Posts.OrderByDescending(p => p.Created).ToPagedList(pageNumber, pageSize));
+                    }
+                    else
+                    {
+                        ViewBag.Query = findtext;
+                        var t = db.Posts.Where(p => p.Title.Contains(findtext) || findtext == "" || findtext == null ||
+                      p.Body.Contains(findtext) || p.Comments.Any(c => c.Body.Contains(findtext) || c.Author.DisplayName.Contains(findtext)));
+                        return View(t.OrderByDescending(p => p.Created).ToPagedList(page ?? 1, 3));
+                    }
+                 }
 
-                   
-                  return View(found);  
-                    
-                }   
-        
-      /*
-                [Authorize(Roles = "Admin")]
-                [Authorize(Roles = "Moderator")]
-                [HttpPost]
-                public async Task<ActionResult> CommentIndex(int PostId, string slug)
-                {
+   /*       var found = db.Posts.Where(p => p.Title.Contains(findtext) || p.Slug.Contains(findtext) ||
+                        p.Body.Contains(findtext) || p.Comments.Any(c => c.Body.Contains(findtext))).OrderByDescending(p => p.Created).ToPagedList(1, 3);
+
+                    ViewBag.Query = findtext;
+
+                    return View(found);  */
+
+
+
+                /*   ToPagedList(1, 3);
+                 * 
+                 * 
+                 *  var found = (db.Posts.Where(p => p.Title.Contains(findtext)))
+                                    .Union(db.Posts.Where(p => p.Slug.Contains(findtext)))
+                                    .Union(db.Posts.Where(p => p.Body.Contains(findtext)))
+                                    .Union(db.Posts.Where(p => p.Comments.Any(c => c.Body.Contains(findtext)))).ToPagedList(1, 3);
+                 * 
+                 * 
+                 * 
+                          [Authorize(Roles = "Admin")]
+                          [Authorize(Roles = "Moderator")]
+                          [HttpPost]
+                          public async Task<ActionResult> CommentIndex(int PostId, string slug)
+                          {
                          
              
 
-                     return View(await db.Comments.ToListAsync(PostId));
+                               return View(await db.Comments.ToListAsync(PostId));
 
 
-                    // Task<comment> commentList = await db.Comments.Find(PostId);
-                    // return RedirectToAction("CommentIndex", new { slug = slug });
+                              // Task<comment> commentList = await db.Comments.Find(PostId);
+                              // return RedirectToAction("CommentIndex", new { slug = slug });
                 
             
-                }*/
+                          }*/
                 /*
                         [Authorize(Roles = "Admin")]
                         [Authorize(Roles = "Moderator")]
