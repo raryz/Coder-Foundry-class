@@ -55,7 +55,8 @@
                         {
                             <li class="">
                                 <div class="listing-image">
-                                    <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                                    @*<img class="img-responsive" src="http://placehold.it/900x300" alt="">*@
+                                    <img class="img-responsive" src="@post.MediaURL" alt="">
                                 </div>
                                 <div class="listing-body">
                                     <h3><a href="@Url.Action("Details", new { Slug = post.Slug })">@post.Title</a></h3>

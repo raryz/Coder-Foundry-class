@@ -17,7 +17,8 @@
                         <div class="col-md-12">
                             <div class="w-box blog-post">
                                 <div class="figure">
-                                    <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                                    @*<img class="img-responsive" src="http://placehold.it/900x300" alt="">*@
+                                    <img class="img-responsive" src="@Model.MediaURL" alt="">
                                     <!-- <img alt="" src="images/prv/wkp-img-1.jpg">  -->
                                     <h2>@Html.DisplayFor(model => model.Title)</h2>
                                     <ul class="meta-list">
@@ -112,7 +113,7 @@
             }
         </div>
         <div class="col-sm-2">
-            <a href="@Url.Action("Index", "Posts")" class="btn c-blue">Back to List</a>
+            <a href="@Url.Action("Index", "Posts")" class="btn c-blue btn-black">Back to List</a>
         </div>
  <!--       <div class="col-sm-2">
             @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))

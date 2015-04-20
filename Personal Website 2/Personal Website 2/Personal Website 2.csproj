@@ -359,6 +359,7 @@
     <Content Include="images\background\squairy_light.png" />
     <Content Include="images\background\subtle_carbon.png" />
     <Content Include="images\background\_notes\dwsync.xml" />
+    <Content Include="images\Blog\about-img-1.jpg" />
     <Content Include="images\boomerang-logo-dark.png" />
     <Content Include="images\boomerang-logo-white.png" />
     <Content Include="images\boomerang-logo.png" />
@@ -498,6 +499,7 @@
     <Content Include="js\jquery.wp.switcher.js" />
     <Content Include="js\less.js" />
     <Content Include="js\modernizr.custom.js" />
+    <Content Include="js\PersonalWebsiteJS Backup 4-19.js" />
     <Content Include="js\PersonalWebsiteJS.js" />
     <Content Include="js\respond.min.js" />
     <Content Include="js\shBrushJScript.js" />
@@ -747,10 +749,10 @@
     <Content Include="Views\Posts\EditComment.cshtml" />
     <Content Include="Views\Posts\DeleteComment.cshtml" />
     <Content Include="Views\Posts\DetailSearch.cshtml" />
+    <Content Include="Views\Home\JS_Exercises Backup 4-19.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="images\Blog\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

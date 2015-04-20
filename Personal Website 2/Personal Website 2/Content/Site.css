@@ -92,6 +92,11 @@ footer .col ul li {
 .c-blue{
     background-color: #00B5FF;
 }
+
+.btn-black{
+    color: black;
+}
+
 .h-row {
   background-color: #FFFFFF;
   padding-left: 25px;
