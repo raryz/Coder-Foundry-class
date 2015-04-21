@@ -161,10 +161,31 @@ namespace Personal_Website_2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Created,Updated,Title,Body,MediaURL,Slug")] Post post)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Created,Updated,Title,Body,MediaURL,Slug")] Post post, HttpPostedFileBase fileUpload)
         {
+
+            if (fileUpload != null && fileUpload.ContentLength > 0)
+            {
+                // check the file name to make sure
+                // it's an image type
+                var ext = Path.GetExtension(fileUpload.FileName);
+                if (ext != ".png" && ext != ".jpg")
+                    // oterwise, throw and error
+                    ModelState.AddModelError("image", "Invalid format.");
+            }
+
             if (ModelState.IsValid)
             {
+
+                // relative server path
+                var filePath = "/images/Blog/";
+                //path on physical drive on server
+                var absPath = Server.MapPath("~" + filePath);
+                //media url for relative path
+                post.MediaURL = filePath + fileUpload.FileName;
+                //save image
+                fileUpload.SaveAs(Path.Combine(absPath, fileUpload.FileName));
+
                 db.Entry(post).State = EntityState.Modified;
                 post.Updated = System.DateTimeOffset.Now;           // added 4-14-2015
                 await db.SaveChangesAsync();
@@ -217,8 +238,8 @@ namespace Personal_Website_2.Controllers
                 else
                 {
                     commentMessage.Created = System.DateTimeOffset.Now;
-                    //commentMessage.Updated = System.DateTimeOffset.Now;   // remove later if allow nulls
-                    commentMessage.UpdatedReason = " ";
+                    commentMessage.Updated = System.DateTimeOffset.Now;   // remove later if allow nulls
+                    //commentMessage.UpdatedReason = " ";
                     commentMessage.AuthorId = User.Identity.GetUserId();
 
                     db.Comments.Add(commentMessage);
