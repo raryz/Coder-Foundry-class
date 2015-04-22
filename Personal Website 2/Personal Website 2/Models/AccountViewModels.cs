@@ -109,4 +109,13 @@ namespace Personal_Website_2.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
+    public class ForgotEmailViewModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+    }
+    
 }
