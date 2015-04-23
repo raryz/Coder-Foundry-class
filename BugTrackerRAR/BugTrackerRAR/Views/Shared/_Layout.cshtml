@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Bug Tracker</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="/css/less-style.css" rel="stylesheet" />
@@ -34,7 +34,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>@*&copy; @DateTime.Now.Year - My ASP.NET Application*@</p>
         </footer>
     </div>
 
@@ -75,9 +75,9 @@
     <!-- jQuery full calendar -->
     <script src="/js/fullcalendar.min.js"></script>
     <!-- jQuery gritter -->
-    <script src="/js/jquery.gritter.min.js"></script>
+    @*<script src="/js/jquery.gritter.min.js"></script>*@
     <!-- jQuery gritter notification -->
-    <script src="/js/custom.notification.js"></script>
+    @*<script src="/js/custom.notification.js"></script>*@
     <!-- Respond JS for IE8 -->
     <script src="/js/respond.min.js"></script>
     <!-- HTML5 Support for IE -->
