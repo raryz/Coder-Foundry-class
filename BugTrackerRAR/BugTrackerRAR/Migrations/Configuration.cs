@@ -25,10 +25,20 @@ namespace BugTrackerRAR.Migrations
                 roleManager.Create(new IdentityRole { Name = "Admin" });
             }
 
-            //if (!context.Roles.Any(r => r.Name == "Moderator"))
-            //{
-            //    roleManager.Create(new IdentityRole { Name = "Moderator" });
-            //}
+            if (!context.Roles.Any(r => r.Name == "Project Manager"))
+            {
+                roleManager.Create(new IdentityRole { Name = "Project Manager" });
+            }
+
+            if (!context.Roles.Any(r => r.Name == "Developer"))
+            {
+                roleManager.Create(new IdentityRole { Name = "Developer" });
+            }
+
+            if (!context.Roles.Any(r => r.Name == "Submitter"))
+            {
+                roleManager.Create(new IdentityRole { Name = "Submitter" });
+            }
 
             var userManager = new UserManager<ApplicationUser>(
                 new UserStore<ApplicationUser>(context));
@@ -46,8 +56,24 @@ namespace BugTrackerRAR.Migrations
 
             }
 
-            var userId = userManager.FindByEmail("admin@coderfoundry.com").Id;
-            userManager.AddToRole(userId, "Admin");
+            //var userId = userManager.FindByEmail("admin@coderfoundry.com").Id;
+            //userManager.AddToRole(userId, "Admin");
+
+            if (!context.Users.Any(r => r.Email == "johnsubj@coderfoundry.com"))
+            {
+                userManager.Create(new ApplicationUser
+                {
+                    UserName = "johnsub@coderfoundry.com",
+                    Email = "johnsub@coderfoundry.com",
+                    FirstName = "John",
+                    LastName = "Submitter",
+                    DisplayName = "John Submitter"
+                }, "Abc123!");
+
+            }
+
+            var userId = userManager.FindByEmail("johnsub@coderfoundry.com").Id;
+            userManager.AddToRole(userId, "Submitter");
 
             //  This method will be called after migrating to the latest version.
 

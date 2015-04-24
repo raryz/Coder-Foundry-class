@@ -1,0 +1,46 @@
+﻿@model BugTrackerRAR.Models.AdminUserViewModel
+
+@{
+    ViewBag.Title = " Edit Users";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<h2>Edit Users</h2>
+
+@using (Html.BeginForm("EditUser", "Admin", null, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.User.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.User.Id)
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+
+
+                @Html.ListBox("SelectedRoles", Model.Roles ,  new { @class = "form-control" } )
+
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn" />
+            </div>
+        </div>
+
+    </div>
+}
+
+

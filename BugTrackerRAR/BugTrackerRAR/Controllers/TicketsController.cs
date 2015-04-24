@@ -15,6 +15,7 @@ namespace BugTrackerRAR.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Tickets
+        [Authorize]
         public ActionResult Index()
         {
             var tickets = db.Tickets.Include(t => t.AssignedUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketPriority).Include(t => t.TicketStatus).Include(t => t.TicketType);
@@ -37,6 +38,7 @@ namespace BugTrackerRAR.Controllers
         }
 
         // GET: Tickets/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.AssignedUserId = new SelectList(db.Users, "Id", "FirstName");
@@ -51,6 +53,7 @@ namespace BugTrackerRAR.Controllers
         // POST: Tickets/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Title,Description,Created,Updated,ProjectId,TicketTypeID,TicketPriorityID,TicketStatusID,OwnerUserId,AssignedUserId")] Ticket ticket)
