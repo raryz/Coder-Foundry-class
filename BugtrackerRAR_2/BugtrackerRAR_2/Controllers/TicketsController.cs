@@ -16,6 +16,7 @@ namespace BugtrackerRAR_2.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Tickets
+        [Authorize]
         public ActionResult Index()
         {
             var tickets = db.Tickets.Include(t => t.AssignedUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketPriority).Include(t => t.TicketStatus).Include(t => t.TicketType);
@@ -38,26 +39,34 @@ namespace BugtrackerRAR_2.Controllers
         }
 
         // GET: Tickets/Create
+        [Authorize]
         public ActionResult Create()
         {
+
             ViewBag.AssignedUserId = new SelectList(db.Users, "Id", "FirstName");
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName");
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
             ViewBag.TicketPriorityID = new SelectList(db.TicketPriorities, "Id", "Name");
             ViewBag.TicketStatusID = new SelectList(db.TicketStatuses, "Id", "Name");
             ViewBag.TicketTypeID = new SelectList(db.TicketTypes, "Id", "Name");
+
             return View();
         }
 
         // POST: Tickets/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Title,Description,Created,Updated,ProjectId,TicketTypeID,TicketPriorityID,TicketStatusID,OwnerUserId,AssignedUserId")] Ticket ticket)
         {
             if (ModelState.IsValid)
             {
+                ticket.OwnerUserId = User.Identity.GetUserId();
+                ticket.Created = System.DateTimeOffset.Now;
+                ticket.TicketStatusID = 3;                       // 3 = unassigned
+
                 db.Tickets.Add(ticket);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -67,7 +76,8 @@ namespace BugtrackerRAR_2.Controllers
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName", ticket.OwnerUserId);
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", ticket.ProjectId);
             ViewBag.TicketPriorityID = new SelectList(db.TicketPriorities, "Id", "Name", ticket.TicketPriorityID);
-            ViewBag.TicketStatusID = new SelectList(db.TicketStatuses, "Id", "Name", ticket.TicketStatusID);
+            // ViewBag.TicketStatusID = new SelectList(db.TicketStatuses, "Id", "Name", ticket.TicketStatusID);
+            //
             ViewBag.TicketTypeID = new SelectList(db.TicketTypes, "Id", "Name", ticket.TicketTypeID);
             return View(ticket);
         }
