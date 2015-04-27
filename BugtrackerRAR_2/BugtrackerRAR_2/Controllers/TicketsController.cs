@@ -113,6 +113,7 @@ namespace BugtrackerRAR_2.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(ticket).State = EntityState.Modified;
+                ticket.Updated = System.DateTimeOffset.Now;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
