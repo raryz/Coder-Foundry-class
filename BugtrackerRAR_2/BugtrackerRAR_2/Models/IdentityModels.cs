@@ -10,10 +10,21 @@ namespace BugtrackerRAR_2.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+
+        public ApplicationUser()
+        {
+            this.Projects = new HashSet<Project>();
+            //this.TicketsOwned = new HashSet<Ticket>();
+            //this.TicketsAssigned = new HashSet<Ticket>();
+
+        }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string DisplayName { get; set; }
-        public List<Project> Projects { get; set; }
+        public ICollection<Project> Projects { get; set; }
+
+       
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
