@@ -443,10 +443,11 @@
     <Content Include="Views\Admin\Users.cshtml" />
     <Content Include="Views\Admin\EditUser.cshtml" />
     <Content Include="Views\Home\Main.cshtml" />
+    <Content Include="Views\ProjectUsers\AssignUser.cshtml" />
+    <Content Include="Views\ProjectUsers\UnassignUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ProjectUsers\" />
     <Folder Include="Views\Roles\" />
   </ItemGroup>
   <ItemGroup>

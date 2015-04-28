@@ -17,7 +17,16 @@ namespace BugtrackerRAR_2.Models.Helpers
         public bool IsUserInProject(string userId, int projectId)
         {
             //All in one line
-            return db.Projects.Find(projectId).Users.Any(u => u.Id == userId);
+            //return db.Projects.Find(projectId).Users.Any(u => u.Id == userId);  <- might work but was not passing projectId correctly
+
+            // had to reverse the order of projectId and pr.Id in the following code for some reason, was
+            // getting an error about unable to return a boolean for pr.ID
+
+            if (db.Projects.Include(p => p.Users).FirstOrDefault(pr => pr.Id == projectId ).Users.Any(u => u.Id == userId))
+            {
+                return true;
+            }
+            return false;
         }
 
         //Chunked
@@ -66,8 +75,9 @@ namespace BugtrackerRAR_2.Models.Helpers
 
         public ICollection<ApplicationUser> ListUsersOnProject(int projectId)
         {
-            return db.Projects.Find(projectId).Users;
+            return db.Projects.Include(p => p.Users).FirstOrDefault(pr => pr.Id == projectId).Users;
         }
+                  
 
         public ICollection<ApplicationUser> ListUsersNotOnProject(int projectId)
         {

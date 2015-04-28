@@ -347,6 +347,7 @@ namespace BugtrackerRAR_2.Controllers
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
                     return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                  
             }
         }
 
@@ -370,7 +371,7 @@ namespace BugtrackerRAR_2.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, DisplayName = ViewBag.loginInfo.DefaultUserName };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
