@@ -1,18 +1,24 @@
-﻿@model IEnumerable<BugtrackerRAR_2.Models.Project>
+﻿@using PagedList
+@using PagedList.Mvc
+@using BugtrackerRAR_2.Models
+
+
+@model PagedList<BugtrackerRAR_2.Models.Project>
 
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
-
+<link href="/Content/PagedList.css" rel="stylesheet" />
+<br />
+<h2>Project List</h2>
+<br />
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            <p>Projects</p>
         </th>
         <th></th>
     </tr>
@@ -44,3 +50,5 @@
         </div>
     </div>
 </div>
+ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

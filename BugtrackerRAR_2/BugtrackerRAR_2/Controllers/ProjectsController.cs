@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+using PagedList.Mvc;
 using BugtrackerRAR_2.Models;
 
 namespace BugtrackerRAR_2.Controllers
@@ -14,10 +16,20 @@ namespace BugtrackerRAR_2.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        // GET: Projects                 commented out so that can customize results that are displayed
+        //public ActionResult Index()
+        //{
+        //    return View(db.Projects.ToList());
+        //}
+
         // GET: Projects
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.Projects.ToList());
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
+            //return View(db.Projects.ToList());
+            return View(db.Projects.OrderBy(p => p.Name).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Projects/Details/5
