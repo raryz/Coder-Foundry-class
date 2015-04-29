@@ -152,6 +152,34 @@ namespace BugtrackerRAR_2.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddComment(TicketComment commentMessage, int TicketId)
+        {
+            if (ModelState.IsValid)
+            {
+                var msgBody = commentMessage.Comment;
+                if (string.IsNullOrWhiteSpace(msgBody))
+                {
+                    ModelState.AddModelError("Title", "Invalid comment.");
+                    return View();
+                }
+                else
+                {
+                    commentMessage.Created = System.DateTimeOffset.Now;
+                    //commentMessage.Updated = System.DateTimeOffset.Now;   // not defined in TicketComment
+                    //commentMessage.UpdatedReason = " ";
+                    commentMessage.UserId = User.Identity.GetUserId();
+
+                    db.TicketComments.Add(commentMessage);
+                    db.SaveChanges();
+                    return RedirectToAction ("Details", new { id = TicketId });
+                }
+            }
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

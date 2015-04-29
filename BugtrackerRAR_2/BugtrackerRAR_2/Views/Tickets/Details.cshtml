@@ -92,7 +92,65 @@
 
     </dl>
 </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="w-box blog-post">
+
+            <div class="comments-wr">
+                <h3 class="section-title">Comments</h3>
+
+                <div class="well">
+                    <h4>Leave a Comment:</h4>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form class="form-light" action="@Url.Action("AddComment","Tickets")" method="post" role="form">
+
+                            <div class="form-group">
+                                @Html.AntiForgeryToken()
+                                <textarea class="form-control" name="Comment" placeholder="Write you comment here..."></textarea>
+                                <input type="hidden" name="TicketId" value="@Model.Id" />
+                                @*<input type="hidden" name="slug" value="@Model.Slug" />*@
+                            </div>
+                            <button type="submit" class="btn pull-right c-blue">Send comment</button>
+                            <span class="clearfix"></span>
+                        </form>
+                    }
+                    else
+                    {
+                        <span>
+                            Please log in to post a comment.
+                        </span>
+                    }
+                </div>
+
+                @foreach (var comment in Model.TicketComments)
+                {
+                    <div class="media">
+
+                        <div class="media-body">
+
+                            <!--     <p>   <small>@comment.UserId</small>  </p>  -->
+                            <p>   <small>@comment.Created</small>  </p>
+                            @comment.Comment
+                        </div>
+                        <div>
+                            @if (User.IsInRole("Admin") )
+                            {
+
+                                @Html.ActionLink("Delete Comment", "DeleteComment", "Tickets", new { id = comment.Id }, new { @class = "btn c-blue" })
+                                @Html.ActionLink("Edit Comment", "EditComment", "Tickets", new { id = comment.Id }, new { @class = "btn c-blue" })
+                            }
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit Ticket", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

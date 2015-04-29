@@ -445,6 +445,7 @@
     <Content Include="Views\Home\Main.cshtml" />
     <Content Include="Views\ProjectUsers\AssignUser.cshtml" />
     <Content Include="Views\ProjectUsers\UnassignUser.cshtml" />
+    <Content Include="Views\Tickets\AddComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

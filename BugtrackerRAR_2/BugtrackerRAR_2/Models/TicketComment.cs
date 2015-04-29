@@ -14,5 +14,6 @@ namespace BugtrackerRAR_2.Models
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }   //cannot call this UserID
+        public virtual Ticket Ticket { get; set; }          // added 4/28/15
     }
 }
