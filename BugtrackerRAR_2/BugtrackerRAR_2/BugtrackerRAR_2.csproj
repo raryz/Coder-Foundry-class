@@ -448,6 +448,7 @@
     <Content Include="Views\ProjectUsers\UnassignUser.cshtml" />
     <Content Include="Views\Tickets\AddComment.cshtml" />
     <Content Include="Views\Tickets\Details before Attachment added.cshtml" />
+    <Content Include="Views\Tickets\IndexB.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

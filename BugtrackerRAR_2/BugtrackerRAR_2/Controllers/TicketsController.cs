@@ -25,6 +25,14 @@ namespace BugtrackerRAR_2.Controllers
             return View(tickets.ToList());
         }
 
+        // GET: Tickets  with Barnie Template
+        [Authorize]
+        public ActionResult IndexB()
+        {
+            var tickets = db.Tickets.Include(t => t.AssignedUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketPriority).Include(t => t.TicketStatus).Include(t => t.TicketType);
+            return View(tickets.ToList());
+        }
+
         // GET: Tickets/Details/5
         public ActionResult Details(int? id)
         {
