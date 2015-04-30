@@ -272,6 +272,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\Lady bug.jpg" />
     <Content Include="img\data-tables\back_disabled.png" />
     <Content Include="img\data-tables\back_enabled.png" />
     <Content Include="img\data-tables\back_enabled_hover.png" />
@@ -446,6 +447,7 @@
     <Content Include="Views\ProjectUsers\AssignUser.cshtml" />
     <Content Include="Views\ProjectUsers\UnassignUser.cshtml" />
     <Content Include="Views\Tickets\AddComment.cshtml" />
+    <Content Include="Views\Tickets\Details before Attachment added.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -134,7 +134,7 @@
                             @comment.Comment
                         </div>
                         <div>
-                            @if (User.IsInRole("Admin") )
+                            @if (User.IsInRole("Admin"))
                             {
 
                                 @Html.ActionLink("Delete Comment", "DeleteComment", "Tickets", new { id = comment.Id }, new { @class = "btn c-blue" })
@@ -149,6 +149,134 @@
         </div>
     </div>
 </div>
+
+<h2 class="text-center b-general">
+    Add Attachment
+</h2>
+
+@using (Html.BeginForm("AddAttachment", "Tickets", FormMethod.Post, new { enctype = "Multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal b-general">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+
+            <div class="col-md-10">
+
+                <input type="hidden" name="TicketId" value="@Model.Id" />
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-md-10">
+
+                <textarea class="form-control" name="Description" placeholder="Describe the attachment here..."></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            @Html.Label("Image Upload", htmlAttributes: new { @class = "form-control" })
+            <div class="col-md-10">
+                <input type="file" id="fileUpload" name="fileUpload" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" value="Add Attachment" class="btn c-blue" />
+            </div>
+        </div>
+    </div>
+}
+
+@foreach (var attachment in Model.TicketAttachments)
+ {
+    <div class="media">
+
+        <div class="media-body">
+
+
+            <div class="listing-image">
+                <img class="img-responsive" src="@attachment.FileUrl" alt="">
+
+            </div>
+
+            @if (User.IsInRole("Admin"))
+                            {
+
+                @Html.ActionLink("Delete Comment", "DeleteAttachment", "Tickets", new { id = attachment.Id }, new { @class = "btn c-blue" })
+                @Html.ActionLink("Edit Comment", "EditComment", "Tickets", new { id = attachment.Id }, new { @class = "btn c-blue" })}
+        </div>
+    </div>
+ }
+
+
+@*<div class="row">     <!--  begin add attachement -->
+        <div class="col-md-12">
+            <div class="w-box blog-post">
+
+                <div class="comments-wr">
+                    <h3 class="section-title">Attachments</h3>
+
+                    <div class="well">
+                        <h4>Add an Attachment:</h4>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form class="form-light" action="@Url.Action("AddAttachment","Tickets")" method="post" role="form">
+
+                                <div class="form-group">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="TicketId" value="@Model.Id" />
+                                    <textarea class="form-control" name="Description" placeholder="Describe the attachment here..."></textarea>
+                                    @Html.Label("Image Upload", htmlAttributes: new { @class = "form-control" })
+                                    <div class="col-md-10">
+                                        <input type="file" id="fileUpload" name="fileUpload" />
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn pull-right c-blue">Add Attachment</button>
+                                <span class="clearfix"></span>
+                            </form>
+                        }
+                        else
+                        {
+                            <span>
+                                Please log in to add an attachment.
+                            </span>
+                        }
+                    </div>
+
+                    @foreach (var attachment in Model.TicketAttachments)
+                    {
+                        <div class="media">
+
+                            <div class="media-body">
+
+
+                                <div class="listing-image">
+                                    <img class="img-responsive" src="@attachment.FileUrl" alt="">
+
+                                </div>
+
+                                @if (User.IsInRole("Admin"))
+                                {
+
+                                    @Html.ActionLink("Delete Comment", "DeleteAttachment", "Tickets", new { id = attachment.Id }, new { @class = "btn c-blue" })
+                                    @Html.ActionLink("Edit Comment", "EditComment", "Tickets", new { id = attachment.Id }, new { @class = "btn c-blue" })
+                                @*}
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+    </div>   <!--  End add Attachment -->*@
+
 
 <p>
     @Html.ActionLink("Edit Ticket", "Edit", new { id = Model.Id }) |

@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using BugtrackerRAR_2.Models;
 using Microsoft.AspNet.Identity;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace BugtrackerRAR_2.Controllers
 {
@@ -174,10 +176,59 @@ namespace BugtrackerRAR_2.Controllers
 
                     db.TicketComments.Add(commentMessage);
                     db.SaveChanges();
-                    return RedirectToAction ("Details", new { id = TicketId });
+                    return RedirectToAction("Details", new { id = TicketId });
                 }
             }
             return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddAttachment(HttpPostedFileBase fileUpload, int TicketId, TicketAttachment ticketattachment)
+        {
+            if (fileUpload != null && fileUpload.ContentLength > 0)
+            {
+                // check the file name to make sure
+                // it's an image type
+                var ext = Path.GetExtension(fileUpload.FileName);
+                if (ext != ".png" && ext != ".jpg" && ext != ".txt")
+                    // otherwise, throw and error
+                    ModelState.AddModelError("image", "Invalid format.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                var msgDescription = ticketattachment.Description;
+                if (string.IsNullOrWhiteSpace(msgDescription))
+                {
+                    ModelState.AddModelError("Title", "Invalid description.");
+                    return View();
+                }
+
+                // relative server path
+                var filePath = "/images/";
+                //path on physical drive on server
+                var absPath = Server.MapPath("~" + filePath);
+                //media url for relative path
+                ticketattachment.FileUrl = filePath + fileUpload.FileName;
+                //save image
+                fileUpload.SaveAs(Path.Combine(absPath, fileUpload.FileName));
+
+                db.Entry(ticketattachment).State = EntityState.Modified;
+                ticketattachment.Created = System.DateTimeOffset.Now;           // 
+                ticketattachment.FilePath = filePath;
+                ticketattachment.UserId = User.Identity.GetUserId();
+
+                db.TicketAttachments.Add(ticketattachment);
+                await db.SaveChangesAsync();
+
+                return RedirectToAction("Details", new { id = TicketId });
+
+            }    // end if model state is valid
+
+            return View();    // if invalid format for image
+
         }
 
         protected override void Dispose(bool disposing)
