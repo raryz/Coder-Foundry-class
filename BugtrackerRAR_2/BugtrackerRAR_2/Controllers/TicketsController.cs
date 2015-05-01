@@ -75,7 +75,7 @@ namespace BugtrackerRAR_2.Controllers
             {
                 ticket.OwnerUserId = User.Identity.GetUserId();
                 ticket.Created = System.DateTimeOffset.Now;
-                ticket.TicketStatusID = 3;                       // 3 = unassigned
+                ticket.TicketStatusID = 1;                       // 1 = unassigned
 
                 db.Tickets.Add(ticket);
                 db.SaveChanges();
