@@ -75,7 +75,8 @@ namespace BugtrackerRAR_2.Models.Helpers
 
         public ICollection<ApplicationUser> ListUsersOnProject(int projectId)
         {
-            return db.Projects.Include(p => p.Users).FirstOrDefault(pr => pr.Id == projectId).Users;
+            
+           return db.Projects.Include(p => p.Users).FirstOrDefault(pr => pr.Id == projectId).Users;
         }
                   
 

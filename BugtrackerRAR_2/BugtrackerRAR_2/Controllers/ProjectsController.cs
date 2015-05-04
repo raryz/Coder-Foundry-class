@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using PagedList;
 using PagedList.Mvc;
 using BugtrackerRAR_2.Models;
+using Microsoft.AspNet.Identity;
 
 namespace BugtrackerRAR_2.Controllers
 {
@@ -25,11 +26,24 @@ namespace BugtrackerRAR_2.Controllers
         // GET: Projects
         public ActionResult Index(int? page)
         {
-            int pageSize = 3;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
 
             //return View(db.Projects.ToList());
             return View(db.Projects.OrderBy(p => p.Name).ToPagedList(pageNumber, pageSize));
+        }
+
+        // GET: Projects
+        public ActionResult Index2(int? page)
+        {
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            var UserId = User.Identity.GetUserId();
+            var projects = db.Projects.Where(pr => pr.Users.Any(u => u.Id == UserId));
+            return View(projects.ToList().ToPagedList(pageNumber, pageSize));
+            //return View(projects.ToList());
+            //return View(projects.ToList()).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Projects/Details/5

@@ -33,7 +33,7 @@ namespace BugtrackerRAR_2.Controllers
           // GET: AssignUsers
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Project Manager")]
         public ActionResult AssignUser(ProjectUsersViewModel model)    
         {
             if (ModelState.IsValid)
@@ -71,7 +71,7 @@ namespace BugtrackerRAR_2.Controllers
         // GET: UnassignUsers
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Project Manager")]
         public ActionResult UnassignUser(ProjectUsersViewModel model)
         {
             if (ModelState.IsValid)

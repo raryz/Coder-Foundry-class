@@ -75,8 +75,8 @@ namespace BugtrackerRAR_2.Migrations
            // var userId = userManager.FindByEmail("samdev@coderfoundry.com").Id;
            // userManager.AddToRole(userId, "Developer");
 
-            var userId = userManager.FindByEmail("jeffdev@coderfoundry.com").Id;
-            userManager.AddToRole(userId, "Developer");
+            var userId = userManager.FindByEmail("maryproj@coderfoundry.com").Id;
+            userManager.AddToRole(userId, "Project Manager");
 
             //  This method will be called after migrating to the latest version.
 

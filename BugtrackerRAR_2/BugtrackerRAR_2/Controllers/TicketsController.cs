@@ -33,6 +33,36 @@ namespace BugtrackerRAR_2.Controllers
             return View(tickets.ToList());
         }
 
+        // GET: Tickets  with Barnie Template
+        // list of projects assigned to project managers or developers
+        [Authorize]
+        public ActionResult IndexBp()
+        {
+            var UserId = User.Identity.GetUserId();
+            var tickets = db.Tickets.Where(t => t.Project.Users.Any(u => u.Id == UserId));
+            
+            return View(tickets.ToList());
+        }
+        
+             // GET: Tickets  with Barnie Template
+        [Authorize]
+        public ActionResult IndexBd()
+        {
+            var UserId = User.Identity.GetUserId();
+            var tickets = db.Tickets.Where(t => t.AssignedUserId == UserId);
+            
+            return View(tickets.ToList());
+        }
+
+       
+         [Authorize]
+        public ActionResult IndexBs()
+        {
+            var UserId = User.Identity.GetUserId();
+            var tickets = db.Tickets.Where(t => t.OwnerUserId == UserId);
+            return View(tickets.ToList());
+        }
+
         // GET: Tickets/Details/5
         public ActionResult Details(int? id)
         {

@@ -458,6 +458,10 @@
     <Content Include="Views\Tickets\IndexB.cshtml" />
     <Content Include="Views\Account\ResendEmailConfirmation.cshtml" />
     <Content Include="Views\Account\ConfirmationSent.cshtml" />
+    <Content Include="Views\Projects\Index2.cshtml" />
+    <Content Include="Views\Tickets\IndexBp.cshtml" />
+    <Content Include="Views\Tickets\IndexBd.cshtml" />
+    <Content Include="Views\Tickets\IndexBs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
