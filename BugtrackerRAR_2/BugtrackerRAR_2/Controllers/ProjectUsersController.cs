@@ -30,11 +30,11 @@ namespace BugtrackerRAR_2.Controllers
             return View(model);
         }
 
-          // GET: AssignUsers
+        // GET: AssignUsers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,Project Manager")]
-        public ActionResult AssignUser(ProjectUsersViewModel model)    
+        public ActionResult AssignUser(ProjectUsersViewModel model)
         {
             if (ModelState.IsValid)
             {   // received model and a string of user ids
@@ -45,6 +45,155 @@ namespace BugtrackerRAR_2.Controllers
                         helper.AddUserToProject(id, model.projectId);
                     }
                     return RedirectToAction("Index", "Projects");
+                }
+                else
+                {
+                    // send error message back to view
+                }
+            }
+            return View(model);
+        }
+
+        // GET: AssignUsers Project Managers
+        public ActionResult AssignPm(int id)     //Project ID passed
+        {
+            var model = new ProjectUsersViewModel();
+            var project = db.Projects.Find(id);
+
+            model.projectId = project.Id;
+            model.projectName = project.Name;
+            model.Users = new MultiSelectList(helper.ListProjectMgrsNotOnProject(id).OrderBy(u => u.DisplayName), "Id", "DisplayName");
+            return View(model);
+        }
+
+        // GET: AssignUsers Project Managers
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public ActionResult AssignPm(ProjectUsersViewModel model)
+        {
+            if (ModelState.IsValid)
+            {   // received model and a string of user ids
+                if (model.SelectedUsers != null)
+                {
+                    foreach (string id in model.SelectedUsers)
+                    {
+                        helper.AddUserToProject(id, model.projectId);
+                    }
+                    return RedirectToAction("IndexBp", "Projects");
+                }
+                else
+                {
+                    // send error message back to view
+                }
+            }
+            return View(model);
+        }
+
+        // GET: AssignUsers  Developers
+        public ActionResult AssignDev(int id)     //Project ID passed
+        {
+            var model = new ProjectUsersViewModel();
+            var project = db.Projects.Find(id);
+
+            model.projectId = project.Id;
+            model.projectName = project.Name;
+            model.Users = new MultiSelectList(helper.ListDevelopersNotOnProject(id).OrderBy(u => u.DisplayName), "Id", "DisplayName");
+            return View(model);
+        }
+
+        // GET: AssignUsers  Developers
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Project Manager")]
+        public ActionResult AssignDev(ProjectUsersViewModel model, int calledfrom)
+        {
+            if (ModelState.IsValid)
+            {   // received model and a string of user ids
+                if (model.SelectedUsers != null)
+                {
+                    foreach (string id in model.SelectedUsers)
+                    {
+                        helper.AddUserToProject(id, model.projectId);
+                    }
+                    if (calledfrom == 1) { 
+                    return RedirectToAction("IndexBp", "Projects");
+                    }
+                    return RedirectToAction("IndexBp2", "Projects");  // Have to create a separate action
+                }                                                     // because using a different view
+                else
+                {
+                    // send error message back to view
+                }
+            }
+            return View(model);
+        }
+
+        // GET: AssignUsers  Developers by Project Manager
+        public ActionResult AssignDev2(int id)     //Project ID passed
+        {
+            var model = new ProjectUsersViewModel();
+            var project = db.Projects.Find(id);
+
+            model.projectId = project.Id;
+            model.projectName = project.Name;
+            model.Users = new MultiSelectList(helper.ListDevelopersNotOnProject(id).OrderBy(u => u.DisplayName), "Id", "DisplayName");
+            return View(model);
+        }
+
+        // GET: AssignUsers  Developers by Project Manager
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Project Manager")]
+        public ActionResult AssignDev2(ProjectUsersViewModel model)
+        {
+            if (ModelState.IsValid)
+            {   // received model and a string of user ids
+                if (model.SelectedUsers != null)
+                {
+                    foreach (string id in model.SelectedUsers)
+                    {
+                        helper.AddUserToProject(id, model.projectId);
+                    }
+                    
+                    return RedirectToAction("IndexBp2", "Projects");  
+                }                                                     
+                else
+                {
+                    // send error message back to view
+                }
+            }
+            return View(model);
+        }
+
+        // GET: UnAssignUsers  Developers by Project Manager
+        public ActionResult UnAssignDev(int id)     //Project ID passed
+        {
+            var model = new ProjectUsersViewModel();
+            var project = db.Projects.Find(id);
+
+            model.projectId = project.Id;
+            model.projectName = project.Name;
+            model.Users = new MultiSelectList(helper.ListDevelopersOnProject(id).OrderBy(u => u.DisplayName), "Id", "DisplayName");
+            return View(model);
+        }
+
+        // GET: UnAssignUsers  Developers by Project Manager
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Project Manager")]
+        public ActionResult UnAssignDev(ProjectUsersViewModel model)
+        {
+            if (ModelState.IsValid)
+            {   // received model and a string of user ids
+                if (model.SelectedUsers != null)
+                {
+                    foreach (string id in model.SelectedUsers)
+                    {
+                        helper.RemoveUserFromProject(id, model.projectId);
+                    }
+
+                    return RedirectToAction("IndexBp2", "Projects");
                 }
                 else
                 {

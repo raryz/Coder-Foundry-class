@@ -52,6 +52,14 @@ namespace BugtrackerRAR_2.Controllers
             //return View(projects.ToList()).ToPagedList(pageNumber, pageSize));
         }
 
+        // GET: Projects             using Barnie Template for Project Managers   
+        public ActionResult IndexBp2()
+        {
+            var UserId = User.Identity.GetUserId();
+            var projects = db.Projects.Where(pr => pr.Users.Any(u => u.Id == UserId));
+            return View(db.Projects.ToList());
+        }
+
         // GET: Projects/Details/5
         public ActionResult Details(int? id)
         {

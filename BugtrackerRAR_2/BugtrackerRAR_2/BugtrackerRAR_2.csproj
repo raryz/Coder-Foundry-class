@@ -468,6 +468,11 @@
     <Content Include="Views\Tickets\IndexBs.cshtml" />
     <Content Include="Views\Tickets\IndexAll.cshtml" />
     <Content Include="Views\Projects\IndexBp.cshtml" />
+    <Content Include="Views\Projects\IndexBp2.cshtml" />
+    <Content Include="Views\ProjectUsers\AssignPm.cshtml" />
+    <Content Include="Views\ProjectUsers\AssignDev.cshtml" />
+    <Content Include="Views\ProjectUsers\AssignDev2.cshtml" />
+    <Content Include="Views\ProjectUsers\UnAssignDev.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

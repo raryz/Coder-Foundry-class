@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<BugtrackerRAR_2.Models.Project>
+﻿@model IEnumerable<BugtrackerRAR_2.Models.Project>
 
 @{
     ViewBag.Title = "Index";
@@ -32,12 +31,9 @@
                 <div class="col-md-3 col-sm-4 col-xs-6">
                     <!-- Page title -->
                     <h2><i class="fa fa-desktop lblue"></i> Project List</h2>
-                    @Html.ActionLink("Create New", "Create")
                 </div>
-      
             </div>
         </div>
-
     </div>
 
     <!-- Mainbar head ends -->
@@ -59,8 +55,7 @@
                     <thead>
                         <tr>
                             <th>Project Name</th>
-                            <th>Edit</th>
-                            <th>Assign</th>
+                          @*  <th>Edit</th>  *@
                             <th>Assign</th>
                             <th>List or Unassign</th>
                         </tr>
@@ -72,19 +67,16 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td>
+                             @*   <td>
+                                   @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                  </td>  *@
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                    @Html.ActionLink("Developers", "AssignDev2", "ProjectUsers", new { id = item.Id }, null)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Project Managers", "AssignPm", "ProjectUsers", new { id = item.Id }, null)
+                                    @Html.ActionLink("Developers", "UnAssignDev", "ProjectUsers", new { id = item.Id }, null)
                                 </td>
-                                <td>
-                                    @Html.ActionLink("Developers", "AssignDev", "ProjectUsers", new { id = item.Id }, null)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Users", "UnassignUser", "ProjectUsers", new { id = item.Id }, null)
-                                </td>
-                                
+
                             </tr>
                         }
 
@@ -167,5 +159,6 @@
 </script>
 <!-- Custom JS -->
 <script src="/js/custom.js"></script>
+
 
 

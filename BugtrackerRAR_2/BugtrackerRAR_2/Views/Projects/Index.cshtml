@@ -30,7 +30,7 @@
         </td>
         <td>
             @Html.ActionLink("Edit Project Name", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Assign Users", "AssignUser", "ProjectUsers", new { id = item.Id }, null) |
+            @Html.ActionLink("Assign Project Managers", "AssignPm", "ProjectUsers", new { id = item.Id }, null) |
             @Html.ActionLink("List or Unassign Users", "UnassignUser", "ProjectUsers", new { id = item.Id }, null) 
             @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
           @*  @Html.ActionLink("Delete", "Delete", new { id=item.Id }) *@

@@ -86,6 +86,35 @@ namespace BugtrackerRAR_2.Models.Helpers
             return db.Users.Where(u => u.Projects.All(p => p.Id != projectId)).ToList();
 
         }
+
+        public ICollection<ApplicationUser> ListDevelopersNotOnProject(int projectId)
+        {
+            var role = db.Roles.First(r => r.Name == "Developer");
+            //role should contain one role record with the id and the name.
+            return db.Users.Where(u => u.Projects.All(p => p.Id != projectId))
+                .Intersect(db.Users.Where(u => u.Roles.Any(r => r.RoleId == role.Id))).ToList();
+
+        }
+
+        public ICollection<ApplicationUser> ListProjectMgrsNotOnProject(int projectId)
+        {
+            //Efficient
+            var role = db.Roles.First(r => r.Name == "Project Manager");
+            //role should contain one role record with the id and the name.
+            return db.Users.Where(u => u.Projects.All(p => p.Id != projectId))
+                .Intersect(db.Users.Where(u => u.Roles.Any(r => r.RoleId == role.Id))).ToList();
+            //return db.Users.Where(u => u.Projects.All(p => p.Id != projectId)).ToList();
+
+        }
+
+        public ICollection<ApplicationUser> ListDevelopersOnProject(int projectId)
+        {
+            var role = db.Roles.First(r => r.Name == "Developer");
+            //role should contain one role record with the id and the name.
+            return db.Users.Where(u => u.Projects.All(p => p.Id == projectId))
+                .Intersect(db.Users.Where(u => u.Roles.Any(r => r.RoleId == role.Id))).ToList();
+
+        }
     }
 }
    
