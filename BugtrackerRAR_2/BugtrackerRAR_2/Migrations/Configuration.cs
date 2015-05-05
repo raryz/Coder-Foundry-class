@@ -56,27 +56,27 @@ namespace BugtrackerRAR_2.Migrations
 
             }
 
-           //var userId = userManager.FindByEmail("admin@coderfoundry.com").Id;
-           //userManager.AddToRole(userId, "Admin");
+            //var userId = userManager.FindByEmail("admin@coderfoundry.com").Id;
+            //userManager.AddToRole(userId, "Admin");
 
-            if (!context.Users.Any(r => r.Email == "jeffdev@coderfoundry.com"))
+            if (!context.Users.Any(r => r.Email == "jerrydev@coderfoundry.com"))
             {
                 userManager.Create(new ApplicationUser
                 {
-                    UserName = "jeffdev@coderfoundry.com",
-                    Email = "jeffdev@coderfoundry.com",
-                    FirstName = "Jeff",
+                    UserName = "jerrydev@coderfoundry.com",
+                    Email = "jerrydev@coderfoundry.com",
+                    FirstName = "Jerry",
                     LastName = "Dev",
-                    DisplayName = "Jeff Dev"
+                    DisplayName = "Jerry Dev"
                 }, "Abc123!");
 
             }
 
-           // var userId = userManager.FindByEmail("samdev@coderfoundry.com").Id;
-           // userManager.AddToRole(userId, "Developer");
+            var userId = userManager.FindByEmail("jerrydev@coderfoundry.com").Id;
+            userManager.AddToRole(userId, "Developer");
 
-            var userId = userManager.FindByEmail("maryproj@coderfoundry.com").Id;
-            userManager.AddToRole(userId, "Project Manager");
+            //var userId = userManager.FindByEmail("maryproj@coderfoundry.com").Id;
+            //userManager.AddToRole(userId, "Project Manager");
 
             //  This method will be called after migrating to the latest version.
 

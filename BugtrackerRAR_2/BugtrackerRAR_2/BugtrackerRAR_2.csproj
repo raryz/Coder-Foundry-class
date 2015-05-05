@@ -391,6 +391,8 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="less\less-style.less" />
+    <None Include="Properties\PublishProfiles\rryzowicz-bugtracker - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\rryzowicz-bugtracker - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -403,7 +405,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -462,6 +466,8 @@
     <Content Include="Views\Tickets\IndexBp.cshtml" />
     <Content Include="Views\Tickets\IndexBd.cshtml" />
     <Content Include="Views\Tickets\IndexBs.cshtml" />
+    <Content Include="Views\Tickets\IndexAll.cshtml" />
+    <Content Include="Views\Projects\IndexBp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

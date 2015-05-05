@@ -23,6 +23,12 @@ namespace BugtrackerRAR_2.Controllers
         //    return View(db.Projects.ToList());
         //}
 
+        // GET: Projects             using Barnie Template    
+        public ActionResult IndexBp()
+        {
+            return View(db.Projects.ToList());
+        }
+
         // GET: Projects
         public ActionResult Index(int? page)
         {

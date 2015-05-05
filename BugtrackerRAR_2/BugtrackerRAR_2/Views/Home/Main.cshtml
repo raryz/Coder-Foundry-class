@@ -57,11 +57,17 @@
                         <!-- Sidebar links -->
                         <ul class="list-unstyled">
                             <li><a href="@Url.Action("Main","Home")"><i class="fa fa-desktop"></i> Dashboard</a></li>
-                            <li><a href="@Url.Action("Index","Tickets")" class="white"> Tickets</a></li>
-                            <li><a href="@Url.Action("Users","Admin")" class="white"> User Roles</a></li>
+
+                            <li>
+                                @if ((User.IsInRole("Project Manager")) || (User.IsInRole("Developer")) ||
+                                (User.IsInRole("Submitter")))
+                                {
+                                    <a href="@Url.Action("IndexAll","Tickets")" class="white"> All Tickets, Display only</a>}
+                            </li>
+                            
                             <li>
                                 @if (User.IsInRole("Admin")) {
-                                    <a href="@Url.Action("IndexB","Tickets")" class="white"> All Tickets </a>}
+                                    <a href="@Url.Action("IndexB","Tickets")" class="white"> All Tickets, allow Edit </a>}
                                 @if (User.IsInRole("Project Manager")){
                                     <a href="@Url.Action("IndexBp","Tickets")" class="white"> Tickets for Projects</a>}
                                 @if (User.IsInRole("Developer")){                                  
@@ -71,11 +77,15 @@
                             </li>
                             <li>
                                     @if (User.IsInRole("Admin")) {
-                                            <a href="@Url.Action("Index","Projects")" class="white"> Projects</a>}
+                                            <a href="@Url.Action("IndexBp","Projects")" class="white"> Projects</a>}
                                     @if ((User.IsInRole("Project Manager")) || (User.IsInRole("Developer"))){
                                         <a href="@Url.Action("Index2","Projects")" class="white"> Projects</a>}
-                                   
-                                </li>
+                            </li>
+                            <li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a href="@Url.Action("Users","Admin")" class="white"> User Roles</a>}
+                           </li>
 
                                     @*<li><a href="widgets.html"><i class="fa fa-bullseye"></i> Widget <span class="badge badge-danger pull-right">6</span></a></li>
                                         <li><a href="charts.html"><i class="fa fa-signal"></i> Charts <span class="badge badge-info pull-right">5</span></a></li>

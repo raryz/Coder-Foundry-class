@@ -10,6 +10,7 @@ using BugtrackerRAR_2.Models;
 using Microsoft.AspNet.Identity;
 using System.IO;
 using System.Threading.Tasks;
+using BugtrackerRAR_2.Models.Helpers;
 
 namespace BugtrackerRAR_2.Controllers
 {
@@ -25,7 +26,15 @@ namespace BugtrackerRAR_2.Controllers
             return View(tickets.ToList());
         }
 
-        // GET: Tickets  with Barnie Template
+        // GET: Tickets  with Barnie Template  Allow authorized users to see all tickets, unable to edit them
+        [Authorize]
+        public ActionResult IndexAll()
+        {
+            var tickets = db.Tickets.Include(t => t.AssignedUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketPriority).Include(t => t.TicketStatus).Include(t => t.TicketType);
+            return View(tickets.ToList());
+        }
+
+        // GET: Tickets  with Barnie Template  Allow Admin to see all tickets, and can edit them, admin checked on view
         [Authorize]
         public ActionResult IndexB()
         {
@@ -40,10 +49,10 @@ namespace BugtrackerRAR_2.Controllers
         {
             var UserId = User.Identity.GetUserId();
             var tickets = db.Tickets.Where(t => t.Project.Users.Any(u => u.Id == UserId));
-            
+
             return View(tickets.ToList());
         }
-        
+               
              // GET: Tickets  with Barnie Template
         [Authorize]
         public ActionResult IndexBd()
@@ -125,6 +134,8 @@ namespace BugtrackerRAR_2.Controllers
         // GET: Tickets/Edit/5
         public ActionResult Edit(int? id)
         {
+            var helperrole = new UserRolesHelper();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -134,7 +145,7 @@ namespace BugtrackerRAR_2.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AssignedUserId = new SelectList(db.Users, "Id", "FirstName", ticket.AssignedUserId);
+            ViewBag.AssignedUserId = new SelectList(helperrole.UsersInRole("Developer"), "Id", "FirstName", ticket.AssignedUserId);
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName", ticket.OwnerUserId);
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", ticket.ProjectId);
             ViewBag.TicketPriorityID = new SelectList(db.TicketPriorities, "Id", "Name", ticket.TicketPriorityID);
@@ -150,6 +161,8 @@ namespace BugtrackerRAR_2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Title,Description,Created,Updated,ProjectId,TicketTypeID,TicketPriorityID,TicketStatusID,OwnerUserId,AssignedUserId")] Ticket ticket)
         {
+            var helperrole = new UserRolesHelper();
+
             if (ModelState.IsValid)
             {
                 db.Entry(ticket).State = EntityState.Modified;
@@ -157,7 +170,7 @@ namespace BugtrackerRAR_2.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AssignedUserId = new SelectList(db.Users, "Id", "FirstName", ticket.AssignedUserId);
+            ViewBag.AssignedUserId = new SelectList(helperrole.UsersInRole("Developer"), "Id", "FirstName", ticket.AssignedUserId);
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName", ticket.OwnerUserId);
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", ticket.ProjectId);
             ViewBag.TicketPriorityID = new SelectList(db.TicketPriorities, "Id", "Name", ticket.TicketPriorityID);
