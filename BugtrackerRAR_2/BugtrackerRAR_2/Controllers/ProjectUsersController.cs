@@ -106,7 +106,7 @@ namespace BugtrackerRAR_2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,Project Manager")]
-        public ActionResult AssignDev(ProjectUsersViewModel model, int calledfrom)
+        public ActionResult AssignDev(ProjectUsersViewModel model)
         {
             if (ModelState.IsValid)
             {   // received model and a string of user ids
@@ -116,12 +116,11 @@ namespace BugtrackerRAR_2.Controllers
                     {
                         helper.AddUserToProject(id, model.projectId);
                     }
-                    if (calledfrom == 1) { 
+                    
                     return RedirectToAction("IndexBp", "Projects");
-                    }
-                    return RedirectToAction("IndexBp2", "Projects");  // Have to create a separate action
-                }                                                     // because using a different view
-                else
+                    
+                }                                                     
+                else                                    
                 {
                     // send error message back to view
                 }
@@ -231,7 +230,7 @@ namespace BugtrackerRAR_2.Controllers
                     {
                         helper.RemoveUserFromProject(id, model.projectId);
                     }
-                    return RedirectToAction("Index", "Projects");
+                    return RedirectToAction("IndexBp", "Projects");
                 }
                 else
                 {

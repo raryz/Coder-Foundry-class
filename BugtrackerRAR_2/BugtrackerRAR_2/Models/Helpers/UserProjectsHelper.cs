@@ -100,7 +100,7 @@ namespace BugtrackerRAR_2.Models.Helpers
         {
             //Efficient
             var role = db.Roles.First(r => r.Name == "Project Manager");
-            //role should contain one role record with the id and the name.
+            //role should contain one role record with the id and the name ( from ASPNETROLES )
             return db.Users.Where(u => u.Projects.All(p => p.Id != projectId))
                 .Intersect(db.Users.Where(u => u.Roles.Any(r => r.RoleId == role.Id))).ToList();
             //return db.Users.Where(u => u.Projects.All(p => p.Id != projectId)).ToList();
@@ -111,7 +111,7 @@ namespace BugtrackerRAR_2.Models.Helpers
         {
             var role = db.Roles.First(r => r.Name == "Developer");
             //role should contain one role record with the id and the name.
-            return db.Users.Where(u => u.Projects.All(p => p.Id == projectId))
+            return db.Users.Where(u => u.Projects.Any(p => p.Id == projectId))
                 .Intersect(db.Users.Where(u => u.Roles.Any(r => r.RoleId == role.Id))).ToList();
 
         }
