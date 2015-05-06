@@ -165,10 +165,34 @@ namespace BugtrackerRAR_2.Controllers
 
             if (ModelState.IsValid)
             {
+                var oldTicket = (from t in db.Tickets.AsNoTracking()
+                                 where t.Id == ticket.Id
+                                 select t).FirstOrDefault();
+                if (oldTicket.AssignedUserId != ticket.AssignedUserId)
+                {
+                    var AssignedHistory = new TicketHistory
+                    {
+                      TicketId = ticket.Id,
+                      UserId = User.Identity.GetUserId(),
+                      Property = "Assigned User ID",
+                      OldValue = oldTicket.AssignedUserId,
+                      NewValue = ticket.AssignedUserId,
+                      Changed = System.DateTimeOffset.Now
+                    };
+                    db.TicketHistories.Add(AssignedHistory);
+                    var user = db.Users.Find(ticket.AssignedUserId);
+                    new EmailService().SendAsync(new IdentityMessage
+                    {
+                        Subject = "You have been assigned a new ticket",
+                        Destination = user.Email,
+                        Body = "Please look at your assigned tickets."
+                    });
+                }
+                                
                 db.Entry(ticket).State = EntityState.Modified;
                 ticket.Updated = System.DateTimeOffset.Now;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Main","Home");
             }
             ViewBag.AssignedUserId = new SelectList(helperrole.UsersInRole("Developer"), "Id", "FirstName", ticket.AssignedUserId);
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName", ticket.OwnerUserId);
