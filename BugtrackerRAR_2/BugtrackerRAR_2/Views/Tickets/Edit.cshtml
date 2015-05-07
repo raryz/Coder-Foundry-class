@@ -56,6 +56,14 @@
             </div>
         </div>*@
 
+        <div class="form-group">
+                            @*must pass the updated field or else created date will be overwritten with invalid data*@
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.Updated)
+
+            </div>
+        </div>
+
         @*<div class="form-group">
             @Html.LabelFor(model => model.ProjectId, "ProjectId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -63,6 +71,14 @@
                 @Html.ValidationMessageFor(model => model.ProjectId, "", new { @class = "text-danger" })
             </div>
         </div>*@
+
+        <div class="form-group">
+            @*must pass the ProjectId field or else a zero will be passed *@
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.ProjectId)
+
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.TicketTypeID, "TicketTypeID", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -95,6 +111,14 @@
                 @Html.ValidationMessageFor(model => model.OwnerUserId, "", new { @class = "text-danger" })
             </div>
         </div>*@
+
+        <div class="form-group">
+                                                           @*must pass the OwnerUserId field  *@
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.OwnerUserId)
+
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.AssignedUserId, "AssignedUserId", htmlAttributes: new { @class = "control-label col-md-2" })

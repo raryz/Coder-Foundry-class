@@ -10,8 +10,10 @@
     <h4>Ticket</h4>
     <hr />
     <dl class="dl-horizontal">
+        @* DisplayFor - Renders the actual contents of the Property specified. *@
+        @* DisplayNameFor - Renders the Name property within the Display Attribute.*@
         <dt>
-            @Html.DisplayNameFor(model => model.AssignedUser.DisplayName)
+            @Html.LabelFor(model => model.AssignedUser.DisplayName, "Assigned to")
         </dt>
 
         <dd>
@@ -19,7 +21,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.OwnerUser.FirstName)
+            @Html.LabelFor(model => model.OwnerUser.FirstName, "Owner")
         </dt>
 
         <dd>
@@ -27,7 +29,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Project.Name)
+            @Html.LabelFor(model => model.Project.Name, "Project Name")
         </dt>
 
         <dd>
@@ -35,7 +37,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TicketPriority.Name)
+            @Html.LabelFor(model => model.TicketPriority.Name, "Priority")
         </dt>
 
         <dd>
@@ -43,7 +45,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TicketStatus.Name)
+            @Html.LabelFor(model => model.TicketStatus.Name, "Status")
         </dt>
 
         <dd>
@@ -51,7 +53,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TicketType.Name)
+            @Html.LabelFor(model => model.TicketType.Name, "Type")
         </dt>
 
         <dd>
@@ -59,7 +61,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.LabelFor(model => model.Title, "Title")
         </dt>
 
         <dd>
@@ -67,7 +69,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.LabelFor(model => model.Description, "Description")
         </dt>
 
         <dd>
@@ -75,7 +77,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Created)
+            @Html.LabelFor(model => model.Created, "Created")
         </dt>
 
         <dd>
@@ -83,7 +85,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Updated)
+            @Html.LabelFor(model => model.Updated, "Updated")
         </dt>
 
         <dd>
@@ -92,17 +94,32 @@
 
     </dl>
 </div>
-@*<div class="row">
+<div class="row">
     <div class="col-md-12">
-        @foreach (var notification in Model.TicketNotifications)
-        {
-          
+        <h3 class="section-title">History</h3>
 
-                
+        @foreach (var history in Model.TicketHistories)
+        {
+            <div class="container">
             
+                    
+                    <p> Changed : @history.Changed   </p>
+                         
+                @if (@history.OldValue == null){
+                     <p>  Developer was assigned  </p>
+                     <br/>
+                }
+                else
+                {
+                     <p> Item that changed : @history.Property  </p>
+                     <p> Previous value : @history.OldValue  </p>
+                     <p> New value :  @history.NewValue  </p>
+                     <br />
+                }
+            </div>
         }
         </div>
-   </div>*@
+   </div>
 
         <div class="row">
             <div class="col-md-12">
@@ -141,9 +158,8 @@
                             <div class="media">
 
                                 <div class="media-body">
-
-                                    <!--     <p>   <small>@comment.UserId</small>  </p>  -->
-                                    <p>   <small>@comment.Created</small>  </p>
+  
+                                    <p>   @comment.Created  </p>
                                     @comment.Comment
                                 </div>
                                 <div>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -21,10 +22,12 @@ namespace BugtrackerRAR_2.Models
         public string Description { get; set; }
         public DateTimeOffset Created { get; set; }
         public Nullable<DateTimeOffset> Updated { get; set; }
+        [Required]
         public int ProjectId { get; set; }
         public int TicketTypeID { get; set; }
         public int TicketPriorityID { get; set; }
         public int TicketStatusID { get; set; }
+        [Required]
         public string OwnerUserId { get; set; }
         public string AssignedUserId { get; set; }
 
