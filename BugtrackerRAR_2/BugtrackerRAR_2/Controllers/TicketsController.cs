@@ -179,7 +179,9 @@ namespace BugtrackerRAR_2.Controllers
                       NewValue = ticket.AssignedUserId,
                       Changed = System.DateTimeOffset.Now
                     };
+
                     db.TicketHistories.Add(AssignedHistory);
+
                     var user = db.Users.Find(ticket.AssignedUserId);
                     new EmailService().SendAsync(new IdentityMessage
                     {
@@ -187,8 +189,171 @@ namespace BugtrackerRAR_2.Controllers
                         Destination = user.Email,
                         Body = "Please look at your assigned tickets."
                     });
+
+                    var NotificationHistory1 = new TicketNotification
+                    {
+                        TicketId = ticket.Id,
+                        UserId = ticket.AssignedUserId
+                    };
+
+                    db.TicketNotifications.Add(NotificationHistory1);
                 }
-                                
+
+                if (oldTicket.Title != ticket.Title)
+                {
+                    var TitleHistory = new TicketHistory
+                    {
+                        TicketId = ticket.Id,
+                        UserId = User.Identity.GetUserId(),
+                        Property = "Title",
+                        OldValue = oldTicket.Title,
+                        NewValue = ticket.Title,
+                        Changed = System.DateTimeOffset.Now
+                    };
+
+                    db.TicketHistories.Add(TitleHistory);
+
+                    var user = db.Users.Find(ticket.AssignedUserId);
+                    new EmailService().SendAsync(new IdentityMessage
+                    {
+                        Subject = "A Title of an assigned ticket has changed",
+                        Destination = user.Email,
+                        Body = "Please look at your assigned tickets."
+                    });
+
+                    var NotificationHistory2 = new TicketNotification
+                    {
+                        TicketId = ticket.Id,
+                        UserId = ticket.AssignedUserId
+                    };
+
+                    db.TicketNotifications.Add(NotificationHistory2);
+                }
+
+                if (oldTicket.Description != ticket.Description)
+                {
+                    var DescriptionHistory = new TicketHistory
+                    {
+                        TicketId = ticket.Id,
+                        UserId = User.Identity.GetUserId(),
+                        Property = "Description",
+                        OldValue = oldTicket.Description,
+                        NewValue = ticket.Description,
+                        Changed = System.DateTimeOffset.Now
+                    };
+
+                    db.TicketHistories.Add(DescriptionHistory);
+
+                    var user = db.Users.Find(ticket.AssignedUserId);
+                    new EmailService().SendAsync(new IdentityMessage
+                    {
+                        Subject = "A Description of an assigned ticket has changed",
+                        Destination = user.Email,
+                        Body = "Please look at your assigned tickets."
+                    });
+
+                    var NotificationHistory3 = new TicketNotification
+                    {
+                        TicketId = ticket.Id,
+                        UserId = ticket.AssignedUserId
+                    };
+
+                    db.TicketNotifications.Add(NotificationHistory3);
+                }
+
+                if (oldTicket.TicketTypeID != ticket.TicketTypeID)
+                {
+                    var TicketTypeHistory = new TicketHistory
+                    {
+                        TicketId = ticket.Id,
+                        UserId = User.Identity.GetUserId(),
+                        Property = "TicketType",
+                        OldValue = oldTicket.TicketType.Name,
+                        NewValue = ticket.TicketType.Name,
+                        Changed = System.DateTimeOffset.Now
+                    };
+
+                    db.TicketHistories.Add(TicketTypeHistory);
+
+                    var user = db.Users.Find(ticket.AssignedUserId);
+                    new EmailService().SendAsync(new IdentityMessage
+                    {
+                        Subject = "A Ticket Type of an assigned ticket has changed",
+                        Destination = user.Email,
+                        Body = "Please look at your assigned tickets."
+                    });
+
+                    var NotificationHistory4 = new TicketNotification
+                    {
+                        TicketId = ticket.Id,
+                        UserId = ticket.AssignedUserId
+                    };
+
+                    db.TicketNotifications.Add(NotificationHistory4);
+                }
+
+                if (oldTicket.TicketPriorityID != ticket.TicketPriorityID)
+                {
+                    var TicketPriorityHistory = new TicketHistory
+                    {
+                        TicketId = ticket.Id,
+                        UserId = User.Identity.GetUserId(),
+                        Property = "TicketPriority",
+                        OldValue = oldTicket.TicketPriority.Name,
+                        NewValue = ticket.TicketPriority.Name,
+                        Changed = System.DateTimeOffset.Now
+                    };
+
+                    db.TicketHistories.Add(TicketPriorityHistory);
+
+                    var user = db.Users.Find(ticket.AssignedUserId);
+                    new EmailService().SendAsync(new IdentityMessage
+                    {
+                        Subject = "A Ticket Priority of an assigned ticket has changed",
+                        Destination = user.Email,
+                        Body = "Please look at your assigned tickets."
+                    });
+
+                    var NotificationHistory5 = new TicketNotification
+                    {
+                        TicketId = ticket.Id,
+                        UserId = ticket.AssignedUserId
+                    };
+
+                    db.TicketNotifications.Add(NotificationHistory5);
+                }
+
+                if (oldTicket.TicketStatusID != ticket.TicketStatusID)
+                {
+                    var TicketStatusHistory = new TicketHistory
+                    {
+                        TicketId = ticket.Id,
+                        UserId = User.Identity.GetUserId(),
+                        Property = "TicketStatus",
+                        OldValue = oldTicket.TicketStatus.Name,
+                        NewValue = ticket.TicketStatus.Name,
+                        Changed = System.DateTimeOffset.Now
+                    };
+
+                    db.TicketHistories.Add(TicketStatusHistory);
+
+                    var user = db.Users.Find(ticket.AssignedUserId);
+                    new EmailService().SendAsync(new IdentityMessage
+                    {
+                        Subject = "A Ticket Status of an assigned ticket has changed",
+                        Destination = user.Email,
+                        Body = "Please look at your assigned tickets."
+                    });
+
+                    var NotificationHistory6 = new TicketNotification
+                    {
+                        TicketId = ticket.Id,
+                        UserId = ticket.AssignedUserId
+                    };
+
+                    db.TicketNotifications.Add(NotificationHistory6);
+                }
+
                 db.Entry(ticket).State = EntityState.Modified;
                 ticket.Updated = System.DateTimeOffset.Now;
                 db.SaveChanges();
@@ -232,7 +397,7 @@ namespace BugtrackerRAR_2.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddComment(TicketComment commentMessage, int TicketId)
+        public ActionResult AddComment(TicketComment commentMessage, int TicketId, string AssignedId)
         {
             if (ModelState.IsValid)
             {
@@ -249,6 +414,23 @@ namespace BugtrackerRAR_2.Controllers
                     //commentMessage.UpdatedReason = " ";
                     commentMessage.UserId = User.Identity.GetUserId();
 
+
+                    var user = db.Users.Find(AssignedId);
+                    new EmailService().SendAsync(new IdentityMessage
+                    {
+                        Subject = "A comment has been added to an assigned ticket",
+                        Destination = user.Email,
+                        Body = "Please look at your assigned tickets."
+                    });
+
+                    var NotificationHistory1 = new TicketNotification
+                    {
+                        TicketId = TicketId,
+                        UserId = AssignedId
+                    };
+
+                    db.TicketNotifications.Add(NotificationHistory1);
+                    
                     db.TicketComments.Add(commentMessage);
                     db.SaveChanges();
                     return RedirectToAction("Details", new { id = TicketId });
@@ -260,7 +442,7 @@ namespace BugtrackerRAR_2.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddAttachment(HttpPostedFileBase fileUpload, int TicketId, TicketAttachment ticketattachment)
+        public async Task<ActionResult> AddAttachment(HttpPostedFileBase fileUpload, int TicketId, TicketAttachment ticketattachment, string AssignedId)
         {
             if (fileUpload != null && fileUpload.ContentLength > 0)
             {
@@ -294,6 +476,22 @@ namespace BugtrackerRAR_2.Controllers
                 ticketattachment.Created = System.DateTimeOffset.Now;           // 
                 ticketattachment.FilePath = filePath;
                 ticketattachment.UserId = User.Identity.GetUserId();
+
+                var user = db.Users.Find(AssignedId);
+                new EmailService().SendAsync(new IdentityMessage
+                {
+                    Subject = "An attachment has been added to an assigned ticket",
+                    Destination = user.Email,
+                    Body = "Please look at your assigned tickets."
+                });
+
+                var NotificationHistory1 = new TicketNotification
+                {
+                    TicketId = TicketId,
+                    UserId = AssignedId
+                };
+
+                db.TicketNotifications.Add(NotificationHistory1);
 
                 db.TicketAttachments.Add(ticketattachment);
                 await db.SaveChangesAsync();
