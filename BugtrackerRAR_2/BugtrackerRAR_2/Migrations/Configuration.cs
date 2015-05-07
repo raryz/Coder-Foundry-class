@@ -15,6 +15,8 @@ namespace BugtrackerRAR_2.Migrations
             AutomaticMigrationsEnabled = true;
         }
 
+
+
         protected override void Seed(BugtrackerRAR_2.Models.ApplicationDbContext context)
         {
             var roleManager = new RoleManager<IdentityRole>(

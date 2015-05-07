@@ -81,7 +81,7 @@ namespace BugtrackerRAR_2.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToAction("Main", "Home");
+                    return RedirectToAction("MainAdmin", "Home");
                     //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -91,6 +91,27 @@ namespace BugtrackerRAR_2.Controllers
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
+            }
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> LoginAsAdmin()
+        {
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var result = await SignInManager.PasswordSignInAsync("username", "password", false, shouldLockout: false);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    return RedirectToAction("Main", "Home");
+                //return RedirectToLocal(returnUrl);
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.Failure:
+                default:
+                    return RedirectToAction("Login");
             }
         }
 

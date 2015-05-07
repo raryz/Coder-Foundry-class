@@ -46,7 +46,11 @@
                     @Html.ActionLink("Register as a new user", "Register", "Account", null, new { @class = "h4" })
                 </p>
                 <p>
-                    @Html.ActionLink("Login as a Guest", "Login", "Account", null, new { @class = "h4" })
+                    @using(Html.BeginForm("LoginAsAdmin", "Account", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-sm btn-primary">Log in as Admin</button>
+                    }
                 </p>
             </div>
         </div>

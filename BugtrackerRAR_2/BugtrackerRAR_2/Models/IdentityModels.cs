@@ -15,7 +15,7 @@ namespace BugtrackerRAR_2.Models
         {
             this.Projects = new HashSet<Project>();
             //this.TicketsOwned = new HashSet<Ticket>();
-            //this.TicketsAssigned = new HashSet<Ticket>();
+            this.TicketsAssigned = new HashSet<Ticket>();
 
         }
 
@@ -23,6 +23,7 @@ namespace BugtrackerRAR_2.Models
         public string LastName { get; set; }
         public string DisplayName { get; set; }
         public ICollection<Project> Projects { get; set; }
+        public ICollection<Ticket> TicketsAssigned { get; set; }
 
        
 
@@ -55,5 +56,14 @@ namespace BugtrackerRAR_2.Models
         public DbSet<TicketComment> TicketComments { get; set; }
         public DbSet<TicketHistory> TicketHistories { get; set; }
         public DbSet<TicketNotification> TicketNotifications { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Ticket>()
+                        .HasOptional(t => t.AssignedUser)
+                        .WithMany(u => u.TicketsAssigned)
+                        .HasForeignKey(m => m.AssignedUserId);
+        }
     }
 }

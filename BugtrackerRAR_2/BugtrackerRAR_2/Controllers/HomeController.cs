@@ -34,5 +34,12 @@ namespace BugtrackerRAR_2.Controllers
 
             return View();
         }
+
+        public ActionResult MainAdmin()
+        {
+            //ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
     }
 }
