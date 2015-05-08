@@ -1,0 +1,315 @@
+﻿@model BugtrackerRAR_2.Models.DashBrdViewModel
+
+@{
+    ViewBag.Title = "Main";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Title here -->
+    <title>Barnie</title>
+    <!-- Description, Keywords and Author -->
+    <meta name="description" content="Your description">
+    <meta name="keywords" content="Your,Keywords">
+    <meta name="author" content="ResponsiveWebInc">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Styles -->
+    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font awesome CSS -->
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <!-- jQuery gritter -->
+    <link href="/css/jquery.gritter.css" rel="stylesheet">
+    <!-- Custom Color CSS -->
+    <link href="/css/less-style.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="#">
+</head>
+
+<body>
+
+    <div class="outer">
+
+        <!-- Sidebar starts -->
+        <div class="sidebar">
+
+            <div class="sidey">
+
+                <!-- Logo -->
+                <div class="logo">
+                    @*<h1><a href="index.html"><i class="fa fa-desktop br-red"></i> Barnie <span>It's Legendary</span></a></h1>*@
+                    <h1 class="white"> Bug Tracker</h1>
+                </div>
+
+                <!-- Sidebar navigation starts -->
+                <!-- Responsive dropdown -->
+                <div class="sidebar-dropdown"><a href="#" class="br-red"><i class="fa fa-bars"></i></a></div>
+
+                <div class="side-nav">
+
+                    <div class="side-nav-block">
+                        <!-- Sidebar heading -->
+                        <h3 class="white">Main</h3>
+                        <!-- Sidebar links -->
+                        <ul class="list-unstyled">
+                            <li><a href="@Url.Action("MainAdmin","Home")"><i class="fa fa-desktop"></i> Dashboard</a></li>
+
+                            <li>
+                                @if ((User.IsInRole("Project Manager")) || (User.IsInRole("Developer")) ||
+                                (User.IsInRole("Submitter")))
+                                {
+                                    <a href="@Url.Action("IndexAll","Tickets")" class="white"> All Tickets, Display only</a>}
+                            </li>
+
+                            <li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a href="@Url.Action("IndexB","Tickets")" class="white"> All Tickets, allow Edit </a>}
+                                @if (User.IsInRole("Project Manager"))
+                                {
+                                    <a href="@Url.Action("IndexBp","Tickets")" class="white"> Tickets for Projects</a>}
+                                @if (User.IsInRole("Developer"))
+                                {
+                                    <a href="@Url.Action("IndexBd","Tickets")" class="white"> Tickets Assigned</a>}
+                                @if (User.IsInRole("Submitter"))
+                                {
+                                    <a href="@Url.Action("IndexBs","Tickets")" class="white"> Tickets Owned</a>}
+                            </li>
+                            <li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a href="@Url.Action("IndexBp","Projects")" class="white"> Projects</a>}
+                                @if ((User.IsInRole("Project Manager")) || (User.IsInRole("Developer")))
+                                {
+                                    <a href="@Url.Action("IndexBp2","Projects")" class="white"> Projects</a>}
+                            </li>
+                            <li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a href="@Url.Action("Users","Admin")" class="white"> User Roles</a>}
+                            </li>
+
+                           
+                        </ul>
+                    </div>
+
+                    
+
+                </div>
+
+                <!-- Sidebar navigation ends -->
+
+            </div>
+        </div>
+        <!-- Sidebar ends -->
+        <!-- Mainbar starts -->
+        <div class="mainbar">
+
+            <!-- Mainbar head starts -->
+            <div class="main-head">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-4 col-xs-6">
+                            <!-- Page title -->
+                            <h2><i class="fa fa-desktop lblue"></i> Dashboard</h2>
+                        </div>
+
+                        <div class="col-md-3 col-sm-4 col-xs-6">
+                            <!-- Search block -->
+                            
+                        </div>
+
+                        <div class="col-md-3 col-sm-4 hidden-xs">
+                            <!-- Notifications -->
+                           
+                            <div class="clearfix"></div>
+                        </div>
+
+
+                        
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Mainbar head ends -->
+           
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <!-- Report widget -->
+                        <div class="widget report-widget">
+
+                            <div class="widget-head br-lblue">
+                                <h3><i class="fa fa-bar-chart-o"></i> Projects with the highest number of tickets</h3>
+                            </div>
+
+                            <div class="widget-body no-padd">
+                                <div class="table-responsive">
+                                    <!-- Table with icon and details -->
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td>Project Name 1</td>
+                                            <td>Number of tickets</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Project Name 2</td>
+                                            <td>Number of tickets</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Project Name 3</td>
+                                            <td>Number of tickets</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Project Name 4</td>
+                                            <td>Number of tickets</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Project Name 5</td>
+                                            <td>Number of tickets</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                           
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+
+                        <!-- Report widget -->
+                        <div class="widget report-widget">
+
+                            <div class="widget-head br-lblue">
+                                <h3><i class="fa fa-bar-chart-o"></i> Developers by number of open tickets</h3>
+                            </div>
+
+                            <div class="widget-body no-padd">
+                                <div class="table-responsive">
+                                    <!-- Table with icon and details -->
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td>Developer Name 1</td>
+                                            <td>Number of tickets</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Developer Name 2</td>
+                                            <td>Number of tickets</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Developer Name 3</td>
+                                            <td>Number of tickets</td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+                            </div>
+
+                          
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-2">
+
+                        <!-- Report widget -->
+                        <div class="widget report-widget">
+
+                            <div class="widget-head br-lblue">
+                                <h3><i class="fa fa-bar-chart-o"></i> Test</h3>
+                            </div>
+
+                            <div class="widget-body no-padd">
+                                <div class="table-responsive">
+                                    <!-- Table with icon and details -->
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td>Test 1</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Developer Name 2</td>
+                                            <td>         </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Developer Name 3</td>
+                                            <td>Number of tickets</td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- Mainbar ends -->
+
+        <div class="clearfix"></div>
+    </div>
+
+    <!-- Javascript files -->
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="/js/jquery-ui.min.js"></script>
+    <!-- Date Time Picker JS -->
+    <script src="/js/bootstrap-datetimepicker.min.js"></script>
+    <!-- Bootstrap wysihtml5 JS -->
+    <script src="/js/wysihtml5-0.3.0.js"></script>
+    <script src="/js/prettify.js"></script>
+    <script src="/js/bootstrap-wysihtml5.min.js"></script>
+    <!-- Validate JS -->
+    <script src="/js/jquery.validate.js"></script>
+    <!-- Form wizard steps  JS -->
+    <script src="/js/jquery.steps.min.js"></script>
+    <!-- jQuery Knob -->
+    <script src="/js/jquery.knob.js"></script>
+    <!-- jQuery slim scroll -->
+    <script src="/js/jquery.slimscroll.min.js"></script>
+    <!-- Data Tables JS -->
+    <script src="/js/jquery.dataTables.min.js"></script>
+    <!-- Pretty Photo JS -->
+    <script src="/js/jquery.prettyPhoto.js"></script>
+    <!-- Rate It JS -->
+    <script src="js/jquery.rateit.min.js"></script>
+    <!-- jQuery full calendar -->
+    <script src="/js/fullcalendar.min.js"></script>
+    <!-- jQuery gritter -->
+    @*<script src="/js/jquery.gritter.min.js"></script>*@
+    <!-- jQuery gritter notification -->
+    @*<script src="/js/custom.notification.js"></script>*@
+    <!-- Respond JS for IE8 -->
+    <script src="/js/respond.min.js"></script>
+    <!-- HTML5 Support for IE -->
+    <script src="/js/html5shiv.js"></script>
+    <!-- Custom JS -->
+    <script src="/js/custom.js"></script>
+
+    <!-- Javascript for this page -->
+
+    <script type="text/javascript">
+    </script>
+
+</body>
+</html>
+

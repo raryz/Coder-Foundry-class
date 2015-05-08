@@ -268,8 +268,8 @@ namespace BugtrackerRAR_2.Controllers
                         TicketId = ticket.Id,
                         UserId = User.Identity.GetUserId(),
                         Property = "TicketType",
-                        OldValue = oldTicket.TicketType.Name,
-                        NewValue = ticket.TicketType.Name,
+                        OldValue = oldTicket.TicketTypeID.ToString(),
+                        NewValue = ticket.TicketTypeID.ToString(),
                         Changed = System.DateTimeOffset.Now
                     };
 
@@ -299,8 +299,8 @@ namespace BugtrackerRAR_2.Controllers
                         TicketId = ticket.Id,
                         UserId = User.Identity.GetUserId(),
                         Property = "TicketPriority",
-                        OldValue = oldTicket.TicketPriority.Name,
-                        NewValue = ticket.TicketPriority.Name,
+                        OldValue = oldTicket.TicketPriorityID.ToString(),
+                        NewValue = ticket.TicketPriorityID.ToString(),
                         Changed = System.DateTimeOffset.Now
                     };
 
@@ -330,8 +330,8 @@ namespace BugtrackerRAR_2.Controllers
                         TicketId = ticket.Id,
                         UserId = User.Identity.GetUserId(),
                         Property = "TicketStatus",
-                        OldValue = oldTicket.TicketStatus.Name,
-                        NewValue = ticket.TicketStatus.Name,
+                        OldValue = oldTicket.TicketStatusID.ToString(),
+                        NewValue = ticket.TicketStatusID.ToString(),
                         Changed = System.DateTimeOffset.Now
                     };
 

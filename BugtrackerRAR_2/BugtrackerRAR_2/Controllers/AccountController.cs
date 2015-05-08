@@ -101,7 +101,7 @@ namespace BugtrackerRAR_2.Controllers
         {
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync("username", "password", false, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync("guestadmin@coderfoundry.com", "Vbn456!", false, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:

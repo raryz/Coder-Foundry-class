@@ -203,6 +203,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\DashBrdController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
@@ -476,6 +477,7 @@
     <Content Include="Views\ProjectUsers\AssignDev2.cshtml" />
     <Content Include="Views\ProjectUsers\UnAssignDev.cshtml" />
     <Content Include="Views\Home\MainAdmin.cshtml" />
+    <Content Include="Views\DashBrd\MainAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
