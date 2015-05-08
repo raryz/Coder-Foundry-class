@@ -7,12 +7,26 @@ namespace BugtrackerRAR_2.Models
 {
     public class DashBrdViewModel
     {
-        public int projectId { get; set; }
-        public string projectName { get; set; }
-
-        public ApplicationUser User { get; set; }
-
-        public ICollection<Ticket> Tickets { get; set; }
+        public DashBrdViewModel()
+        {
+            projInfo = new List<ProjectInfo>();
+            devInfo = new List<DevInfo>();
+        }
+        public List<ProjectInfo> projInfo {get; set;}
+        public List<DevInfo> devInfo { get; set; }
 
     }
+
+    public class DevInfo
+    {
+        public string DevName { get; set; }
+        public int NumTickets { get; set; }
+    }
+
+    public class ProjectInfo
+    {
+        public string ProjectName { get; set; }
+        public int NumTickets { get; set; }
+    }
+
 }

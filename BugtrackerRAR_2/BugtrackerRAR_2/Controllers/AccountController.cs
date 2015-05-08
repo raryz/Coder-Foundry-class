@@ -81,7 +81,8 @@ namespace BugtrackerRAR_2.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToAction("MainAdmin", "Home");
+                    return RedirectToAction("MainAdmin", "DashBrd");
+                    //return RedirectToAction("MainAdmin", "Home");
                     //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -105,7 +106,7 @@ namespace BugtrackerRAR_2.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToAction("Main", "Home");
+                    return RedirectToAction("MainAdmin", "DashBrd");
                 //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

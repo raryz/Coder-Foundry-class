@@ -156,26 +156,15 @@
                                 <div class="table-responsive">
                                     <!-- Table with icon and details -->
                                     <table class="table table-bordered">
+                                        
+                                        @foreach (var proj in Model.projInfo) { 
                                         <tr>
-                                            <td>Project Name 1</td>
-                                            <td>Number of tickets</td>
+                                            <td>@proj.ProjectName</td>
+                                            <td>@proj.NumTickets</td>
+
+                                           
                                         </tr>
-                                        <tr>
-                                            <td>Project Name 2</td>
-                                            <td>Number of tickets</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Project Name 3</td>
-                                            <td>Number of tickets</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Project Name 4</td>
-                                            <td>Number of tickets</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Project Name 5</td>
-                                            <td>Number of tickets</td>
-                                        </tr>
+                                        }
                                     </table>
                                 </div>
                             </div>
@@ -197,19 +186,16 @@
                             <div class="widget-body no-padd">
                                 <div class="table-responsive">
                                     <!-- Table with icon and details -->
-                                    <table class="table table-bordered">
-                                        <tr>
-                                            <td>Developer Name 1</td>
-                                            <td>Number of tickets</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Developer Name 2</td>
-                                            <td>Number of tickets</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Developer Name 3</td>
-                                            <td>Number of tickets</td>
-                                        </tr>
+                                      <table class="table table-bordered">
+                                        @foreach (var dev in Model.devInfo)
+                                        {
+                                            <tr>
+                                                <td>@dev.DevName</td>
+                                                <td>@dev.NumTickets</td>
+
+
+                                            </tr>
+                                        }
 
                                     </table>
                                 </div>
@@ -220,41 +206,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-2">
-
-                        <!-- Report widget -->
-                        <div class="widget report-widget">
-
-                            <div class="widget-head br-lblue">
-                                <h3><i class="fa fa-bar-chart-o"></i> Test</h3>
-                            </div>
-
-                            <div class="widget-body no-padd">
-                                <div class="table-responsive">
-                                    <!-- Table with icon and details -->
-                                    <table class="table table-bordered">
-                                        <tr>
-                                            <td>Test 1</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Developer Name 2</td>
-                                            <td>         </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Developer Name 3</td>
-                                            <td>Number of tickets</td>
-                                        </tr>
-
-                                    </table>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-
-                    </div>
+                    
                 </div>
 
             </div>
@@ -264,7 +216,7 @@
 
         <div class="clearfix"></div>
     </div>
-
+  
     <!-- Javascript files -->
     <!-- jQuery -->
     <script src="/js/jquery.js"></script>
