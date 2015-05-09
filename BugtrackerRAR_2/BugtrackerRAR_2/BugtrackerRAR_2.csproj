@@ -282,6 +282,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\Fly swater.jpg" />
     <Content Include="images\Lady bug.jpg" />
     <Content Include="Models\Helpers\img\data-tables\back_disabled.png" />
     <Content Include="Models\Helpers\img\data-tables\back_enabled.png" />

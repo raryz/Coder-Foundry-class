@@ -23,10 +23,16 @@ namespace BugtrackerRAR_2.Controllers
                 model.projInfo.Add(new ProjectInfo { ProjectName = p.Name, NumTickets = p.Tickets.Count });
             }
             var helper = new UserRolesHelper();
-            var devs = helper.UsersInRole("Developer").OrderByDescending(u => u.TicketsAssigned.Count).Take(3);
-            foreach(var d in devs){
-               model.devInfo.Add(new DevInfo { DevName = d.DisplayName, NumTickets = d.TicketsAssigned.Count });
+            var devs = helper.UsersInRole("Developer");
+                
+            foreach (var d in devs){
+                var ticketCount = db.Tickets.Where(t => t.AssignedUserId == d.Id).Count();
+                model.devInfo.Add(new DevInfo { DevName = d.DisplayName, NumTickets = ticketCount});
             }
+                
+            
+            model.devInfo = model.devInfo.OrderByDescending(d => d.NumTickets).Take(3).ToList();
+           
             return View(model);
         }
     }

@@ -149,7 +149,7 @@
                         <div class="widget report-widget">
 
                             <div class="widget-head br-lblue">
-                                <h3><i class="fa fa-bar-chart-o"></i> Projects with the highest number of tickets</h3>
+              <h3 class="black"><i class="fa fa-bar-chart-o black"></i> Projects with the highest number of tickets</h3>
                             </div>
 
                             <div class="widget-body no-padd">
@@ -159,8 +159,8 @@
                                         
                                         @foreach (var proj in Model.projInfo) { 
                                         <tr>
-                                            <td>@proj.ProjectName</td>
-                                            <td>@proj.NumTickets</td>
+                                            <td class="black">@proj.ProjectName</td>
+                                            <td class="black">@proj.NumTickets</td>
 
                                            
                                         </tr>
@@ -180,7 +180,7 @@
                         <div class="widget report-widget">
 
                             <div class="widget-head br-lblue">
-                                <h3><i class="fa fa-bar-chart-o"></i> Developers by number of open tickets</h3>
+                   <h3 class="black"><i class="fa fa-bar-chart-o black"></i> Developers by number of assigned tickets </h3>
                             </div>
 
                             <div class="widget-body no-padd">
@@ -190,8 +190,8 @@
                                         @foreach (var dev in Model.devInfo)
                                         {
                                             <tr>
-                                                <td>@dev.DevName</td>
-                                                <td>@dev.NumTickets</td>
+                                                <td class="black">@dev.DevName</td>
+                                                <td class="black">@dev.NumTickets</td>
 
 
                                             </tr>

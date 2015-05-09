@@ -101,13 +101,17 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-1">
-
-        </div>
+        
         <div class="col-sm-2">
-            <a href="/Home/Main" class="btn"> Back to Dashboard</a>
+            @if (User.IsInRole("Admin"))
+            {
+                <a href="@Url.Action("MainAdmin","DashBrd")" class="black"> Back to Dashboard</a>}
+            @if (User.IsInRole("Project Manager"))
+            {
+                <a href="@Url.Action("Main", "Home")" class="black"> Back to Dashboard</a>}
+            @*<a href="/Home/Main" class="btn"> Back to Dashboard</a>*@
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-10">
 
         </div>
     </div>

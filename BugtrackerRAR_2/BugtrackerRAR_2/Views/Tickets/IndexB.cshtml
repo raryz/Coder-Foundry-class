@@ -305,7 +305,14 @@
 
         </div>
         <div class="col-sm-2">
-            <a href="/Home/Main" class="btn"> Back to Dashboard</a>
+            @if (User.IsInRole("Admin"))
+            {
+                <a href="/DashBrd/MainAdmin" class="btn"> Back to Dashboard</a>
+            }
+            else {
+            <a href="/Home/Main" class=" btn"> Back to Dashboard</a>
+            }
+           
         </div>
         <div class="col-sm-9">
 
