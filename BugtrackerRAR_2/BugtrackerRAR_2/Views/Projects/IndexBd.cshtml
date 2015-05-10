@@ -1,0 +1,165 @@
+﻿@model IEnumerable<BugtrackerRAR_2.Models.Project>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- Styles -->
+<!-- Bootstrap CSS -->
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<!-- jQuery Datatables -->
+<link href="/css/jquery.dataTables.css" rel="stylesheet">
+<!-- Font awesome CSS -->
+<link href="/css/font-awesome.min.css" rel="stylesheet">
+<!-- jQuery gritter -->
+<link href="/css/jquery.gritter.css" rel="stylesheet">
+<!-- Custom Color CSS -->
+<link href="/css/less-style.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="/css/style.css" rel="stylesheet">
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="#">
+
+<!-- Mainbar starts -->
+<div class="">
+
+    <!-- Mainbar head starts -->
+    <div class="main-head">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-6">
+                    <!-- Page title -->
+                    <h2><i class="fa fa-desktop lblue"></i> Project List</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mainbar head ends -->
+
+    <div class="main-content">
+        <div class="single-head">
+            <!-- Heading -->
+            <!-- Bread crumbs -->
+            @*<div class="breads pull-right">
+                    <strong>Nav</strong> : <a href="#">Home</a> / <a href="#">Sign</a> / Home
+                </div>*@
+            <div class="clearfix"></div>
+        </div>
+        <!-- Table Page -->
+        <div class="page-tables">
+            <!-- Table -->
+            <div class="table-responsive">
+                <table cellpadding="0" cellspacing="0" border="0" id="data-table">
+                    <thead>
+                        <tr>
+                            <th>Project Name</th>
+                            @*  <th>Edit</th>  *@
+                            @*<th>Assign</th>
+                            <th>List or Unassign</th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                @*   <td>
+                                     @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                    </td>  *@
+                                @*<td>
+                                    @Html.ActionLink("Developers", "AssignDev2", "ProjectUsers", new { id = item.Id }, null)
+                                </td>*@
+                                @*<td>
+                                    @Html.ActionLink("Developers", "UnAssignDev", "ProjectUsers", new { id = item.Id }, null)
+                                </td>*@
+
+                            </tr>
+                        }
+
+                </table>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Mainbar ends -->
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-1">
+
+        </div>
+        <div class="col-sm-2">
+            <a href="/Home/Main" class="btn"> Back to Dashboard</a>
+        </div>
+        <div class="col-sm-9">
+
+        </div>
+    </div>
+</div>
+
+<!-- Javascript files -->
+<!-- jQuery -->
+<script src="/js/jquery.js"></script>
+<!-- Bootstrap JS -->
+<script src="/js/bootstrap.min.js"></script>
+<!-- jQuery UI -->
+<script src="/js/jquery-ui.min.js"></script>
+<!-- Date Time Picker JS -->
+<script src="/js/bootstrap-datetimepicker.min.js"></script>
+<!-- Bootstrap wysihtml5 JS -->
+<script src="/js/wysihtml5-0.3.0.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/bootstrap-wysihtml5.min.js"></script>
+<!-- Validate JS -->
+<script src="/js/jquery.validate.js"></script>
+<!-- Form wizard steps  JS -->
+<script src="/js/jquery.steps.min.js"></script>
+<!-- jQuery Knob -->
+<script src="/js/jquery.knob.js"></script>
+<!-- jQuery slim scroll -->
+<script src="/js/jquery.slimscroll.min.js"></script>
+<!-- Data Tables JS -->
+<script src="/js/jquery.dataTables.min.js"></script>
+<!-- Pretty Photo JS -->
+<script src="/js/jquery.prettyPhoto.js"></script>
+<!-- Rate It JS -->
+<script src="/js/jquery.rateit.min.js"></script>
+<!-- jQuery full calendar -->
+<script src="/js/fullcalendar.min.js"></script>
+<!-- jQuery gritter -->
+@*<script src="js/jquery.gritter.min.js"></script>*@
+<!-- jQuery gritter notification -->
+<script src="/js/custom.notification.js"></script>
+<!-- Respond JS for IE8 -->
+<script src="/js/respond.min.js"></script>
+<!-- HTML5 Support for IE -->
+<script src="/js/html5shiv.js"></script>
+
+<!-- Javascript for this page -->
+
+<script type="text/javascript">
+		/* ****************************************** */
+		/* Data Table JS */
+		/* ****************************************** */
+
+		$(document).ready(function() {
+			$('#data-table').dataTable({
+			   "sPaginationType": "full_numbers"
+			});
+		});
+
+</script>
+<!-- Custom JS -->
+<script src="/js/custom.js"></script>
+
+
+
+

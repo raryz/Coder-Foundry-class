@@ -81,9 +81,15 @@ namespace BugtrackerRAR_2.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    //return RedirectToAction("MainAdmin", "DashBrd");
+                    if ((User.IsInRole("Admin")))              // is not working
+                    {
+                        return RedirectToAction("MainAdmin", "DashBrd");
+                    }
+                    else { 
                     return RedirectToAction("Main", "Home");
+                    }
                     //return RedirectToLocal(returnUrl);
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

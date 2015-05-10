@@ -479,6 +479,7 @@
     <Content Include="Views\ProjectUsers\UnAssignDev.cshtml" />
     <Content Include="Views\Home\MainAdmin.cshtml" />
     <Content Include="Views\DashBrd\MainAdmin.cshtml" />
+    <Content Include="Views\Projects\IndexBd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

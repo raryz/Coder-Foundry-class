@@ -60,6 +60,14 @@ namespace BugtrackerRAR_2.Controllers
             return View(db.Projects.ToList());
         }
 
+        // GET: Projects             using Barnie Template for Developers   
+        public ActionResult IndexBd()
+        {
+            var UserId = User.Identity.GetUserId();
+            var projects = db.Projects.Where(pr => pr.Users.Any(u => u.Id == UserId));
+            return View(db.Projects.ToList());
+        }
+
         // GET: Projects/Details/5
         public ActionResult Details(int? id)
         {

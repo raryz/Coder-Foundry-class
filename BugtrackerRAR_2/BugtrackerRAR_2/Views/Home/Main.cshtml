@@ -78,8 +78,10 @@
                             <li>
                                     @if (User.IsInRole("Admin")) {
                                             <a href="@Url.Action("IndexBp","Projects")" class="white"> Projects</a>}
-                                    @if ((User.IsInRole("Project Manager")) || (User.IsInRole("Developer"))){
+                                    @if (User.IsInRole("Project Manager")) {
                                         <a href="@Url.Action("IndexBp2","Projects")" class="white"> Projects</a>}
+                                    @if (User.IsInRole("Developer"))  {
+                                        <a href="@Url.Action("IndexBd","Projects")" class="white"> Projects</a>}
                             </li>
                             <li>
                                 @if (User.IsInRole("Admin"))
@@ -364,27 +366,7 @@
 
                                         <!-- Mainbar head ends -->
 
-                                        <div class="main-content">
-                                            <div class="container">
-
-                                                <div class="page-content">
-
-                                                    <!-- Heading -->
-                                                    <div class="single-head">
-                                                        <!-- Heading -->
-                                                        <h3 class="pull-left"><i class="fa fa-desktop purple"></i> Your Page</h3>
-                                                        <!-- Bread crumbs -->
-                                                        @*<div class="breads pull-right">
-                                                                <strong>Nav</strong> : <a href="#">Home</a> / <a href="#">Sign</a> / Home
-                                                            </div>*@
-                                                        <div class="clearfix"></div>
-                                                    </div>
-
-
-                                                </div>
-
-                                            </div>
-                                        </div>
+                                        
 
                                     </div>
         <!-- Mainbar ends -->
