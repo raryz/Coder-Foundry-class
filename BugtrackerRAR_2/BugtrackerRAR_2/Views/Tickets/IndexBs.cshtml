@@ -31,7 +31,7 @@
                 <div class="col-md-3 col-sm-4 col-xs-6">
                     <!-- Page title -->
                     <h2><i class="fa fa-desktop lblue"></i> Tickets</h2>
-                    @Html.ActionLink("Create New", "Create")
+                    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
                 </div>
 
                 <div class="col-md-3 col-sm-4 hidden-xs">
@@ -279,8 +279,8 @@
                                     @Html.DisplayFor(modelItem => item.Updated)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                    @Html.ActionLink("Edit   ", "Edit", new { id = item.Id }, new { @class = "btn br-blue white" }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn br-lblue white" }) 
                                     @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
                                 </td>
                             </tr>
@@ -303,7 +303,7 @@
 
         </div>
         <div class="col-sm-2">
-            <a href="/Home/Main" class="btn"> Back to Dashboard</a>
+            <a href="/Home/Main" class="btn btn-primary"> Back to Dashboard</a>
         </div>
         <div class="col-sm-9">
 

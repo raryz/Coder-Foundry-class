@@ -97,7 +97,9 @@
 
         </div>
         <div class="col-sm-2">
-            <a href="/Home/Main" class="btn"> Back to Dashboard</a>
+            @if (User.IsInRole("Project Manager"))
+            {
+                <a href="@Url.Action("Main", "Home")" class="btn br-blue white"> Back to Dashboard</a>}
         </div>
         <div class="col-sm-9">
 

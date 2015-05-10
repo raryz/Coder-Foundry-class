@@ -27,7 +27,7 @@
 </head>
 
 <body>
-    <br />
+   @* <br /> *@
     <br />
 
     <!-- Grid page -->
@@ -40,16 +40,16 @@
             <div class="col-md-3">
                 <br />
                 <p>
-                    @Html.ActionLink("Login", "Login", "Account", null, new{@class="h4"})
-                </p>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register", "Account", null, new { @class = "h4" })
-                </p>
-                <p>
+                    @Html.ActionLink("Login", "Login", "Account", null, new { @class = "btn btn-primary h4" })
+               
+               
+                    @Html.ActionLink("Register as a new user", "Register", "Account", null, new { @class = "btn btn-primary h4" })
+                
+                
                     @using(Html.BeginForm("LoginAsAdmin", "Account", FormMethod.Post))
                     {
                         @Html.AntiForgeryToken()
-                        <button type="submit" class="btn btn-sm btn-primary">Log in as Admin</button>
+                        <button type="submit" class="btn btn-primary h4">Log in as Guest</button>
                     }
                 </p>
             </div>

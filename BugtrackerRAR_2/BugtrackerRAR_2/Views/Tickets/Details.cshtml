@@ -313,8 +313,8 @@
 
 
     <p>
-        @Html.ActionLink("Edit Ticket", "Edit", new { id = Model.Id }) |
-        <a href="/Home/Main" class="btn"> Back to Dashboard</a>
+        @Html.ActionLink("Edit Ticket", "Edit", new { id = Model.Id }, new { @class = "btn br-lblue white" }) 
+        <a href="/Home/Main" class="btn btn-primary"> Back to Dashboard</a>
 
         @*@if (User.IsInRole("Admin")) {
                 <a href="@Url.Action("IndexB","Tickets")" class="white"> Back to List</a>}

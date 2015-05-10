@@ -110,17 +110,35 @@
     }
 
     <div>
+        <p>
        @* @Html.ActionLink("Back to List", "Index")
     <a href="/Home/Main" class="btn"> Back to Dashboard</a> *@
-       @if (User.IsInRole("Admin")) {
-            <a href="@Url.Action("IndexB","Tickets")" class="black"> Back to List</a>}
-        @if (User.IsInRole("Project Manager")) {
-            <a href="@Url.Action("IndexBp", "Tickets")" class="black"> Back to List</a>}
-        <br />                                                                               
-        @if (User.IsInRole("Admin")){
-            <a href="@Url.Action("MainAdmin","DashBrd")" class="black"> Back to Dashboard</a>}
-        @if (User.IsInRole("Project Manager")) {
-            <a href="@Url.Action("Main", "Home")" class="black"> Back to Dashboard</a>}
+       @if (User.IsInRole("Admin"))
+       {
+        <a href="@Url.Action("IndexB","Tickets")" class="btn br-lblue white"> Back to List</a>}
+        @if (User.IsInRole("Project Manager"))
+        {
+            <a href="@Url.Action("IndexBp", "Tickets")" class="btn br-lblue white"> Back to List</a>}
+        @if (User.IsInRole("Developer"))
+        {
+            <a href="@Url.Action("IndexBd", "Tickets")" class="btn br-lblue white"> Back to List</a>}
+        @if (User.IsInRole("Submitter"))
+        {
+          <a href="@Url.Action("IndexBs", "Tickets")" class="btn br-lblue white"> Back to List</a>}
+                                                                                     
+        @if (User.IsInRole("Admin"))
+        {
+            <a href="@Url.Action("MainAdmin","DashBrd")" class="btn br-blue white"> Back to Dashboard</a>}
+        @if (User.IsInRole("Project Manager"))
+        {
+            <a href="@Url.Action("Main", "Home")" class="btn br-blue white"> Back to Dashboard</a>}
+        @if (User.IsInRole("Developer"))
+        {
+            <a href="@Url.Action("Main", "Home")" class="btn br-blue white"> Back to Dashboard</a>}
+        @if (User.IsInRole("Submitter"))
+        {
+             <a href="@Url.Action("Main", "Home")" class="btn br-blue white"> Back to Dashboard</a>}
+       </p>
     </div>
 </div>
 @section Scripts {

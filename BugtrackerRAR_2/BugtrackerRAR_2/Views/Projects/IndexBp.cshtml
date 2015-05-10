@@ -32,7 +32,7 @@
                 <div class="col-md-3 col-sm-4 col-xs-6">
                     <!-- Page title -->
                     <h2><i class="fa fa-desktop lblue"></i> Project List</h2>
-                    @Html.ActionLink("Create New", "Create")
+                    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
                 </div>
       
             </div>
@@ -105,10 +105,10 @@
         <div class="col-sm-2">
             @if (User.IsInRole("Admin"))
             {
-                <a href="@Url.Action("MainAdmin","DashBrd")" class="black"> Back to Dashboard</a>}
+                <a href="@Url.Action("MainAdmin","DashBrd")" class="btn br-blue white"> Back to Dashboard</a>}
             @if (User.IsInRole("Project Manager"))
             {
-                <a href="@Url.Action("Main", "Home")" class="black"> Back to Dashboard</a>}
+                <a href="@Url.Action("Main", "Home")" class="btn br-blue white"> Back to Dashboard</a>}
             @*<a href="/Home/Main" class="btn"> Back to Dashboard</a>*@
         </div>
         <div class="col-sm-10">

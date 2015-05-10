@@ -10,6 +10,8 @@ using PagedList;
 using PagedList.Mvc;
 using BugtrackerRAR_2.Models;
 using Microsoft.AspNet.Identity;
+using System.IO;
+
 
 namespace BugtrackerRAR_2.Controllers
 {
@@ -57,15 +59,17 @@ namespace BugtrackerRAR_2.Controllers
         {
             var UserId = User.Identity.GetUserId();
             var projects = db.Projects.Where(pr => pr.Users.Any(u => u.Id == UserId));
-            return View(db.Projects.ToList());
+            return View(projects.ToList());
         }
 
         // GET: Projects             using Barnie Template for Developers   
         public ActionResult IndexBd()
         {
+            //var projects = db.Projects.Include(t => t.Name);
+
             var UserId = User.Identity.GetUserId();
             var projects = db.Projects.Where(pr => pr.Users.Any(u => u.Id == UserId));
-            return View(db.Projects.ToList());
+            return View(projects.ToList());
         }
 
         // GET: Projects/Details/5
@@ -103,7 +107,15 @@ namespace BugtrackerRAR_2.Controllers
             {
                 db.Projects.Add(project);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                if ((User.IsInRole("Admin")))              
+                {
+                    return RedirectToAction("IndexBp", "Projects");
+                }
+                else
+                {
+                    return RedirectToAction("IndexBp", "Projects");
+                }
+                
             }
 
             return View(project);
