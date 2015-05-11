@@ -52,19 +52,19 @@ namespace BugtrackerRAR_2.Controllers
 
             return View(tickets.ToList());
         }
-               
-             // GET: Tickets  with Barnie Template
+
+        // GET: Tickets  with Barnie Template
         [Authorize]
         public ActionResult IndexBd()
         {
             var UserId = User.Identity.GetUserId();
             var tickets = db.Tickets.Where(t => t.AssignedUserId == UserId);
-            
+
             return View(tickets.ToList());
         }
 
-       
-         [Authorize]
+
+        [Authorize]
         public ActionResult IndexBs()
         {
             var UserId = User.Identity.GetUserId();
@@ -108,27 +108,32 @@ namespace BugtrackerRAR_2.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Description,Created,Updated,ProjectId,TicketTypeID,TicketPriorityID,TicketStatusID,OwnerUserId,AssignedUserId")] Ticket ticket)
+        public ActionResult Create([Bind(Include = "Id,Title,Description,Created,Updated,ProjectId,TicketTypeID,TicketPriorityID,TicketStatusID,AssignedUserId")] Ticket ticket)
         {
+
+            ticket.OwnerUserId = User.Identity.GetUserId();
+            ticket.Created = System.DateTimeOffset.Now;
+            ticket.TicketStatusID = 1;                       // 1 = unassigned
+
             if (ModelState.IsValid)
             {
-                ticket.OwnerUserId = User.Identity.GetUserId();
-                ticket.Created = System.DateTimeOffset.Now;
-                ticket.TicketStatusID = 1;                       // 1 = unassigned
-
                 db.Tickets.Add(ticket);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Main", "Home");
+                // return RedirectToAction("Index");
             }
 
-            ViewBag.AssignedUserId = new SelectList(db.Users, "Id", "FirstName", ticket.AssignedUserId);
-            ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName", ticket.OwnerUserId);
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", ticket.ProjectId);
-            ViewBag.TicketPriorityID = new SelectList(db.TicketPriorities, "Id", "Name", ticket.TicketPriorityID);
+            //ViewBag.AssignedUserId = new SelectList(db.Users, "Id", "FirstName", ticket.AssignedUserId);
+            //ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName", ticket.OwnerUserId);
+            //ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", ticket.ProjectId);
+            //ViewBag.TicketPriorityID = new SelectList(db.TicketPriorities, "Id", "Name", ticket.TicketPriorityID);
             // ViewBag.TicketStatusID = new SelectList(db.TicketStatuses, "Id", "Name", ticket.TicketStatusID);
             //
-            ViewBag.TicketTypeID = new SelectList(db.TicketTypes, "Id", "Name", ticket.TicketTypeID);
-            return View(ticket);
+            //ViewBag.TicketTypeID = new SelectList(db.TicketTypes, "Id", "Name", ticket.TicketTypeID);
+            //return View(ticket);
+            //var errors = ModelState.Errors;
+            return View();
+
         }
 
         // GET: Tickets/Edit/5
@@ -172,12 +177,12 @@ namespace BugtrackerRAR_2.Controllers
                 {
                     var AssignedHistory = new TicketHistory
                     {
-                      TicketId = ticket.Id,
-                      UserId = User.Identity.GetUserId(),
-                      Property = "Assigned User ID",
-                      OldValue = oldTicket.AssignedUserId,
-                      NewValue = ticket.AssignedUserId,
-                      Changed = System.DateTimeOffset.Now
+                        TicketId = ticket.Id,
+                        UserId = User.Identity.GetUserId(),
+                        Property = "Assigned User ID",
+                        OldValue = oldTicket.AssignedUserId,
+                        NewValue = ticket.AssignedUserId,
+                        Changed = System.DateTimeOffset.Now
                     };
 
                     db.TicketHistories.Add(AssignedHistory);
@@ -357,7 +362,7 @@ namespace BugtrackerRAR_2.Controllers
                 db.Entry(ticket).State = EntityState.Modified;
                 ticket.Updated = System.DateTimeOffset.Now;
                 db.SaveChanges();
-                return RedirectToAction("Main","Home");
+                return RedirectToAction("Main", "Home");
             }
             ViewBag.AssignedUserId = new SelectList(helperrole.UsersInRole("Developer"), "Id", "FirstName", ticket.AssignedUserId);
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName", ticket.OwnerUserId);
@@ -430,7 +435,7 @@ namespace BugtrackerRAR_2.Controllers
                     };
 
                     db.TicketNotifications.Add(NotificationHistory1);
-                    
+
                     db.TicketComments.Add(commentMessage);
                     db.SaveChanges();
                     return RedirectToAction("Details", new { id = TicketId });

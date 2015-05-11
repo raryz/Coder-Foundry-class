@@ -21,7 +21,8 @@ namespace BugtrackerRAR_2.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTimeOffset Created { get; set; }
-        public Nullable<DateTimeOffset> Updated { get; set; }
+        public DateTimeOffset? Updated { get; set; }
+        //public Nullable<DateTimeOffset> Updated { get; set; }
         [Required]
         public int ProjectId { get; set; }
         public int TicketTypeID { get; set; }
