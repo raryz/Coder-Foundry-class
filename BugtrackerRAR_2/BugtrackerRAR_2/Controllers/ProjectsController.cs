@@ -149,7 +149,7 @@ namespace BugtrackerRAR_2.Controllers
             {
                 db.Entry(project).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexBp","Projects");
             }
             return View(project);
         }

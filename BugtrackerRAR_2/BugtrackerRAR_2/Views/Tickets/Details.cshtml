@@ -207,7 +207,7 @@
 
                 <div class="col-md-10">
 
-                    <textarea class="form-control" name="Description" placeholder="Describe the attachment here..."></textarea>
+                    <textarea class="form-control" name="Description" placeholder="Describe the attachment here... This field is required." required></textarea>
                 </div>
             </div>
 
@@ -314,7 +314,19 @@
 
     <p>
         @Html.ActionLink("Edit Ticket", "Edit", new { id = Model.Id }, new { @class = "btn br-lblue white" }) 
-        <a href="/Home/Main" class="btn btn-primary"> Back to Dashboard</a>
+
+       @if (User.IsInRole("Admin"))
+       {
+        <a href="@Url.Action("MainAdmin","DashBrd")" class="btn br-blue white"> Back to Dashboard</a>}
+       @if (User.IsInRole("Project Manager"))
+       {
+        <a href="@Url.Action("Main", "Home")" class="btn br-blue white"> Back to Dashboard</a>}
+       @if (User.IsInRole("Developer"))
+       {
+        <a href="@Url.Action("Main", "Home")" class="btn br-blue white"> Back to Dashboard</a>}
+       @if (User.IsInRole("Submitter"))
+       {
+        <a href="@Url.Action("Main", "Home")" class="btn br-blue white"> Back to Dashboard</a>}
 
         @*@if (User.IsInRole("Admin")) {
                 <a href="@Url.Action("IndexB","Tickets")" class="white"> Back to List</a>}

@@ -119,7 +119,14 @@ namespace BugtrackerRAR_2.Controllers
             {
                 db.Tickets.Add(ticket);
                 db.SaveChanges();
-                return RedirectToAction("Main", "Home");
+                if ((User.IsInRole("Admin")))
+                {
+                    return RedirectToAction("MainAdmin", "DashBrd");
+                }
+                else
+                {
+                    return RedirectToAction("Main", "Home");
+                }
                 // return RedirectToAction("Index");
             }
 
@@ -184,6 +191,9 @@ namespace BugtrackerRAR_2.Controllers
                         NewValue = ticket.AssignedUserId,
                         Changed = System.DateTimeOffset.Now
                     };
+
+                    //    OldValue = oldTicket.AssignedUser.DisplayName,
+                    //    NewValue = ticket.AssignedUser.DisplayName,
 
                     db.TicketHistories.Add(AssignedHistory);
 
@@ -272,12 +282,16 @@ namespace BugtrackerRAR_2.Controllers
                     {
                         TicketId = ticket.Id,
                         UserId = User.Identity.GetUserId(),
-                        Property = "TicketType",
-                        OldValue = oldTicket.TicketTypeID.ToString(),
-                        NewValue = ticket.TicketTypeID.ToString(),
+                        Property = "Ticket Type",
+                        OldValue = oldTicket.TicketType.Name,
+                        NewValue = db.TicketTypes.Find(ticket.TicketTypeID).Name,
                         Changed = System.DateTimeOffset.Now
                     };
 
+                    //OldValue = oldTicket.TicketTypeID.ToString(),
+                    //    NewValue = ticket.TicketTypeID.ToString(),
+
+                    
                     db.TicketHistories.Add(TicketTypeHistory);
 
                     var user = db.Users.Find(ticket.AssignedUserId);
@@ -303,11 +317,13 @@ namespace BugtrackerRAR_2.Controllers
                     {
                         TicketId = ticket.Id,
                         UserId = User.Identity.GetUserId(),
-                        Property = "TicketPriority",
-                        OldValue = oldTicket.TicketPriorityID.ToString(),
-                        NewValue = ticket.TicketPriorityID.ToString(),
+                        Property = "Ticket Priority",
+                        OldValue = oldTicket.TicketPriority.Name,
+                        NewValue = db.TicketPriorities.Find(ticket.TicketPriorityID).Name,
                         Changed = System.DateTimeOffset.Now
                     };
+
+                    
 
                     db.TicketHistories.Add(TicketPriorityHistory);
 
@@ -334,11 +350,20 @@ namespace BugtrackerRAR_2.Controllers
                     {
                         TicketId = ticket.Id,
                         UserId = User.Identity.GetUserId(),
-                        Property = "TicketStatus",
-                        OldValue = oldTicket.TicketStatusID.ToString(),
-                        NewValue = ticket.TicketStatusID.ToString(),
+                        Property = "Ticket Status",
+                        OldValue = oldTicket.TicketStatus.Name,
+                        NewValue = db.TicketStatuses.Find(ticket.TicketStatusID).Name,
                         Changed = System.DateTimeOffset.Now
                     };
+
+                    //{
+                    //    TicketId = ticket.Id,
+                    //    UserId = User.Identity.GetUserId(),
+                    //    Property = "TicketStatus",
+                    //    OldValue = oldTicket.TicketStatusID.ToString(),
+                    //    NewValue = ticket.TicketStatusID.ToString(),
+                    //    Changed = System.DateTimeOffset.Now
+                    //};
 
                     db.TicketHistories.Add(TicketStatusHistory);
 
@@ -362,7 +387,15 @@ namespace BugtrackerRAR_2.Controllers
                 db.Entry(ticket).State = EntityState.Modified;
                 ticket.Updated = System.DateTimeOffset.Now;
                 db.SaveChanges();
-                return RedirectToAction("Main", "Home");
+                if ((User.IsInRole("Admin")))
+                {
+                    return RedirectToAction("MainAdmin", "DashBrd");
+                }
+                else
+                {
+                    return RedirectToAction("Main", "Home");
+                }
+                
             }
             ViewBag.AssignedUserId = new SelectList(helperrole.UsersInRole("Developer"), "Id", "FirstName", ticket.AssignedUserId);
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName", ticket.OwnerUserId);
