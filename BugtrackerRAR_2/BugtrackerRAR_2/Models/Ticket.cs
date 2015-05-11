@@ -28,7 +28,7 @@ namespace BugtrackerRAR_2.Models
         public int TicketTypeID { get; set; }
         public int TicketPriorityID { get; set; }
         public int TicketStatusID { get; set; }
-        [Required]
+        //[Required]
         public string OwnerUserId { get; set; }
         public string AssignedUserId { get; set; }
 
