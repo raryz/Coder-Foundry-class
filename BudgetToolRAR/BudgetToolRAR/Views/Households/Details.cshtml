@@ -1,0 +1,51 @@
+﻿@model BudgetToolRAR.Models.Household
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Household</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.LabelFor(model => model.Name, "Household Name")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+</div>
+
+<div class="well">
+    <h4>Add User to Household</h4>
+    
+   
+        <form class="form-light" action="@Url.Action("AddUser","Households")" method="post" role="form">
+
+            <div class="form-group">
+                @Html.AntiForgeryToken()
+                <p>
+                    Enter email address :
+                    <input type="email" name="Email" maxlength="40" />
+                    &nbsp; &nbsp; &nbsp;
+                    Enter name to display :
+                    <input type="text" name="DisplayName" maxlength="40" />
+                </p>
+                
+                <input type="hidden" name="HouseId" value="@Model.Id" />
+            </div>
+            <button type="submit" class="btn pull-right c-blue">Add to Household</button>
+            <span class="clearfix"></span>
+        </form>
+    
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
