@@ -45,21 +45,21 @@ namespace BugtrackerRAR_2.Migrations
             var userManager = new UserManager<ApplicationUser>(
                 new UserStore<ApplicationUser>(context));
 
-            if (!context.Users.Any(r => r.Email == "admin@coderfoundry.com"))
+            if (!context.Users.Any(r => r.Email == "guestadmin@coderfoundry.com"))
             {
                 userManager.Create(new ApplicationUser
                 {
-                    UserName = "admin@coderfoundry.com",
-                    Email = "admin@coderfoundry.com",
-                    FirstName = "Bob",
-                    LastName = "Ryzowicz",
-                    DisplayName = "Bob Ryzowicz"
-                }, "Abc123!");
+                    UserName = "guestadmin@coderfoundry.com",
+                    Email = "guestadmin@coderfoundry.com",
+                    FirstName = "Guest",
+                    LastName = "Lastname",
+                    DisplayName = "Guest Lastname"
+                }, "Vbn456!");
 
             }
 
-            //var userId = userManager.FindByEmail("admin@coderfoundry.com").Id;
-            //userManager.AddToRole(userId, "Admin");
+            var userId = userManager.FindByEmail("guestadmin@coderfoundry.com").Id;
+            userManager.AddToRole(userId, "Admin");
 
             if (!context.Users.Any(r => r.Email == "jerrydev@coderfoundry.com"))
             {
@@ -74,8 +74,8 @@ namespace BugtrackerRAR_2.Migrations
 
             }
 
-            var userId = userManager.FindByEmail("jerrydev@coderfoundry.com").Id;
-            userManager.AddToRole(userId, "Developer");
+            //var userId = userManager.FindByEmail("jerrydev@coderfoundry.com").Id;
+            //userManager.AddToRole(userId, "Developer");
 
             //var userId = userManager.FindByEmail("maryproj@coderfoundry.com").Id;
             //userManager.AddToRole(userId, "Project Manager");

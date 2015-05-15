@@ -79,6 +79,13 @@ namespace BudgetToolRAR.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Display Name for User")]
+        public string DisplayName { get; set; }
+
+        [Display(Name = "Household Name ( If creating a new Household )")]
+        public string Name { get; set; }
     }
 
     public class ResetPasswordViewModel

@@ -23,6 +23,8 @@ namespace BudgetToolRAR.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public int HouseholdId { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
