@@ -24,7 +24,7 @@ namespace BudgetToolRAR.Models
             return userIdentity;
         }
 
-        public int HouseholdId { get; set; }
+        public int? HouseholdId { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

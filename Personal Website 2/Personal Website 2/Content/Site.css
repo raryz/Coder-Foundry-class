@@ -249,4 +249,16 @@ a.menu:after, .dropdown-toggle:after {
     padding-left: 0px;
     margin-left: 0px;
 }
-  
+.wp-theme-1 .navbar-wp .dropdown-menu {
+    min-width: 220px;
+    background: #FFF;
+    border: 0;
+    border-top: 1px solid #00B5FF;
+    border-bottom: 3px solid #00B5FF;
+    border-radius: 0;
+}
+.wp-theme-1 .navbar-wp .navbar-nav>.open>a, .wp-theme-1 .navbar-wp .navbar-nav>.open>a:hover, .wp-theme-1 .navbar-wp .navbar-nav>.open>a:focus {
+  color: #FFF !important;
+  background-color: #00B5FF;
+}
+

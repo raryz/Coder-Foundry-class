@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.single-widget-container {
+  left: 0;
+  top: 30%;
+  margin-top: -192.5px;
+  position: absolute;
+  width: 100%;
+}

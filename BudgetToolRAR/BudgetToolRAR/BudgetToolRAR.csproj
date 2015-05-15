@@ -2015,6 +2015,8 @@
     <Content Include="Views\Account\RegisterLb.cshtml" />
     <Content Include="Views\Account\ResendEmailConfirmation.cshtml" />
     <Content Include="Views\Account\ConfirmationSent.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordLb.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmationLb.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

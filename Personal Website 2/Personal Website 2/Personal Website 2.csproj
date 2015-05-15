@@ -360,6 +360,13 @@
     <Content Include="images\background\subtle_carbon.png" />
     <Content Include="images\background\_notes\dwsync.xml" />
     <Content Include="images\Blog\about-img-1.jpg" />
+    <Content Include="images\Blog\about-img-2.jpg" />
+    <Content Include="images\Blog\bale of hay.jpg" />
+    <Content Include="images\Blog\banner-img-1.jpg" />
+    <Content Include="images\Blog\bridge and clouds.jpg" />
+    <Content Include="images\Blog\canyon.jpg" />
+    <Content Include="images\Blog\col-img-6.jpg" />
+    <Content Include="images\Blog\Lady bug.jpg" />
     <Content Include="images\boomerang-logo-dark.png" />
     <Content Include="images\boomerang-logo-white.png" />
     <Content Include="images\boomerang-logo.png" />

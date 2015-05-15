@@ -323,6 +323,49 @@ namespace BudgetToolRAR.Controllers
             return View();
         }
 
+        // GET: /Account/ForgotPasswordLb
+        [AllowAnonymous]
+        public ActionResult ForgotPasswordLb()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/ForgotPasswordLb
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ForgotPasswordLb(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByNameAsync(model.Email);
+                if (user == null)
+                {
+                    // Don't reveal that the user does not exist or is not confirmed
+                    return View("ForgotPasswordConfirmationLb");
+                }
+
+                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                return RedirectToAction("ForgotPasswordConfirmationLb", "Account");
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        //
+        // GET: /Account/ForgotPasswordConfirmation
+        [AllowAnonymous]
+        public ActionResult ForgotPasswordConfirmationLb()
+        {
+            return View();
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public ActionResult ResendEmailConfirmation()
