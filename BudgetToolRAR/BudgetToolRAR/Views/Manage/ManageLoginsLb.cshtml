@@ -1,18 +1,18 @@
-﻿@using BudgetToolRAR.Models
-@model LoginViewModel
+﻿@model BudgetToolRAR.Models.ManageLoginsViewModel
+@using Microsoft.Owin.Security
 @*@{
         ViewBag.Title = "Log in";
     }*@
 @{
     Layout = null;
 }
-
+<p class="text-success">@ViewBag.StatusMessage</p>
 <!-- light-blue - v3.1.0 - 2014-12-06 -->
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Forgot Password</title>
+    <title>Manage your external logins</title>
 
     <link href="/css/application.css" rel="stylesheet">
     <link rel="shortcut icon" href="/img/favicon.png">
@@ -28,45 +28,70 @@
     </script>
 </head>
 <body class="background-dark">
-    <div class="single-widget-container">
-        <section class="widget login-widget">
-            <header class="text-align-center">
-                <h4>Forgot Your Password ?</h4>
-                <h5>Enter your email</h5>
-            </header>
-            <div class="body">
-                @using (Html.BeginForm("ForgotPasswordLb", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                {
-                    @Html.AntiForgeryToken()
-                    <fieldset>
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Email)
-
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-user"></i>
-                                </span>
-
-                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg input-transparent" })
-                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-
-                            </div>
-                        </div>
-                       
-                    </fieldset>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-block btn-lg btn-danger">
-                            <span class="small-circle"><i class="fa fa-caret-right"></i></span>
-                            <small>Email Link</small>
-                        </button>
-                        
-                    </div>
-                }
+    <div>
+       @{
+           var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+           if (loginProviders.Count() == 0)
+           {
+            <div>
+                <p>
+                    There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=313242">this article</a>
+                    for details on setting up this ASP.NET application to support logging in via external services.
+                </p>
             </div>
-            
-        </section>
+           }
+           else
+           {
+               if (Model.CurrentLogins.Count > 0)
+               {
+                <h4>Registered Logins</h4>
+                <table class="table">
+                    <tbody>
+                        @foreach (var account in Model.CurrentLogins)
+                        {
+                            <tr>
+                                <td>@account.LoginProvider</td>
+                                <td>
+                                    @if (ViewBag.ShowRemoveButton)
+                                    {
+                                        using (Html.BeginForm("RemoveLogin", "Manage"))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <div>
+                                                @Html.Hidden("loginProvider", account.LoginProvider)
+                                                @Html.Hidden("providerKey", account.ProviderKey)
+                                                <input type="submit" class="btn btn-default" value="Remove" title="Remove this @account.LoginProvider login from your account" />
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @: &nbsp;
+                                }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+               }
+               if (Model.OtherLogins.Count > 0)
+               {
+                   using (Html.BeginForm("LinkLogin", "Manage"))
+                   {
+                    @Html.AntiForgeryToken()
+                    <div id="socialLoginList">
+                        <p>
+                            @foreach (AuthenticationDescription p in Model.OtherLogins)
+                            {
+                                <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
+                            }
+                        </p>
+                    </div>
+                   }
+               }
+           }
+    }
+
     </div>
     <!-- common libraries. required for every page-->
     <script src="/lib/jquery/dist/jquery.min.js"></script>

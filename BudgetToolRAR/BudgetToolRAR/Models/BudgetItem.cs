@@ -17,6 +17,9 @@ namespace BudgetToolRAR.Models
 
         public Boolean BudgetType { get; set; }
 
+        public int HouseholdId { get; set; }
+        public int BudgetCategoryId { get; set; }
+
         public virtual BudgetCategory BudgetCategory { get; set; }
 
         public virtual Household Household { get; set; }

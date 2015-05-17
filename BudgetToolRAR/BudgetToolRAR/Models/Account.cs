@@ -15,6 +15,8 @@ namespace BudgetToolRAR.Models
 
         public decimal Balance { get; set; }
 
+        public int HouseholdId { get; set; }
+
         public virtual Household Household { get; set; }
     }
 }

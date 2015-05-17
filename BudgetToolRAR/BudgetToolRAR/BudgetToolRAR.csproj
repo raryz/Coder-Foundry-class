@@ -2020,6 +2020,11 @@
     <Content Include="Views\Account\ConfirmEmailLb.cshtml" />
     <Content Include="Views\Account\ResetPasswordLb.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmationLb.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmationLb.cshtml" />
+    <Content Include="Views\Manage\IndexLb.cshtml" />
+    <Content Include="Views\Manage\ManageLoginsLb.cshtml" />
+    <Content Include="Views\Manage\ChangePasswordLb.cshtml" />
+    <Content Include="Views\Manage\SetPasswordLb.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
