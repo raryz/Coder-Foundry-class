@@ -30,3 +30,8 @@ textarea {
   position: absolute;
   width: 100%;
 }
+
+.navbar-inverse {
+  background-color: rgba(102, 105, 104, 0.9);
+  border-color: rgba(102, 105, 104, 0.9);
+}
