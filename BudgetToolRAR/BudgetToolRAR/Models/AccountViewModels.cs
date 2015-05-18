@@ -87,7 +87,7 @@ namespace BudgetToolRAR.Models
         [Display(Name = "Household Name ( If creating a new Household )")]
         public string Name { get; set; }
 
-       public bool JoinHouse { get; set; }
+        //public string isJoinHouse { get; set; }
 
     }
 

@@ -211,6 +211,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BudgetCategory.cs" />
     <Compile Include="Models\BudgetItem.cs" />
+    <Compile Include="Models\Invite.cs" />
     <Compile Include="Models\EmailMessage.cs" />
     <Compile Include="Models\Household.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -254,6 +255,7 @@
     <Content Include="img\bgnoise_lg.png" />
     <Content Include="img\bgnoise_lg_dark.png" />
     <Content Include="img\bgnoise_lg_transparent.png" />
+    <Content Include="img\computer 1.jpg" />
     <Content Include="img\favicon.png" />
     <Content Include="img\glyphicons-halflings-dark.png" />
     <Content Include="img\glyphicons-halflings-white.png" />
@@ -2025,6 +2027,7 @@
     <Content Include="Views\Manage\ManageLoginsLb.cshtml" />
     <Content Include="Views\Manage\ChangePasswordLb.cshtml" />
     <Content Include="Views\Manage\SetPasswordLb.cshtml" />
+    <Content Include="Views\Home\Landing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
