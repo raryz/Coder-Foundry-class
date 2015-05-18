@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using BudgetToolRAR.Models;
 
 namespace BudgetToolRAR.Controllers
 {
     [RequireHttps]
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public ActionResult Index()
         {
             return View();
@@ -23,6 +27,15 @@ namespace BudgetToolRAR.Controllers
         public ActionResult Dashboard()
         {
             return View();
+        }
+
+        public ActionResult HouseList()
+        {
+            //var UserId = User.Identity.GetUserId();
+            var user = db.Users.Find(User.Identity.GetUserId());
+            Household hh = db.Households.Find(user.HouseholdId);
+            //var HouseNumber = db.Users.Where(u => );
+            return View(hh.Users.ToList());
         }
 
         public ActionResult About()

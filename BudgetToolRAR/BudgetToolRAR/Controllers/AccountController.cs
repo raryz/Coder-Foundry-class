@@ -118,7 +118,7 @@ namespace BudgetToolRAR.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToAction("Index", "Households");
+                    return RedirectToAction("Dashboard", "Home");
                 //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -262,7 +262,7 @@ namespace BudgetToolRAR.Controllers
                             var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                             await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                            return RedirectToAction("Index", "Home");
+                            return RedirectToAction("Dashboard", "Home");
                         }
                         AddErrors(result);
                     }   // end if Name != null || Name != " "
@@ -291,7 +291,7 @@ namespace BudgetToolRAR.Controllers
                         var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                         await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Dashboard", "Home");
                     }
                     AddErrors(result);
                 }      // end join house

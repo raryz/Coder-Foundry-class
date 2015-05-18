@@ -22,12 +22,10 @@ namespace BudgetToolRAR.Models
         public Decimal ReconciledAmount { get; set; }
 
         public int AccountId { get; set; }
-        public int HouseholdId { get; set; }
         public int BudgetCategoryId { get; set; }
 
         public virtual Account Account { get; set; }
 
-        public virtual Household Household { get; set; }
 
         public virtual BudgetCategory BudgetCategory { get; set; }
 

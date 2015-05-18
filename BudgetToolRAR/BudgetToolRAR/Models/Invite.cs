@@ -11,8 +11,8 @@ namespace BudgetToolRAR.Models
 
         public string Email { get; set; }
 
-        public int HouseNumber { get; set; }
+        public int HouseholdId { get; set; }
 
-        //public virtual Household Household { get; set; }
+        public virtual Household Household { get; set; }
     }
 }
