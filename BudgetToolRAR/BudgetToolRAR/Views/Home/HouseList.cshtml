@@ -1,4 +1,4 @@
-﻿@using BudgetToolRAR.Models
+﻿@model IEnumerable<BudgetToolRAR.Models.ApplicationUser>
 
 @*@{
         ViewBag.Title = "Log in";
@@ -36,13 +36,13 @@
         <ul id="side-nav" class="side-nav">
             <li class="active">
                 @*<a href="index.html"><i class="fa fa-home"></i> <span class="name">Dashboard</span></a>*@
-                <h3>Dashboard</h3>
+               @* <h3>Dashboard</h3>  *@
             </li>
-            @*<li class="panel ">*@
+            <li class="panel ">
             @*<a class="accordion-toggle collapsed" data-toggle="collapse"
                 data-parent="#side-nav" href="#forms-collapse"><i class="fa fa-pencil"></i><span class="name">Household</span></a>*@
-            @*<a class="toggle"
-                data-parent="#side-nav" href="#house-collapse"><i class="fa fa-home"></i><span class="name h4">Household</span></a>*@
+            <a class="toggle"
+               data-parent="#side-nav" href="@Url.Action("Dashboard","Home")"><i class="fa fa-bar-chart"></i><span class="name h4">Dashboard</span></a>
             @*<ul id="forms-collapse" class="panel-collapse collapse ">
                     <li class=""><a href="form_account.html">Account</a></li>
                     <li class=""><a href="form_article.html">Article</a></li>
@@ -74,103 +74,135 @@
             </li>
         </ul>
     </nav>
-    <div class="page-tables">
-        <!-- Table -->
-        <div class="table-responsive">
-            <table cellpadding="0" cellspacing="0" border="0" id="data-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(u => item.DisplayName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(u => item.Email)
-                            </td>
-                            
-                        </tr>
-                    }
+    <div class="row">
+        <div class="col-md-12"><br /></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12"><br /></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12"><br /></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12"><br /></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12"><br /></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12"><br /></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12"><br /></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12"><br /></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12"><br /></div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="page-tables">
+                <!-- Table -->
+                <div class="table-responsive">
+                    <h3>Household Member List</h3>
+                    <table cellpadding="0" cellspacing="0" border="0" id="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
+                                        @Html.DisplayFor(u => item.DisplayName)
+                                    </td>
+                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
+                                        @Html.DisplayFor(u => item.Email)
+                                    </td>
 
-            </table>
-            <div class="clearfix"></div>
+                                </tr>
+                            }
+
+                    </table>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- common libraries. required for every page-->
-    <script src="/lib/jquery/dist/jquery.min.js"></script>
-    <script src="/lib/jquery-pjax/jquery.pjax.js"></script>
-    <script src="/lib/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
-    <script src="/lib/widgster/widgster.js"></script>
-    <script src="/lib/underscore/underscore.js"></script>
+        <!-- common libraries. required for every page-->
+        <script src="/lib/jquery/dist/jquery.min.js"></script>
+        <script src="/lib/jquery-pjax/jquery.pjax.js"></script>
+        <script src="/lib/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+        <script src="/lib/widgster/widgster.js"></script>
+        <script src="/lib/underscore/underscore.js"></script>
 
-    <!-- common application js -->
-    <script src="/js/app.js"></script>
-    <script src="/js/settings.js"></script>
+        <!-- common application js -->
+        <script src="/js/app.js"></script>
+        <script src="/js/settings.js"></script>
 
-    <!-- common templates -->
-    <script type="text/template" id="settings-template">
-        <div class="setting clearfix">
-            <div>Background</div>
-            <div id="background-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
-                <% dark = background == 'dark'; light = background == 'light';%>
-                <button type="button" data-value="dark" class="btn btn-sm btn-default <%= dark? 'active' : '' %>">Dark</button>
-                <button type="button" data-value="light" class="btn btn-sm btn-default <%= light? 'active' : '' %>">Light</button>
+        <!-- common templates -->
+        <script type="text/template" id="settings-template">
+            <div class="setting clearfix">
+                <div>Background</div>
+                <div id="background-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+                    <% dark = background == 'dark'; light = background == 'light';%>
+                    <button type="button" data-value="dark" class="btn btn-sm btn-default <%= dark? 'active' : '' %>">Dark</button>
+                    <button type="button" data-value="light" class="btn btn-sm btn-default <%= light? 'active' : '' %>">Light</button>
+                </div>
             </div>
-        </div>
-        <div class="setting clearfix">
-            <div>Sidebar on the</div>
-            <div id="sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
-                <% onRight = sidebar == 'right'%>
-                <button type="button" data-value="left" class="btn btn-sm btn-default <%= onRight? '' : 'active' %>">Left</button>
-                <button type="button" data-value="right" class="btn btn-sm btn-default <%= onRight? 'active' : '' %>">Right</button>
+            <div class="setting clearfix">
+                <div>Sidebar on the</div>
+                <div id="sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+                    <% onRight = sidebar == 'right'%>
+                    <button type="button" data-value="left" class="btn btn-sm btn-default <%= onRight? '' : 'active' %>">Left</button>
+                    <button type="button" data-value="right" class="btn btn-sm btn-default <%= onRight? 'active' : '' %>">Right</button>
+                </div>
             </div>
-        </div>
-        <div class="setting clearfix">
-            <div>Sidebar</div>
-            <div id="display-sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
-                <% display = displaySidebar%>
-                <button type="button" data-value="true" class="btn btn-sm btn-default <%= display? 'active' : '' %>">Show</button>
-                <button type="button" data-value="false" class="btn btn-sm btn-default <%= display? '' : 'active' %>">Hide</button>
+            <div class="setting clearfix">
+                <div>Sidebar</div>
+                <div id="display-sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+                    <% display = displaySidebar%>
+                    <button type="button" data-value="true" class="btn btn-sm btn-default <%= display? 'active' : '' %>">Show</button>
+                    <button type="button" data-value="false" class="btn btn-sm btn-default <%= display? '' : 'active' %>">Hide</button>
+                </div>
             </div>
-        </div>
-        <div class="setting clearfix">
-            <div>White Version</div>
-            <div>
-                <a href="../white/index.html" class="btn btn-sm btn-default">&nbsp; Switch &nbsp;   <i class="fa fa-angle-right"></i></a>
+            <div class="setting clearfix">
+                <div>White Version</div>
+                <div>
+                    <a href="../white/index.html" class="btn btn-sm btn-default">&nbsp; Switch &nbsp;   <i class="fa fa-angle-right"></i></a>
+                </div>
             </div>
-        </div>
-    </script>
+        </script>
 
-    <script type="text/template" id="sidebar-settings-template">
-        <% auto = sidebarState == 'auto'%>
-        <% if (auto) {%>
-        <button type="button"
-                data-value="icons"
-                class="btn-icons btn btn-transparent btn-sm">
-            Icons
-        </button>
-        <button type="button"
-                data-value="auto"
-                class="btn-auto btn btn-transparent btn-sm">
-            Auto
-        </button>
-        <%} else {%>
-        <button type="button"
-                data-value="auto"
-                class="btn btn-transparent btn-sm">
-            Auto
-        </button>
-        <% } %>
-    </script>
+        <script type="text/template" id="sidebar-settings-template">
+            <% auto = sidebarState == 'auto'%>
+            <% if (auto) {%>
+            <button type="button"
+                    data-value="icons"
+                    class="btn-icons btn btn-transparent btn-sm">
+                Icons
+            </button>
+            <button type="button"
+                    data-value="auto"
+                    class="btn-auto btn btn-transparent btn-sm">
+                Auto
+            </button>
+            <%} else {%>
+            <button type="button"
+                    data-value="auto"
+                    class="btn btn-transparent btn-sm">
+                Auto
+            </button>
+            <% } %>
+        </script>
 
-    <!-- page specific scripts -->
+        <!-- page specific scripts -->
 
 
 </body>
