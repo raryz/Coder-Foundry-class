@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BudgetToolRAR.Models;
+using Microsoft.AspNet.Identity;
 
 namespace BudgetToolRAR.Controllers
 {
@@ -113,6 +114,30 @@ namespace BudgetToolRAR.Controllers
             db.Households.Remove(household);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // GET: Projects/Delete/5
+        public ActionResult RemoveUser()
+        {
+            var user = db.Users.Find(User.Identity.GetUserId());
+                                                // User.Identity.GetUserId gets the information from the cookie
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        // POST: Projects/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveUserConfirmed()
+        {
+            var user = db.Users.Find(
+                User.Identity.GetUserId());
+            user.HouseholdId = null;
+            db.SaveChanges();
+            return RedirectToAction("Landing","Home");
         }
 
         //[Authorize]

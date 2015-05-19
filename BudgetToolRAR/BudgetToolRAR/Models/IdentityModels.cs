@@ -43,6 +43,7 @@ namespace BudgetToolRAR.Models
         public DbSet<BudgetItem> BudgetItems { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<BudgetCategory> BudgetCategories { get; set; }
+        public DbSet<Invite> Invites { get; set; }
 
     }
 }

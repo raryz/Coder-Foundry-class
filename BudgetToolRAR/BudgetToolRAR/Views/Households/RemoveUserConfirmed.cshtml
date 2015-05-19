@@ -1,0 +1,95 @@
+﻿@model BudgetToolRAR.Models.ApplicationUser
+
+@*@{
+        ViewBag.Title = "Log in";
+    }*@
+
+
+<!-- light-blue - v3.1.0 - 2014-12-06 -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Remove User</title>
+
+   
+</head>
+<body class="background-dark">
+    <div class="logo">
+        <h3>Remove User Confirmation</h3>
+    </div>
+    
+    
+    <div class="page-tables">
+        <!-- Table -->
+        <div class="table-responsive">
+            <h3>User to Remove</h3>
+            <table cellpadding="0" cellspacing="0" border="0" id="data-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="width:200px; overflow:hidden;font-size: 14px;">
+                            @Html.DisplayFor(model => model.DisplayName)
+                        </td>
+                        <td style="width:200px; overflow:hidden;font-size: 14px;">
+                            @Html.DisplayFor(model => model.Email)
+                        </td>
+
+                    </tr>
+            </table>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            @using (Html.BeginForm(null,null,FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @*<h4>User to Remove</h4>*@
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DisplayName, "Display Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.DisplayName, new { htmlAttributes = new { @class = "form-control" } })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+
+                        </div>
+                    </div>
+
+                </div>
+                <button class="name h4 btn btn-primary" type="submit">Leave Confirmation</button>
+
+                <p><h5>You will lose access to the current household's accounts.</h5></p>
+
+            }
+        </div>
+    </div>
+    
+    <!-- common libraries. required for every page-->
+   
+    <!-- page specific scripts -->
+
+
+</body>
+</html>
+
+
+

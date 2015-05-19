@@ -2032,6 +2032,8 @@
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\HouseList.cshtml" />
+    <Content Include="Views\Households\RemoveUser.cshtml" />
+    <Content Include="Views\Households\RemoveUserConfirmed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

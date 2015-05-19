@@ -13,6 +13,6 @@ namespace BudgetToolRAR.Models
 
         public int HouseholdId { get; set; }
 
-        public virtual Household Household { get; set; }
+      
     }
 }
