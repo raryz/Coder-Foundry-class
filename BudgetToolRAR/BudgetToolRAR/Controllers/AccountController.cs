@@ -233,7 +233,7 @@ namespace BudgetToolRAR.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RegisterLb(RegisterViewModel model, string isJoinHouse)
+        public async Task<ActionResult> RegisterLb(RegisterViewModel model, string isJoinHouse , Invite invite)
         {
             if (ModelState.IsValid)
             {
@@ -275,6 +275,8 @@ namespace BudgetToolRAR.Controllers
                 if (isJoinHouse == "joinAHouse")
                 {
                     // find House to join using email address, get householdID
+                    var db = new ApplicationDbContext();
+                    var emailinvite = db.Invites.
                     // add householdID to User data
                     // if House is not found, return View
                     // if House is found, proceed with adding user, etc.

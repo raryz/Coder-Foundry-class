@@ -11,7 +11,7 @@ namespace BudgetToolRAR.Models
 
         public string Email { get; set; }
 
-        public int HouseholdId { get; set; }
+        public int? HouseholdId { get; set; }
 
       
     }

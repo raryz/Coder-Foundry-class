@@ -90,6 +90,44 @@ namespace BudgetToolRAR.Controllers
             return View(household);
         }
 
+        public ActionResult HouseList()
+        {
+            //var UserId = User.Identity.GetUserId();
+            var user = db.Users.Find(User.Identity.GetUserId());
+            Household hh = db.Households.Find(user.HouseholdId);
+            //var HouseNumber = db.Users.Where(u => );
+            return View(hh.Users.ToList());
+        }
+
+
+        // GET: Households/InviteUser
+        public ActionResult InviteUser()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult InviteUser( string Email, Invite invite)
+        {
+            invite.Email = Email;
+            
+            var user = db.Users.Find(User.Identity.GetUserId());
+            invite.HouseholdId = user.HouseholdId;
+            if (invite.HouseholdId != null)
+            {
+                db.Invites.Add(invite);
+                db.SaveChanges();
+                new EmailService().SendAsync(new IdentityMessage
+                {
+                    Subject = "Join Household",
+                    Destination = invite.Email,
+                    Body = "You have been invited to join a household in the budget tool. Select -Join- on log in."
+                });
+            }
+            return RedirectToAction("HouseList", "Households");
+        }
+
         // GET: Households/Delete/5
         public ActionResult Delete(int? id)
         {

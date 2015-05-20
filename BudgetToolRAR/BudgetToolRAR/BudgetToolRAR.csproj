@@ -2031,9 +2031,10 @@
     <Content Include="Views\Home\Landing.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\HouseList.cshtml" />
+    <Content Include="Views\Households\HouseList.cshtml" />
     <Content Include="Views\Households\RemoveUser.cshtml" />
     <Content Include="Views\Households\RemoveUserConfirmed.cshtml" />
+    <Content Include="Views\Households\InviteUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

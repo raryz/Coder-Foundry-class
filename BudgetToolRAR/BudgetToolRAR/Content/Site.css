@@ -47,3 +47,11 @@ textarea {
   top: 0;
   right: 0;
 }
+
+.invite-widget-container {
+  left: 400px;
+  top: 50%;
+  margin-top: -192.5px;
+  position: absolute;
+  width: 100%;
+}

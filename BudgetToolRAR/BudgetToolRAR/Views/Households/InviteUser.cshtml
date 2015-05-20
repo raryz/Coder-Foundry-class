@@ -1,0 +1,74 @@
+﻿@model BudgetToolRAR.Models.Invite
+
+@*@{
+        ViewBag.Title = "Log in";
+    }*@
+
+
+<!-- light-blue - v3.1.0 - 2014-12-06 -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invite User</title>
+
+
+</head>
+<body class="background-dark">
+    <br />
+    <div class="row">
+        <div class="col-md-1">
+           
+        </div>
+        <div class="col-md-6">
+            <h3 class="text-align-right">Enter the Email of the person you would like to invite.</h3>
+        </div>
+    </div>
+    <div class="invite-widget-container">
+        <section class="widget login-widget">
+            <header class="text-align-center">
+                <h4>Invite User</h4>
+            </header>
+            <div class="body">
+                @using (Html.BeginForm("InviteUser", "Households", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <fieldset>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email)
+
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-user"></i>
+                                </span>
+
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg input-transparent" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-block btn-lg btn-danger">
+                            <span class="small-circle"><i class="fa fa-caret-right"></i></span>
+                            <small>Send email</small>
+                        </button>
+                        <br />
+                    </div>
+
+                }
+            </div>
+        </section>
+    </div>
+    
+
+    <!-- page specific scripts -->
+
+
+</body>
+</html>
+
+
