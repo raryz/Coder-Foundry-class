@@ -16,12 +16,7 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
+
 
 .single-widget-container {
   left: 0;
@@ -54,4 +49,23 @@ textarea {
   margin-top: -192.5px;
   position: absolute;
   width: 100%;
+}
+
+.input-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.form-control-create {
+    display: block;
+    width: 30%;
+    height: 30px;
+    padding: 5px 12px;
+    font-size: 13px;
+    line-height: 1.428571429;
+    color: #555555;
+    background-color: white;
+    background-image: none;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
 }

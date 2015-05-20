@@ -38,19 +38,19 @@
                 @using (Html.BeginForm("RegisterLb", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
                     @Html.AntiForgeryToken()
-                    <fieldset>
+                    <fieldset style="padding: 15px;">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                         <div class="form-group">
                             @Html.LabelFor(m => m.Email)
 
-                            <div class="input-group">
+                            <div class="input-group input-group-lg">
                                 <span class="input-group-addon">
                                     <i class="fa fa-user"></i>
                                 </span>
 
                                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg input-transparent" })
-                               
+
                             </div>
                         </div>
                         <div class="form-group">
@@ -81,7 +81,7 @@
                         <div class="form-group">
                             @Html.LabelFor(m => m.DisplayName)
 
-                            <div class="input-group">
+                            <div class="input-group input-group-lg">
                                 <span class="input-group-addon">
                                     <i class="fa fa-user"></i>
                                 </span>
@@ -91,26 +91,35 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Name)
+                            <label id="houseOrSecretLabel">
+                                @if(!string.IsNullOrWhiteSpace(ViewBag.Secret))
+                                {
+                                    <text>Enter the secret code</text>
+                                }
+                                else
+                                {
+                                    <text>Enter the Household Name</text>
+                                    
+                                }
+                            </label>
 
-                            <div class="input-group">
+                            <div class="input-group input-group-lg">
                                 <span class="input-group-addon">
                                     <i class="fa fa-home"></i>
                                 </span>
 
-                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control input-lg input-transparent" })
-
+                                <input type="text" id="houseOrSecret" name="@(!string.IsNullOrWhiteSpace(ViewBag.Secret)? "secret" : "Name")" class="form-control input-lg input-transparent" value="@ViewBag.Secret" />
                             </div>
                         </div>
                         <div class="form-group">
                             @*@Html.LabelFor(m => m.Password)*@
 
                             <div class="input-group input-group-lg">
-                                <span class="input-group-addon">
+                                @*<span class="input-group-addon">
                                     <i class="fa fa-question"></i>
-                                </span>
-                                <input type="radio" name="isJoinHouse" value="joinAHouse"/> Join an existing House
-                                <input type="radio" name="isJoinHouse" value="createHouse" /> Create a new House
+                                </span>*@
+                                <input type="radio" name="isJoinHouse" value="joinAHouse" @if(!string.IsNullOrWhiteSpace(ViewBag.Secret)){<text>checked</text>} onclick="radioClicked(this)"/> Join an existing House
+                                <input type="radio" name="isJoinHouse" value="createHouse" @if(string.IsNullOrWhiteSpace(ViewBag.Secret)) { <text> checked</text>} onclick="radioClicked(this)" /> Create a new House
                             </div>
                         </div>
                     </fieldset>
@@ -194,7 +203,23 @@
     </script>
 
     <!-- page specific scripts -->
-
+    <script>
+        function radioClicked(button)
+        {
+            if(button.value == "joinAHouse")
+            {
+                $('#houseOrSecret').attr("name", "secret");
+                $('#houseOrSecret').val("");
+                $('#houseOrSecretLabel').text("Enter the secret code");
+            }
+            else
+            {
+                $('#houseOrSecret').attr("name", "Name");
+                $('#houseOrSecret').val("");
+                $('#houseOrSecretLabel').text("Enter the Household Name");
+            }
+        }
+    </script>
 
 </body>
 </html>

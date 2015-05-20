@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BudgetToolRAR.Models;
+using Microsoft.AspNet.Identity;
 
 namespace BudgetToolRAR.Controllers
 {
@@ -16,6 +17,12 @@ namespace BudgetToolRAR.Controllers
 
         // GET: Accounts
         public ActionResult Index()
+        {
+            return View(db.Accounts.ToList());
+        }
+
+        // GET: Accounts
+        public ActionResult AccountsIndexLb()
         {
             return View(db.Accounts.ToList());
         }
@@ -53,6 +60,32 @@ namespace BudgetToolRAR.Controllers
                 db.Accounts.Add(account);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+
+            return View(account);
+        }
+
+        // GET: Accounts/AccountsCreateLb
+        public ActionResult AccountsCreateLb()
+        {
+            return View();
+        }
+
+        // POST: Accounts/AccountsCreateLb
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AccountsCreateLb([Bind(Include = "Id,Name,Balance")] Account account)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = db.Users.Find(User.Identity.GetUserId());
+                
+                account.HouseholdId = user.HouseholdId.Value;
+                db.Accounts.Add(account);
+                db.SaveChanges();
+                return RedirectToAction("AccountsIndexLb");
             }
 
             return View(account);

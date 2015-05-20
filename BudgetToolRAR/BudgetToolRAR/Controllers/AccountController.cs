@@ -223,17 +223,21 @@ namespace BudgetToolRAR.Controllers
         //
         // GET: /Account/RegisterLb
         [AllowAnonymous]
-        public ActionResult RegisterLb()
+        public ActionResult RegisterLb(string secret)
         {
+            if(!string.IsNullOrWhiteSpace(secret))
+            {
+                ViewBag.Secret = secret;
+            }
             return View();
         }
 
         //
-        // POST: /Account/Register
+        // POST: /Account/RegisterLb
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RegisterLb(RegisterViewModel model, string isJoinHouse , Invite invite)
+        public async Task<ActionResult> RegisterLb(RegisterViewModel model, string isJoinHouse , string secret)
         {
             if (ModelState.IsValid)
             {
@@ -276,26 +280,33 @@ namespace BudgetToolRAR.Controllers
                 {
                     // find House to join using email address, get householdID
                     var db = new ApplicationDbContext();
-                    var emailinvite = db.Invites.
+                    secret = secret.ToUpper();
+                    var invite = db.Invites.FirstOrDefault(i => i.Secret == secret && i.Email == model.Email);
+                    if(invite != null)
+                    {
+                        var user = new ApplicationUser { UserName = model.Email, Email = model.Email, DisplayName = model.DisplayName, HouseholdId = invite.HouseholdId };
+                        var result = await UserManager.CreateAsync(user, model.Password);
+                        if (result.Succeeded)
+                        {
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                            // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                            // Send an email with this link
+                            string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                            await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                            db.Invites.Remove(invite);
+                            return RedirectToAction("Dashboard", "Home");
+                        }
+                        AddErrors(result);
+                    }
+                    ModelState.AddModelError("secret", "The key provided was invalid.");
                     // add householdID to User data
                     // if House is not found, return View
                     // if House is found, proceed with adding user, etc.
-                    var idFound = 1;
-                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, DisplayName = model.DisplayName, HouseholdId = idFound };
-                    var result = await UserManager.CreateAsync(user, model.Password);
-                    if (result.Succeeded)
-                    {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                        // Send an email with this link
-                        string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                        return RedirectToAction("Dashboard", "Home");
-                    }
-                    AddErrors(result);
+                    
+                    
+                    
                 }      // end join house
 
             }

@@ -108,23 +108,21 @@ namespace BudgetToolRAR.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult InviteUser( string Email, Invite invite)
+        public ActionResult InviteUser( Invite invite)
         {
-            invite.Email = Email;
-            
             var user = db.Users.Find(User.Identity.GetUserId());
-            invite.HouseholdId = user.HouseholdId;
-            if (invite.HouseholdId != null)
+            invite.HouseholdId = user.HouseholdId.Value;
+            invite.Secret = Utilities.GenerateSecretCode();
+            db.Invites.Add(invite);
+            db.SaveChanges();
+            new EmailService().SendAsync(new IdentityMessage
             {
-                db.Invites.Add(invite);
-                db.SaveChanges();
-                new EmailService().SendAsync(new IdentityMessage
-                {
-                    Subject = "Join Household",
-                    Destination = invite.Email,
-                    Body = "You have been invited to join a household in the budget tool. Select -Join- on log in."
-                });
-            }
+                Subject = "Join Household",
+                Destination = invite.Email,
+                Body = "You have been invited to join a household in the budget tool. Select -Join- on log in, and input the code: " + invite.Secret +".\n" +
+                        "Or, <a href=\"" + Url.Action("RegisterLb", "Account", new { secret = invite.Secret }, "https") +"\">Click here</a> to join."
+            });
+
             return RedirectToAction("HouseList", "Households");
         }
 

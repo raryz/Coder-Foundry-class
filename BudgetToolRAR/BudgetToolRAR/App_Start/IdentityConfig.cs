@@ -32,7 +32,7 @@ namespace BudgetToolRAR
             myMessage.AddTo(message.Destination);
             myMessage.From = new MailAddress(from);
             myMessage.Subject = message.Subject;
-            myMessage.Text = message.Body;
+            //myMessage.Text = message.Body;
             myMessage.Html = message.Body;
 
             // Create credentials, specifying your user name and password.
