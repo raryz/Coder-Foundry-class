@@ -31,10 +31,10 @@
     </div>
     <br /><br />
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-2">
             <br />
         </div>
-        <div class="col-md-8">
+        <div class="col-md-10">
 
             <div class="page-tables">
                 <!-- Table -->
@@ -46,10 +46,14 @@
                                 <th style="width:200px;">Account</th>
                                 <th style="width:200px;">Balance</th>
                                 <th style="width:200px;">Reconciled</th>
+                                <th style="width: 70px;">Edit</th>
+                                <th style="width:100px;">Transactions</th>
+                                <th style="width:100px;">Delete</th>
                             </tr>
                         </thead>
-                        <tbody>   @* If there are no accounts, will display the heading but will be blank for data, no errors will occur*@
-                            @foreach (var item in Model)         
+                        <tbody>
+                            @* If there are no accounts, will display the heading but will be blank for data, no errors will occur*@
+                            @foreach (var item in Model)
                             {
                                 <tr>
                                     <td style="width:200px; overflow:hidden;font-size: 14px;">
@@ -60,13 +64,37 @@
                                     </td>
                                     <td style="width:200px; overflow:hidden;font-size: 14px;">
                                         @*@if (u => item.Balance == Viewbag.Reconcile[item.Id])
-                                        {
-                                            <p>Reconciled</p>
-                                        }
-                                        else
-                                        {
-                                            @Html.Displayfor(Viewbag.Reconcile[item.Id])
-                                           }*@
+                                            {
+                                                <p>Reconciled</p>
+                                            }
+                                            else
+                                            {
+                                                @Html.Displayfor(Viewbag.Reconcile[item.Id])
+                                               }*@
+                                    </td>
+                                    @*<td>
+                                        <a href="~/Views/Accounts/AccountsEditLb.cshtml" title="Edit">
+                                            <i class="fa fa-edit "></i>      @*  fa-2x *@
+                                        @*</a>
+                                    </td>
+                                    <td>
+                                        <a href="~/Views/Accounts/AccountsDetailsLb.cshtml" title="Transactions">
+                                            <i class="fa fa-list-alt "></i>*@      @*  fa-2x *@
+                                        @*</a>
+                                    </td>
+                                    <td>
+                                        <a href="~/Views/Accounts/AccountsDeleteLb.cshtml" title="Transactions">
+                                            <i class="fa fa-trash "></i>*@      @*  fa-2x *@
+                                        @*</a>
+                                    </td>*@
+                                    <td>
+                                        @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "btn  white fa fa-edit" })
+                                    </td>  
+                                    <td>
+                                        @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "btn white fa fa-list" })
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "btn white fa fa-trash" })
                                     </td>
                                 </tr>
                             }

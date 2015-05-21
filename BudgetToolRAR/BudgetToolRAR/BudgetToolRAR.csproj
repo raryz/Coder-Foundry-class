@@ -2038,6 +2038,9 @@
     <Content Include="Views\Households\InviteUser.cshtml" />
     <Content Include="Views\Accounts\AccountsIndexLb.cshtml" />
     <Content Include="Views\Accounts\AccountsCreateLb.cshtml" />
+    <Content Include="Views\Accounts\AccountsEditLb.cshtml" />
+    <Content Include="Views\Accounts\AccountsDetailsLb.cshtml" />
+    <Content Include="Views\Accounts\AccountsDeleteLb.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
