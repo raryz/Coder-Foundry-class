@@ -48,7 +48,7 @@
                                 <th style="width:200px;">Reconciled</th>
                                 <th style="width: 70px;">Edit</th>
                                 <th style="width:100px;">Transactions</th>
-                                <th style="width:100px;">Delete</th>
+                                <th style="width:50px;">Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,13 +88,20 @@
                                         @*</a>
                                     </td>*@
                                     <td>
-                                        @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "btn  white fa fa-edit" })
+                                        @Html.ActionLink(" ", "AccountsEditLb", "Accounts", new { id = item.Id }, new { @class = "btn  white fa fa-edit" })
                                     </td>  
                                     <td>
-                                        @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "btn white fa fa-list" })
+                                        @Html.ActionLink(" ", "AccountDetailsLb", "Accounts", new { id = item.Id }, new { @class = "btn white fa fa-list" })
                                     </td>
                                     <td>
-                                        @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "btn white fa fa-trash" })
+                                        @Html.ActionLink(" ", "AccountsDeleteLb", new { id = item.Id }, new { @class = "btn white fa fa-trash" })
+                                    </td>
+                                    <td>
+                                        @if (item.Balance < 0)
+                                        {
+                                            <button class="btn btn-danger" type="button" title="">Overdraft Warning</button>
+                                        }
+                                           
                                     </td>
                                 </tr>
                             }

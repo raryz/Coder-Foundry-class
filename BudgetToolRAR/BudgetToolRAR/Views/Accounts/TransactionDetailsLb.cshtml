@@ -1,0 +1,106 @@
+﻿@model IEnumerable<BudgetToolRAR.Models.Transaction>
+
+@*@{
+        ViewBag.Title = "Log in";
+    }*@
+
+
+<!-- light-blue - v3.1.0 - 2014-12-06 -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transactions</title>
+</head>
+<body class="background-dark">
+    <div class="logo">
+        <h3>Budget Tool</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12"><br /></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <br />
+        </div>
+        <div class="col-md-2">
+           <p>Balance        Reconciled</p>
+        </div>
+        <div class="col-md-8">
+            <a href="@Url.Action("TransactionsCreateLb","Accounts")"><span class="name h4 btn btn-primary">Create a Transaction</span></a>
+        </div>
+    </div>
+    <br /><br />
+    <div class="row">
+        <div class="col-md-2">
+            <br />
+        </div>
+        <div class="col-md-10">
+
+            <div class="page-tables">
+                <!-- Table -->
+                <div class="table-responsive">
+                    <h3>Transactions</h3>
+                    <table cellpadding="0" cellspacing="0" border="0" id="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width:200px;">Date</th>
+                                <th style="width:200px;">Description</th>
+                                <th style="width:200px;">Category</th>
+                                <th style="width: 70px;">Amount</th>
+                                <th style="width:100px;">Reconciled</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @* If there are no accounts, will display the heading but will be blank for data, no errors will occur*@
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
+                                        @Html.DisplayFor(u => item.Date)
+                                    </td>
+                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
+                                        @Html.DisplayFor(u => item.Description)
+                                    </td>
+                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
+                                        @Html.DisplayFor(u => item.Category)
+                                    </td>
+                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
+                                        @Html.DisplayFor(u => item.Amount)
+                                    </td>
+                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
+                                        @Html.DisplayFor(u => item.ReconciledAmount)
+                                    </td>
+
+                                    <td>
+                                        @Html.ActionLink(" ", "TransactionEditLb", "Accounts", new { id = item.Id }, new { @class = "btn  white fa fa-edit" })
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink(" ", "TransactionDeleteLb", new { id = item.Id }, new { @class = "btn white fa fa-trash" })
+                                    </td>
+                                </tr>
+                            }
+                    </table>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12"><br /></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12"><br /></div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12"><br /></div>
+    </div>
+
+    <!-- page specific scripts -->
+</body>
+</html>
+

@@ -81,7 +81,33 @@ namespace BudgetToolRAR.Controllers
             if (ModelState.IsValid)
             {
                 var user = db.Users.Find(User.Identity.GetUserId());
-                
+
+                account.HouseholdId = user.HouseholdId.Value;
+                db.Accounts.Add(account);
+                db.SaveChanges();
+                return RedirectToAction("AccountsIndexLb");
+            }
+
+            return View(account);
+        }
+
+        // GET: Accounts/TransactionsCreateLb
+        public ActionResult TransactionsCreateLb()
+        {
+            return View();
+        }
+
+        // POST: Accounts/TransactionsCreateLb
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult TransactionsCreateLb([Bind(Include = "Id,Name,Balance")] Account account)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = db.Users.Find(User.Identity.GetUserId());
+
                 account.HouseholdId = user.HouseholdId.Value;
                 db.Accounts.Add(account);
                 db.SaveChanges();
@@ -122,6 +148,39 @@ namespace BudgetToolRAR.Controllers
             return View(account);
         }
 
+        // GET: Accounts/AccountsEditLb/5
+        public ActionResult AccountsEditLb(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Account account = db.Accounts.Find(id);
+            if (account == null)
+            {
+                return HttpNotFound();
+            }
+            return View(account);
+        }
+
+        // POST: Accounts/AccountsEditLb/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AccountsEditLb([Bind(Include = "Id,Name,Balance")] Account account)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = db.Users.Find(User.Identity.GetUserId());
+                account.HouseholdId = user.HouseholdId.Value;
+
+                db.Entry(account).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("AccountsIndexLb");
+            }
+            return View(account);
+        }
         // GET: Accounts/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -146,6 +205,32 @@ namespace BudgetToolRAR.Controllers
             db.Accounts.Remove(account);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // GET: Accounts/AccountsDeleteLb/5
+        public ActionResult AccountsDeleteLb(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Account account = db.Accounts.Find(id);
+            if (account == null)
+            {
+                return HttpNotFound();
+            }
+            return View(account);
+        }
+
+        // POST: Accounts/AccountsDeleteLb/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AccountsDeleteLb(int id)
+        {
+            Account account = db.Accounts.Find(id);
+            db.Accounts.Remove(account);
+            db.SaveChanges();
+            return RedirectToAction("AccountsIndexLb");
         }
 
         protected override void Dispose(bool disposing)
