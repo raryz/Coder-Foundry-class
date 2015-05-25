@@ -25,14 +25,37 @@
         <div class="col-md-2">
             <br />
         </div>
-        <div class="col-md-2">
-           <p>Balance        Reconciled</p>
+        <div class="col-md-6">
+            @* <br /> *@
+
+            <table cellpadding="0" cellspacing="0" border="0" id="data-table">
+                <thead>
+                    <tr>
+                        <th style="width:100px;">Balance</th>
+                        <th style="width:100px;">Reconciled</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="width:100px; overflow:hidden;font-size: 14px;"></td>
+                        <td style="width:100px; overflow:hidden;font-size: 14px;"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="col-md-8">
-            <a href="@Url.Action("TransactionsCreateLb","Accounts")"><span class="name h4 btn btn-primary">Create a Transaction</span></a>
         </div>
-    </div>
-    <br /><br />
+    <br /><br /><br />
+        <div class="row">
+            <div class="col-md-2">
+                <br />
+            </div>
+
+            <div class="col-md-10">
+                <a href="@Url.Action("TransactionsCreateLb","Accounts")"><span class="name h4 btn btn-primary">Create a Transaction</span></a>
+            </div>
+        </div>
+    <br />
+
     <div class="row">
         <div class="col-md-2">
             <br />
@@ -46,11 +69,11 @@
                     <table cellpadding="0" cellspacing="0" border="0" id="data-table">
                         <thead>
                             <tr>
-                                <th style="width:200px;">Date</th>
+                                <th style="width:100px;">Date</th>
                                 <th style="width:200px;">Description</th>
-                                <th style="width:200px;">Category</th>
-                                <th style="width: 70px;">Amount</th>
-                                <th style="width:100px;">Reconciled</th>
+                                <th style="width:150px;">Category</th>
+                                <th style="width:110px;">Amount</th>
+                                <th style="width:110px;">Reconciled</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,19 +81,19 @@
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
+                                    <td style="width:100px; overflow:hidden;font-size: 14px;">
                                         @Html.DisplayFor(u => item.Date)
                                     </td>
                                     <td style="width:200px; overflow:hidden;font-size: 14px;">
                                         @Html.DisplayFor(u => item.Description)
                                     </td>
-                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
-                                        @Html.DisplayFor(u => item.Category)
+                                    <td style="width:150px; overflow:hidden;font-size: 14px;">
+                                        @Html.DisplayFor(u => item.BudgetCategory.Name)
                                     </td>
-                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
+                                    <td style="width:110px; overflow:hidden;font-size: 14px;">
                                         @Html.DisplayFor(u => item.Amount)
                                     </td>
-                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
+                                    <td style="width:110px; overflow:hidden;font-size: 14px;">
                                         @Html.DisplayFor(u => item.ReconciledAmount)
                                     </td>
 

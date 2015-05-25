@@ -42,6 +42,25 @@ namespace BudgetToolRAR.Controllers
             return View(account);
         }
 
+        // GET: Accounts/TransactionDetailsLb/5
+        public ActionResult TransactionDetailsLb(int id)
+        {
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+                        
+            var transactions = db.Transactions.Where(t => t.AccountId == id);
+            return View(transactions.ToList());
+
+            //Account account = db.Accounts.Find(id);
+            //if (account == null)
+            //{
+            //    return HttpNotFound();
+            //}                          could have done it this way and returned the account
+            //return View(account);      this would have been similar to Comments under Posts
+        }
+
         // GET: Accounts/Create
         public ActionResult Create()
         {
@@ -64,6 +83,31 @@ namespace BudgetToolRAR.Controllers
 
             return View(account);
         }
+        // GET: Accounts/CreateCategoryLb
+        public ActionResult CreateCategoryLb()
+        {
+            return View();
+        }
+
+        // POST: Accounts/CreateCategoryLb
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateCategoryLb([Bind(Include = "Id,Name")] BudgetCategory budgetcategory)
+        {
+            if (ModelState.IsValid)
+            {
+
+                db.BudgetCategories.Add(budgetcategory);
+                   
+                db.SaveChanges();
+                return RedirectToAction("AccountsIndexLb");
+            }
+
+            return RedirectToAction("AccountsIndexLb");
+        }
+
 
         // GET: Accounts/AccountsCreateLb
         public ActionResult AccountsCreateLb()
