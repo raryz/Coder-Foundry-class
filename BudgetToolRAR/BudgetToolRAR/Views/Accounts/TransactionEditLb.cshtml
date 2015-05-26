@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Create Transaction</title>
+    <title>Edit Transaction</title>
 </head>
 <body class="background-dark">
     <div class="logo">
@@ -15,8 +15,9 @@
 
     <div class="container">
         <div class="col-md-offset-2 col-md-10">
-            <h2>Create Transaction</h2>
-    </div>
+            <h2>Edit Transaction</h2>
+     </div>
+
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
@@ -75,10 +76,11 @@
 
                     <div class="form-group">
                         <div class="col-md-2">
-                            <br />
+                           @* <label>Expense/Income</label> *@
+                            @Html.LabelFor(model => model.TransType, "Expense/Income", htmlAttributes: new { @class = "control-label col-md-2" })
                         </div>
                         <div class="col-md-10">
-                            <label>Expense/Income</label>
+                            
                             <select name="transactiontype">
                                 <option value="Expense">Expense</option>
                                 <option value="Income">Income</option>
@@ -86,10 +88,12 @@
                         </div>
                     </div>
 
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Create Transaction" class="h4 btn btn-primary" />
+                            <input type="submit" value="Save Transaction" class="h4 btn btn-primary" />
                         </div>
                     </div>
                 </div>
@@ -101,5 +105,6 @@
 
 </body>
 </html>
+
 
 

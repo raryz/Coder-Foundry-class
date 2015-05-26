@@ -82,7 +82,8 @@
                             {
                                 <tr>
                                     <td style="width:100px; overflow:hidden;font-size: 14px;">
-                                        @Html.DisplayFor(u => item.Date)
+                                        @item.Date.ToString("MM/dd/yyyy")
+                                        @*@Html.DisplayFor(u => item.Date, "{0:MM/dd/yyyy}")*@
                                     </td>
                                     <td style="width:200px; overflow:hidden;font-size: 14px;">
                                         @Html.DisplayFor(u => item.Description)

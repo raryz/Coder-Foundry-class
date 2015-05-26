@@ -2044,6 +2044,8 @@
     <Content Include="Views\Accounts\TransactionDetailsLb.cshtml" />
     <Content Include="Views\Accounts\CreateCategoryLb.cshtml" />
     <Content Include="Views\Accounts\TransactionCreateLb.cshtml" />
+    <Content Include="Views\Accounts\TransactionEditLb.cshtml" />
+    <Content Include="Views\Accounts\TransactionDeleteLb.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

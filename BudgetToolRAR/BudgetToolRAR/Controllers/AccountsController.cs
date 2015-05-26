@@ -50,7 +50,7 @@ namespace BudgetToolRAR.Controllers
             //{
             //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             //}
-                        
+
             var transactions = db.Transactions.Where(t => t.AccountId == id);
             return View(transactions.ToList());
 
@@ -101,7 +101,7 @@ namespace BudgetToolRAR.Controllers
             {
 
                 db.BudgetCategories.Add(budgetcategory);
-                   
+
                 db.SaveChanges();
                 return RedirectToAction("AccountsIndexLb");
             }
@@ -140,7 +140,7 @@ namespace BudgetToolRAR.Controllers
         public ActionResult TransactionCreateLb()
         {
             ViewBag.BudgetCategoryId = new SelectList(db.BudgetCategories, "Id", "Name");
-            ViewBag.AccountIdId = new SelectList(db.Accounts, "Id", "Name");
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Name");
             return View();
         }
 
@@ -161,7 +161,7 @@ namespace BudgetToolRAR.Controllers
                 {
                     transaction.TransType = false; // Income = false
                 }
-               
+
                 db.Transactions.Add(transaction);
                 db.SaveChanges();
                 return RedirectToAction("AccountsIndexLb");
@@ -234,6 +234,42 @@ namespace BudgetToolRAR.Controllers
             }
             return View(account);
         }
+
+        // GET: Accounts/TransactionEditLb/5
+        public ActionResult TransactionEditLb(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Transaction transaction = db.Transactions.Find(id);
+
+            ViewBag.BudgetCategoryId = new SelectList(db.BudgetCategories, "Id", "Name");
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Name");
+
+            if (transaction == null)
+            {
+                return HttpNotFound();
+            }
+            return View(transaction);
+        }
+
+        // POST: Accounts/TransactionEditLb/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult TransactionEditLb([Bind(Include = "Id,Date,Description,Amount,ReconciledAmount,BudgetCategoryId,AccountId")] Transaction transaction)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(transaction).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("AccountsIndexLb");
+            }
+            return View(transaction);
+        }
+
         // GET: Accounts/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -282,6 +318,33 @@ namespace BudgetToolRAR.Controllers
         {
             Account account = db.Accounts.Find(id);
             db.Accounts.Remove(account);
+            db.SaveChanges();
+            return RedirectToAction("AccountsIndexLb");
+        }
+
+        // GET: Accounts/TransactionDeleteLb/5
+        public ActionResult TransactionDeleteLb(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Transaction transaction = db.Transactions.Find(id);
+            if (transaction == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return View(transaction);
+        }
+
+        // POST: Accounts/TransactionDeleteLb/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult TransactionDeleteLb(int id)
+        {
+            Transaction transaction = db.Transactions.Find(id);
+            db.Transactions.Remove(transaction);
             db.SaveChanges();
             return RedirectToAction("AccountsIndexLb");
         }

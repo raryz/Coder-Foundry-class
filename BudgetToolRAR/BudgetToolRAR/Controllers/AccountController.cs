@@ -98,6 +98,7 @@ namespace BudgetToolRAR.Controllers
         public ActionResult LoginLb(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+            new LoginViewModel();
             return View();
         }
 
