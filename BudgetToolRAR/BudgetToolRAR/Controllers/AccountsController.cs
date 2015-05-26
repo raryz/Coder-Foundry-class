@@ -24,6 +24,7 @@ namespace BudgetToolRAR.Controllers
         // GET: Accounts
         public ActionResult AccountsIndexLb()
         {
+            // need to find householdId for user and only display accounts for that household
             return View(db.Accounts.ToList());
         }
 
@@ -135,30 +136,38 @@ namespace BudgetToolRAR.Controllers
             return View(account);
         }
 
-        // GET: Accounts/TransactionsCreateLb
-        public ActionResult TransactionsCreateLb()
+        // GET: Accounts/TransactionCreateLb
+        public ActionResult TransactionCreateLb()
         {
+            ViewBag.BudgetCategoryId = new SelectList(db.BudgetCategories, "Id", "Name");
+            ViewBag.AccountIdId = new SelectList(db.Accounts, "Id", "Name");
             return View();
         }
 
-        // POST: Accounts/TransactionsCreateLb
+        // POST: Accounts/TransactionCreateLb
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult TransactionsCreateLb([Bind(Include = "Id,Name,Balance")] Account account)
+        public ActionResult TransactionCreateLb([Bind(Include = "Id,Date,Description,Amount,ReconciledAmount,BudgetCategoryId,AccountId")] Transaction transaction, string transactiontype)
         {
             if (ModelState.IsValid)
             {
-                var user = db.Users.Find(User.Identity.GetUserId());
-
-                account.HouseholdId = user.HouseholdId.Value;
-                db.Accounts.Add(account);
+                if (transactiontype == "Expense")
+                {
+                    transaction.TransType = true; // Expense = true
+                }
+                if (transactiontype == "Income")
+                {
+                    transaction.TransType = false; // Income = false
+                }
+               
+                db.Transactions.Add(transaction);
                 db.SaveChanges();
                 return RedirectToAction("AccountsIndexLb");
             }
 
-            return View(account);
+            return View(transaction);
         }
 
         // GET: Accounts/Edit/5
