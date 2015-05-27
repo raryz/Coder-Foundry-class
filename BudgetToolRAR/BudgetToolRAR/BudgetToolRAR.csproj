@@ -2046,6 +2046,10 @@
     <Content Include="Views\Accounts\TransactionCreateLb.cshtml" />
     <Content Include="Views\Accounts\TransactionEditLb.cshtml" />
     <Content Include="Views\Accounts\TransactionDeleteLb.cshtml" />
+    <Content Include="Views\Accounts\BudgetIndexLb.cshtml" />
+    <Content Include="Views\Accounts\BudgetDetailsLb.cshtml" />
+    <Content Include="Views\Accounts\BudgetCreateLb.cshtml" />
+    <Content Include="Views\Accounts\BudgetDeleteLb.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2056,6 +2060,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataTables\datatables.mvc-master\DataTables.Mvc\DataTables.Mvc.csproj">
+      <Project>{431adb89-3da0-4e18-9af0-984b917e6eb8}</Project>
+      <Name>DataTables.Mvc</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

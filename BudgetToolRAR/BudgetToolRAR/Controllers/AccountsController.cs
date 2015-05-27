@@ -22,6 +22,13 @@ namespace BudgetToolRAR.Controllers
         }
 
         // GET: Accounts
+        public ActionResult BudgetIndexLb()
+        {
+            
+            return View();
+        }
+
+        // GET: Accounts
         public ActionResult AccountsIndexLb()
         {
             // need to find householdId for user and only display accounts for that household
@@ -60,6 +67,16 @@ namespace BudgetToolRAR.Controllers
             //    return HttpNotFound();
             //}                          could have done it this way and returned the account
             //return View(account);      this would have been similar to Comments under Posts
+        }
+
+        // GET: Accounts/TransactionDetailsLb/5
+        public ActionResult BudgetDetailsLb()
+        {
+            var user = db.Users.Find(User.Identity.GetUserId());
+            var hhid = user.HouseholdId;
+            var budgetitems = db.BudgetItems.Where(t => t.HouseholdId == hhid);
+            return View(budgetitems.ToList());
+ 
         }
 
         // GET: Accounts/Create
@@ -170,6 +187,41 @@ namespace BudgetToolRAR.Controllers
             return View(transaction);
         }
 
+        // GET: Accounts/BudgetCreateLb
+        public ActionResult BudgetCreateLb()
+        {
+            ViewBag.BudgetCategoryId = new SelectList(db.BudgetCategories, "Id", "Name");
+            
+            return View();
+        }
+
+        // POST: Accounts/BudgetCreateLb
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult BudgetCreateLb([Bind(Include = "Id,Name,Amount,BudgetCategoryId,HouseholdId")] BudgetItem budgetitem, string budtype)
+        {
+            if (ModelState.IsValid)
+            {
+                if (budtype == "Expense")
+                {
+                    budgetitem.BudgetType = true; // Expense = true
+                }
+                if (budtype == "Income")
+                {
+                    budgetitem.BudgetType = false; // Income = false
+                }
+
+                var user = db.Users.Find(User.Identity.GetUserId());
+                budgetitem.HouseholdId = user.HouseholdId.Value;
+                db.BudgetItems.Add(budgetitem);
+                db.SaveChanges();
+                return RedirectToAction("BudgetDetailsLb");
+            }
+
+            return View(budgetitem);
+        }
         // GET: Accounts/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -347,6 +399,33 @@ namespace BudgetToolRAR.Controllers
             db.Transactions.Remove(transaction);
             db.SaveChanges();
             return RedirectToAction("AccountsIndexLb");
+        }
+
+        // GET: Accounts/BudgetDeleteLb/5
+        public ActionResult BudgetDeleteLb(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            BudgetItem budgetitem = db.BudgetItems.Find(id);
+            if (budgetitem == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(budgetitem);
+        }
+
+        // POST: Accounts/BudgetDeleteLb/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult BudgetDeleteLb(int id)
+        {
+            BudgetItem budgetitem = db.BudgetItems.Find(id);
+            db.BudgetItems.Remove(budgetitem);
+            db.SaveChanges();
+            return RedirectToAction("BudgetDetailsLb");
         }
 
         protected override void Dispose(bool disposing)

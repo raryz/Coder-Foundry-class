@@ -1,0 +1,156 @@
+﻿@model IEnumerable<BudgetToolRAR.Models.BudgetItem>
+
+@*@{
+        ViewBag.Title = "Log in";
+    }*@
+
+
+<!-- light-blue - v3.1.0 - 2014-12-06 -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Budget Items</title>
+</head>
+<body class="background-dark">
+    <div class="logo">
+        <h3>Budget Tool</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12"><br /></div>
+    </div>
+
+    
+    <br />
+    <div class="row">
+        <div class="col-md-2">
+            <br />
+        </div>
+
+        <div class="col-md-10">
+            <a href="@Url.Action("BudgetCreateLb","Accounts")"><span class="name h4 btn btn-primary">Create a Budget Item</span></a>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-md-2">
+            <br />
+        </div>
+        <div class="col-md-10">
+
+            <div class="page-tables">
+                <!-- Table -->
+                <div class="table-responsive">
+
+                    <h3>Income</h3>               
+
+                    <table cellpadding="0" cellspacing="0" border="0" id="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width:100px;">Name</th>
+                                <th style="width:150px;">Category</th>
+                                <th style="width:110px;">Amount</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                            @* If there are no budget items, will display the heading but will be blank for data, no errors will occur*@
+                            
+                            @foreach (var item in Model)
+                            {
+                                if (item.BudgetType == false) {      @* Income item = false *@
+                                <tr>
+                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
+                                        @Html.DisplayFor(u => item.Name)
+                                    </td>
+                                    <td style="width:150px; overflow:hidden;font-size: 14px;">
+                                        @Html.DisplayFor(u => item.BudgetCategory.Name)
+                                    </td>
+                                    <td style="width:110px; overflow:hidden;font-size: 14px;">
+                                        @Html.DisplayFor(u => item.Amount)
+                                    </td>
+                                   
+
+                                    <td>
+                                        @Html.ActionLink(" ", "BudgetEditLb", "Accounts", new { id = item.Id }, new { @class = "btn  white fa fa-edit" })
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink(" ", "BudgetDeleteLb", new { id = item.Id }, new { @class = "btn white fa fa-trash" })
+                                    </td>
+                                </tr>
+                                }
+                            }
+                    </table>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <br />
+        </div>
+        <div class="col-md-10">
+
+            <div class="page-tables">
+                <!-- Table -->
+                <div class="table-responsive">
+                    <h3>Expenses</h3>
+                    <table cellpadding="0" cellspacing="0" border="0" id="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width:100px;">Name</th>
+                                <th style="width:150px;">Category</th>
+                                <th style="width:110px;">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @* If there are no budget items, will display the heading but will be blank for data, no errors will occur*@
+                            @foreach (var item in Model)
+                            {
+                               if (item.BudgetType == true) {      @* Expense item = true *@
+                                <tr>
+                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
+                                        @Html.DisplayFor(u => item.Name)
+                                    </td>
+                                    <td style="width:150px; overflow:hidden;font-size: 14px;">
+                                        @Html.DisplayFor(u => item.BudgetCategory.Name)
+                                    </td>
+                                    <td style="width:110px; overflow:hidden;font-size: 14px;">
+                                        @Html.DisplayFor(u => item.Amount)
+                                    </td>
+
+
+                                    <td>
+                                        @Html.ActionLink(" ", "BudgetEditLb", "Accounts", new { id = item.Id }, new { @class = "btn  white fa fa-edit" })
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink(" ", "BudgetDeleteLb", new { id = item.Id }, new { @class = "btn white fa fa-trash" })
+                                    </td>
+                                </tr>
+                                }
+                            }
+                    </table>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12"><br /></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12"><br /></div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12"><br /></div>
+    </div>
+
+    <!-- page specific scripts -->
+</body>
+</html>
+
+

@@ -1,0 +1,71 @@
+﻿@model BudgetToolRAR.Models.BudgetItem
+
+
+
+<!-- light-blue - v3.1.0 - 2014-12-06 -->
+
+<!DOCTYPE html>
+<html>
+
+<body class="background-dark">
+   
+
+
+    <div class="row">
+        <div class="col-md-2">
+            <br />
+        </div>
+        <div class="col-md-10">
+            @using (Html.BeginForm(null, null, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="page-tables">
+                    <!-- Table -->
+                    <div class="table-responsive">
+                        <h3>Budget Item to Remove</h3>
+                        <table cellpadding="0" cellspacing="0" border="0" id="data-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:220px;">Item Name</th>
+                                    
+                                    <th style="width:200px;">Category</th>
+                                    
+                                    <th style="width:200px;">Amount</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                   
+                                    <td style="width:220px; overflow:hidden;font-size: 14px;">
+                                        @Html.DisplayFor(model => model.Name)
+                                    </td>
+                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
+                                        @Html.DisplayFor(model => model.BudgetCategory.Name)
+                                    </td>
+                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
+                                        @Html.DisplayFor(model => model.Amount)
+                                    </td>
+                               </tr>
+                        </table>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <br /><br /><br />
+                <button class="name h4 btn btn-primary" type="submit">Delete Confirmation</button>
+
+
+
+            }
+        </div>
+    </div>
+
+    <!-- common libraries. required for every page-->
+    <!-- page specific scripts -->
+
+
+</body>
+</html>
+
+
