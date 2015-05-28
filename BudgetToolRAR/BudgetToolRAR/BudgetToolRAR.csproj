@@ -2050,6 +2050,7 @@
     <Content Include="Views\Accounts\BudgetDetailsLb.cshtml" />
     <Content Include="Views\Accounts\BudgetCreateLb.cshtml" />
     <Content Include="Views\Accounts\BudgetDeleteLb.cshtml" />
+    <Content Include="Views\Accounts\BudgetEditLb.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

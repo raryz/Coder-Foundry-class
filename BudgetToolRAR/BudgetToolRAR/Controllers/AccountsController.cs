@@ -322,6 +322,45 @@ namespace BudgetToolRAR.Controllers
             return View(transaction);
         }
 
+        // GET: Accounts/BudgetEditLb/5
+        public ActionResult BudgetEditLb(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            BudgetItem budgetitem = db.BudgetItems.Find(id);
+
+            var budId = budgetitem.BudgetCategoryId;
+            //ViewBag.BudgetCategoryId = new SelectList(db.BudgetCategories, "Id", "Name", new { Id = budId });
+
+            //ViewBag.BudgetCategoryId = new SelectList(db.BudgetCategories, "Id", "Name", new {budgetitem.BudgetCategoryId = budId});
+            // new { id = budId }
+
+            if (budgetitem == null)
+            {
+                return HttpNotFound();
+            }
+            return View(budgetitem);
+        }
+
+        // POST: Accounts/BudgetEditLb/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult BudgetEditLb([Bind(Include = "Id,Name,Amount,BudgetCategoryId,HouseholdId")] BudgetItem budgetitem)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(budgetitem).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("BudgetDetailsLb");
+            }
+            return View(budgetitem);
+        }
+
+
         // GET: Accounts/Delete/5
         public ActionResult Delete(int? id)
         {
