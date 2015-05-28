@@ -41,35 +41,41 @@
                 </div>
             </div>
 
-            @*<div class="form-group">
+            <div class="form-group">
                 @Html.LabelFor(model => model.BudgetCategoryId, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownList("BudgetCategoryId", null, htmlAttributes: new { @class = "form-control-create" })
                     @Html.ValidationMessageFor(model => model.BudgetCategoryId, "", new { @class = "text-danger" })
                 </div>
-            </div>*@
+            </div>
 
-            @*<div class="form-group">
+            @*@if (Model.BudgetType == true)
+            {
+                var setexpense = true;
+            }
+            else
+            {
+                var setexpense = false;
+            }*@
+
+            <div class="form-group">
                 <div class="col-md-2">
                     <br />
                 </div>
                 <div class="col-md-10">
 
-                    <input type="radio" name="budtype" value="Expense">Expense
+                    <input type="radio" name="budtype" value="Expense" @if (Model.BudgetType == true) { <text> checked</text>}>Expense
                     <br>
-                    <input type="radio" name="budtype" value="Income">Income
+                    <input type="radio" name="budtype" value="Income" @if (Model.BudgetType != true)  { <text> checked</text>}>Income
 
                 </div>
-            </div>*@
+            </div>
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.Id)
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.HouseholdId)
-
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.BudgetCategoryId)
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.BudgetType)

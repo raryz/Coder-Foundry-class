@@ -15,10 +15,13 @@ namespace BudgetToolRAR.Models
 
         public Boolean TransType { get; set; }
 
+        [Required]
         public DateTimeOffset Date { get; set; }
 
+        [Required]
         public Decimal Amount { get; set; }
 
+        [Required]
         public Decimal ReconciledAmount { get; set; }
 
         public int AccountId { get; set; }

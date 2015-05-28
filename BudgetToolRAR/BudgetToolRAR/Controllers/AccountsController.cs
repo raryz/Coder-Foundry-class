@@ -32,7 +32,12 @@ namespace BudgetToolRAR.Controllers
         public ActionResult AccountsIndexLb()
         {
             // need to find householdId for user and only display accounts for that household
-            return View(db.Accounts.ToList());
+                        
+            var user = db.Users.Find(User.Identity.GetUserId()); 
+            var hhid = user.HouseholdId;
+            var accounts = db.Accounts.Where(a => a.HouseholdId == hhid);
+
+            return View(accounts.ToList());
         }
 
         // GET: Accounts/Details/5
@@ -59,6 +64,11 @@ namespace BudgetToolRAR.Controllers
             //}
 
             var transactions = db.Transactions.Where(t => t.AccountId == id);
+
+            var income = transactions.Where(y => y.TransType == false).Select(t=>t.Amount).DefaultIfEmpty().Sum();
+            var expense = transactions.Where(y => y.TransType == true).Select(t=>t.Amount).DefaultIfEmpty().Sum();
+            var balance = income - expense;
+
             return View(transactions.ToList());
 
             //Account account = db.Accounts.Find(id);
@@ -157,7 +167,12 @@ namespace BudgetToolRAR.Controllers
         public ActionResult TransactionCreateLb()
         {
             ViewBag.BudgetCategoryId = new SelectList(db.BudgetCategories, "Id", "Name");
-            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Name");
+
+            var user = db.Users.Find(User.Identity.GetUserId());
+            var hhid = user.HouseholdId;
+            var accounts = db.Accounts.Where(a => a.HouseholdId == hhid);
+
+            ViewBag.AccountId = new SelectList(accounts, "Id", "Name");
             return View();
         }
 
@@ -184,6 +199,13 @@ namespace BudgetToolRAR.Controllers
                 return RedirectToAction("AccountsIndexLb");
             }
 
+            ViewBag.BudgetCategoryId = new SelectList(db.BudgetCategories, "Id", "Name");
+
+            var user = db.Users.Find(User.Identity.GetUserId());
+            var hhid = user.HouseholdId;
+            var accounts = db.Accounts.Where(a => a.HouseholdId == hhid);
+
+            ViewBag.AccountId = new SelectList(accounts, "Id", "Name");
             return View(transaction);
         }
 
@@ -331,12 +353,11 @@ namespace BudgetToolRAR.Controllers
             }
             BudgetItem budgetitem = db.BudgetItems.Find(id);
 
-            var budId = budgetitem.BudgetCategoryId;
-            //ViewBag.BudgetCategoryId = new SelectList(db.BudgetCategories, "Id", "Name", new { Id = budId });
-
-            //ViewBag.BudgetCategoryId = new SelectList(db.BudgetCategories, "Id", "Name", new {budgetitem.BudgetCategoryId = budId});
-            // new { id = budId }
-
+            //var budId = budgetitem.BudgetCategoryId;
+            // the budgetitem.BudgetCategoryId object is being passed in the SelectList as the default selected value
+            
+            ViewBag.BudgetCategoryId = new SelectList(db.BudgetCategories, "Id", "Name", budgetitem.BudgetCategoryId);
+           
             if (budgetitem == null)
             {
                 return HttpNotFound();
@@ -349,10 +370,18 @@ namespace BudgetToolRAR.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult BudgetEditLb([Bind(Include = "Id,Name,Amount,BudgetCategoryId,HouseholdId")] BudgetItem budgetitem)
+        public ActionResult BudgetEditLb([Bind(Include = "Id,Name,Amount,BudgetCategoryId,BudgetType,HouseholdId")] BudgetItem budgetitem, string budtype)
         {
             if (ModelState.IsValid)
             {
+                if (budtype == "Expense")
+                {
+                    budgetitem.BudgetType = true;
+                }
+                else
+                {
+                    budgetitem.BudgetType = false;
+                }
                 db.Entry(budgetitem).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("BudgetDetailsLb");
