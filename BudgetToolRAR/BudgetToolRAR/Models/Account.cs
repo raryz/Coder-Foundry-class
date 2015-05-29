@@ -8,6 +8,11 @@ namespace BudgetToolRAR.Models
 {
     public class Account
     {
+         public Account()
+        {
+            this.Transactions = new HashSet<Transaction>();
+        }
+
         public int Id { get; set; }
 
         [Required]
@@ -18,5 +23,7 @@ namespace BudgetToolRAR.Models
         public int HouseholdId { get; set; }
 
         public virtual Household Household { get; set; }
+
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

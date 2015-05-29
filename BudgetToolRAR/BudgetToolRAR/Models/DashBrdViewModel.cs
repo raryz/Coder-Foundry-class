@@ -21,7 +21,7 @@ namespace BudgetToolRAR.Models
     {
         public string AccountName { get; set; }
         public decimal AccountBalance { get; set; }
-        public decimal ReconciledBalance { get; set; }
+        public int AcctId { get; set; }
     }
 
     public class TransactionInfo

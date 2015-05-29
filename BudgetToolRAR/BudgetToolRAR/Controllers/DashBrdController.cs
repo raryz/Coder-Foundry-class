@@ -14,30 +14,41 @@ namespace BudgetToolRAR.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        //public JsonResult GetDataAjax()
+        //{
+        //    var data = new[] {
+        //        new{ y= "2006", a= 100, b= 90 },
+        //        new{ y= "2007", a= 75,  b= 65 }
+        //};
+        //    return Json(data);
+        //}
+
         //GET: DashBrd
         public ActionResult MainAdmin()
         {
             var model = new DashBrdViewModel();
 
-            var user = db.Users.Find(User.Identity.GetUserId()); 
+            var user = db.Users.Find(User.Identity.GetUserId());
             var hhid = user.HouseholdId;
             var accounts = db.Accounts.Where(a => a.HouseholdId == hhid);
-   
+            var transactions = db.Transactions.Where(a => a.Account.HouseholdId == hhid);
+
             foreach (var a in accounts)
             {
-                model.accountInfo.Add(new AccountInfo { AccountName = a.Name, AccountBalance = a.Balance });
-            
-
-                var transactions = db.Transactions.Where((t => t.AccountId == a.Id));    //   && (t => t.AccountId == id)) ;
-
-
-                foreach (var t in transactions)
-                {
-                    model.transactionInfo.Add(new TransactionInfo { AcctName = t.Account.Name, Amount = t.Amount, Date = t.Date, Description = t.Description});
-                }                
+                model.accountInfo.Add(new AccountInfo { AccountName = a.Name, AccountBalance = a.Balance, AcctId = a.Id });
             }
-model.transactionInfo = model.transactionInfo.OrderByDescending(d => d.Date).Take(4).ToList();
+
+            foreach (var trx in transactions)
+            {
+                model.transactionInfo.Add(new TransactionInfo { AcctName = trx.Account.Name, Amount = trx.Amount, Date = trx.Date, Description = trx.Description });
+            }
+
+            model.transactionInfo = model.transactionInfo.OrderByDescending(d => d.Date).Take(4).ToList();
             return View(model);
         }
     }
+
 }
+
+
+
