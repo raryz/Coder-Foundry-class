@@ -1,0 +1,69 @@
+﻿@using BudgetToolRAR.Models.DashBrdViewModel
+
+@*@{
+        ViewBag.Title = "Log in";
+    }*@
+
+
+<!-- light-blue - v3.1.0 - 2014-12-06 -->
+
+<!DOCTYPE html>
+<html>
+
+<body class="background-dark">
+    <div class="logo">
+        <h3>Budget Tool</h3>
+    </div>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6">
+
+
+                <div class="widget-head br-lblue">
+                    <h3 class="black"> Recent Transactions</h3>
+                </div>
+
+                <table class="table table-bordered">
+
+                    @foreach (var tran in Model.transactionInfo)
+                    {
+                        <tr>
+                            <td class="black">@tran.Date</td>
+                            <td class="black">@tran.AcctName</td>
+                            <td class="black">@tran.Description</td>
+                            <td class="black">@tran.Amount</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div class="col-md-4">
+
+                <div class="widget-head br-lblue">
+                    <h3 class="black"> Account Summary </h3>
+                </div>
+
+                <table class="table table-bordered">
+                    @foreach (var act in Model.accountInfo)
+                    {
+                        <tr>
+                            <td class="black">@act.AccountName</td>
+                            <td class="black">@act.AccountBalance</td>
+                            <td class="black">@act.ReconciledBalance</td>
+                        </tr>
+                    }
+
+                </table>
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- page specific scripts -->
+
+
+</body>
+</html>

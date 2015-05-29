@@ -200,6 +200,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\DashBrdController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HouseholdsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -2052,6 +2053,7 @@
     <Content Include="Views\Accounts\BudgetCreateLb.cshtml" />
     <Content Include="Views\Accounts\BudgetDeleteLb.cshtml" />
     <Content Include="Views\Accounts\BudgetEditLb.cshtml" />
+    <Content Include="Views\DashBrd\MainAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
