@@ -13,16 +13,7 @@ namespace BudgetToolRAR.Controllers
     public class DashBrdController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-        //public JsonResult GetDataAjax()
-        //{
-        //    var data = new[] {
-        //        new{ y= "2006", a= 100, b= 90 },
-        //        new{ y= "2007", a= 75,  b= 65 }
-        //};
-        //    return Json(data);
-        //}
-
+        
         //GET: DashBrd
         public ActionResult MainAdmin()
         {
@@ -46,7 +37,36 @@ namespace BudgetToolRAR.Controllers
             model.transactionInfo = model.transactionInfo.OrderByDescending(d => d.Date).Take(4).ToList();
             return View(model);
         }
+
+        public JsonResult GetDataAjax()
+        {
+            var data = new[] {
+                new{ x= 1, y= 10 },
+                new{ x= 2,  y= 15 },
+                new{ x= 3,  y= 20}
+        };
+            return Json(data);
+        }
+
+        public JsonResult GetDataAjax2()
+        {
+            var data2 = new[] {
+                new{ y= "2006", a= 100, b= 90 },
+                new{ y= "2007", a= 75,  b= 65 },
+                new{ y= "2007", a= 50,  b= 40}
+        };
+            return Json(data2);
+        }
+
+        public ActionResult GetChartData()
+        {
+            return View();
+        }
     }
+    //var data = new[] {
+    //            new{ y= "2006", a= 100, b= 90 },
+                //new{ y= "2007", a= 75,  b= 65 },
+                //new{ y= "2007", a= 50,  b= 40}
 
 }
 

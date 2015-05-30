@@ -318,9 +318,15 @@ namespace BudgetToolRAR.Controllers
             }
             Transaction transaction = db.Transactions.Find(id);
 
-            ViewBag.BudgetCategoryId = new SelectList(db.BudgetCategories, "Id", "Name");
-            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Name");
+            var user = db.Users.Find(User.Identity.GetUserId());
+            var hhId = user.HouseholdId.Value;
+            var accounts = db.Accounts.Where(a => a.HouseholdId == hhId);
 
+            ViewBag.BudgetCategoryId = new SelectList(db.BudgetCategories, "Id", "Name", transaction.BudgetCategoryId);
+            ViewBag.AccountId = new SelectList(accounts, "Id", "Name", transaction.AccountId);
+
+            //ViewBag.BudgetCategoryId = new SelectList(db.BudgetCategories, "Id", "Name");
+           
             if (transaction == null)
             {
                 return HttpNotFound();
@@ -333,10 +339,18 @@ namespace BudgetToolRAR.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult TransactionEditLb([Bind(Include = "Id,Date,Description,Amount,ReconciledAmount,BudgetCategoryId,AccountId")] Transaction transaction)
+        public ActionResult TransactionEditLb([Bind(Include = "Id,Date,Description,Amount,ReconciledAmount,BudgetCategoryId,AccountId")] Transaction transaction, string trantype)
         {
             if (ModelState.IsValid)
             {
+                if (trantype == "Expense")
+                {
+                    transaction.TransType = true;
+                }
+                else
+                {
+                    transaction.TransType = false;
+                }
                 db.Entry(transaction).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("AccountsIndexLb");

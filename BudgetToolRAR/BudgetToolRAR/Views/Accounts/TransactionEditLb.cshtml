@@ -74,10 +74,10 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                  @*  <div class="form-group">
                         <div class="col-md-2">
                            @* <label>Expense/Income</label> *@
-                            @Html.LabelFor(model => model.TransType, "Expense/Income", htmlAttributes: new { @class = "control-label col-md-2" })
+                     @*       @Html.LabelFor(model => model.TransType, "Expense/Income", htmlAttributes: new { @class = "control-label col-md-2" })
                         </div>
                         <div class="col-md-10">
                             
@@ -86,7 +86,21 @@
                                 <option value="Income">Income</option>
                             </select>
                         </div>
+                    </div> *@
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <br />
+                        </div>
+                        <div class="col-md-10">
+
+                            <input type="radio" name="trantype" value="Expense" @if (Model.TransType == true) { <text> checked</text>}>Expense
+                            <br>
+                            <input type="radio" name="trantype" value="Income" @if (Model.TransType != true) { <text> checked</text>}>Income
+
+                        </div>
                     </div>
+
 
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.HiddenFor(model => model.Id)
