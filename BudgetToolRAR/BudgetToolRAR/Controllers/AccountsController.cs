@@ -24,7 +24,7 @@ namespace BudgetToolRAR.Controllers
         // GET: Accounts
         public ActionResult BudgetIndexLb()
         {
-            
+
             return View();
         }
 
@@ -32,8 +32,8 @@ namespace BudgetToolRAR.Controllers
         public ActionResult AccountsIndexLb()
         {
             // need to find householdId for user and only display accounts for that household
-                        
-            var user = db.Users.Find(User.Identity.GetUserId()); 
+
+            var user = db.Users.Find(User.Identity.GetUserId());
             var hhid = user.HouseholdId;
             var accounts = db.Accounts.Where(a => a.HouseholdId == hhid);
 
@@ -64,10 +64,8 @@ namespace BudgetToolRAR.Controllers
             //}
 
             var transactions = db.Transactions.Where(t => t.AccountId == id);
-
-            var income = transactions.Where(y => y.TransType == false).Select(t=>t.Amount).DefaultIfEmpty().Sum();
-            var expense = transactions.Where(y => y.TransType == true).Select(t=>t.Amount).DefaultIfEmpty().Sum();
-            var balance = income - expense;
+            var acctInfo = db.Accounts.FirstOrDefault(act => act.Id == id);
+            ViewBag.prevBalance = acctInfo.Balance;
 
             return View(transactions.ToList());
 
@@ -86,7 +84,7 @@ namespace BudgetToolRAR.Controllers
             var hhid = user.HouseholdId;
             var budgetitems = db.BudgetItems.Where(t => t.HouseholdId == hhid);
             return View(budgetitems.ToList());
- 
+
         }
 
         // GET: Accounts/Create
@@ -185,18 +183,28 @@ namespace BudgetToolRAR.Controllers
         {
             if (ModelState.IsValid)
             {
+                var account = db.Accounts.FirstOrDefault(acct => acct.Id == transaction.AccountId)  ;
+
                 if (transactiontype == "Expense")
                 {
                     transaction.TransType = true; // Expense = true
+                    account.Balance = account.Balance - transaction.Amount;
                 }
                 if (transactiontype == "Income")
                 {
                     transaction.TransType = false; // Income = false
+                    account.Balance = account.Balance + transaction.Amount;
                 }
 
+                db.Entry(account).State = EntityState.Modified;
                 db.Transactions.Add(transaction);
                 db.SaveChanges();
                 return RedirectToAction("AccountsIndexLb");
+
+                //var income = transactions.Where(y => y.TransType == false).Select(t=>t.Amount).DefaultIfEmpty().Sum();
+                //var expense = transactions.Where(y => y.TransType == true).Select(t=>t.Amount).DefaultIfEmpty().Sum();
+                //var balance = income - expense;
+                //var curBalance = prevBalance - balance;
             }
 
             ViewBag.BudgetCategoryId = new SelectList(db.BudgetCategories, "Id", "Name");
@@ -213,7 +221,7 @@ namespace BudgetToolRAR.Controllers
         public ActionResult BudgetCreateLb()
         {
             ViewBag.BudgetCategoryId = new SelectList(db.BudgetCategories, "Id", "Name");
-            
+
             return View();
         }
 
@@ -326,7 +334,7 @@ namespace BudgetToolRAR.Controllers
             ViewBag.AccountId = new SelectList(accounts, "Id", "Name", transaction.AccountId);
 
             //ViewBag.BudgetCategoryId = new SelectList(db.BudgetCategories, "Id", "Name");
-           
+
             if (transaction == null)
             {
                 return HttpNotFound();
@@ -343,14 +351,20 @@ namespace BudgetToolRAR.Controllers
         {
             if (ModelState.IsValid)
             {
+                var account = db.Accounts.FirstOrDefault(acct => acct.Id == transaction.AccountId);
+
                 if (trantype == "Expense")
                 {
                     transaction.TransType = true;
+                    account.Balance = account.Balance - transaction.Amount;
                 }
                 else
                 {
                     transaction.TransType = false;
+                    account.Balance = account.Balance + transaction.Amount;
                 }
+
+                db.Entry(account).State = EntityState.Modified;
                 db.Entry(transaction).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("AccountsIndexLb");
@@ -369,9 +383,9 @@ namespace BudgetToolRAR.Controllers
 
             //var budId = budgetitem.BudgetCategoryId;
             // the budgetitem.BudgetCategoryId object is being passed in the SelectList as the default selected value
-            
+
             ViewBag.BudgetCategoryId = new SelectList(db.BudgetCategories, "Id", "Name", budgetitem.BudgetCategoryId);
-           
+
             if (budgetitem == null)
             {
                 return HttpNotFound();
@@ -468,7 +482,7 @@ namespace BudgetToolRAR.Controllers
             {
                 return HttpNotFound();
             }
-            
+
             return View(transaction);
         }
 
