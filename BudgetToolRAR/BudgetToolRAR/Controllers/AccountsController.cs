@@ -66,6 +66,7 @@ namespace BudgetToolRAR.Controllers
             var transactions = db.Transactions.Where(t => t.AccountId == id);
             var acctInfo = db.Accounts.FirstOrDefault(act => act.Id == id);
             ViewBag.prevBalance = acctInfo.Balance;
+            ViewBag.prevReconciled = acctInfo.ReconciledBalance;
 
             return View(transactions.ToList());
 
@@ -146,7 +147,7 @@ namespace BudgetToolRAR.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AccountsCreateLb([Bind(Include = "Id,Name,Balance")] Account account)
+        public ActionResult AccountsCreateLb([Bind(Include = "Id,Name,Balance,ReconciledBalance")] Account account)
         {
             if (ModelState.IsValid)
             {
@@ -189,11 +190,13 @@ namespace BudgetToolRAR.Controllers
                 {
                     transaction.TransType = true; // Expense = true
                     account.Balance = account.Balance - transaction.Amount;
+                    account.ReconciledBalance = account.ReconciledBalance - transaction.ReconciledAmount;
                 }
                 if (transactiontype == "Income")
                 {
                     transaction.TransType = false; // Income = false
                     account.Balance = account.Balance + transaction.Amount;
+                    account.ReconciledBalance = account.ReconciledBalance + transaction.ReconciledAmount;
                 }
 
                 db.Entry(account).State = EntityState.Modified;
@@ -363,6 +366,10 @@ namespace BudgetToolRAR.Controllers
                     {
                         account.Balance = account.Balance - (transaction.Amount - oldtransaction.Amount);
                     }
+                    if (transaction.ReconciledAmount != oldtransaction.ReconciledAmount)
+                    {
+                        account.ReconciledBalance = account.ReconciledBalance - (transaction.ReconciledAmount - oldtransaction.ReconciledAmount);
+                    }
                 }
                 else
                 {
@@ -370,6 +377,10 @@ namespace BudgetToolRAR.Controllers
                     if (transaction.Amount != oldtransaction.Amount)
                     {
                         account.Balance = account.Balance + (transaction.Amount - oldtransaction.Amount);
+                    }
+                    if (transaction.ReconciledAmount != oldtransaction.ReconciledAmount)
+                    {
+                        account.ReconciledBalance = account.ReconciledBalance + (transaction.ReconciledAmount - oldtransaction.ReconciledAmount);
                     }
                 }
 
@@ -507,10 +518,12 @@ namespace BudgetToolRAR.Controllers
             if (transaction.TransType == true)  // Expense = true
             {
                 account.Balance = account.Balance + transaction.Amount;   // opposite of create, removing an expense
+                account.ReconciledBalance = account.ReconciledBalance + transaction.ReconciledAmount;
             }
             if (transaction.TransType == false)   // Income = false
             {
                 account.Balance = account.Balance - transaction.Amount;   // opposite of create, removing income
+                account.ReconciledBalance = account.ReconciledBalance - transaction.ReconciledAmount;
             }
 
             db.Entry(account).State = EntityState.Modified;

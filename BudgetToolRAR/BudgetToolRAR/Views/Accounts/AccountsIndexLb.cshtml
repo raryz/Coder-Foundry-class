@@ -63,47 +63,40 @@
                                         @Html.DisplayFor(u => item.Balance)
                                     </td>
                                     <td style="width:200px; overflow:hidden;font-size: 14px;">
-                                        @*@if (u => item.Balance == Viewbag.Reconcile[item.Id])
-                                            {
-                                                <p>Reconciled</p>
-                                            }
-                                            else
-                                            {
-                                                @Html.Displayfor(Viewbag.Reconcile[item.Id])
-                                               }*@
+                                        @Html.DisplayFor(u => item.ReconciledBalance)
                                     </td>
                                     @*<td>
                                         <a href="~/Views/Accounts/AccountsEditLb.cshtml" title="Edit">
                                             <i class="fa fa-edit "></i>      @*  fa-2x *@
-                                        @*</a>
-                                    </td>
-                                    <td>
-                                        <a href="~/Views/Accounts/AccountsDetailsLb.cshtml" title="Transactions">
-                                            <i class="fa fa-list-alt "></i>*@      @*  fa-2x *@
-                                        @*</a>
-                                    </td>
-                                    <td>
-                                        <a href="~/Views/Accounts/AccountsDeleteLb.cshtml" title="Transactions">
-                                            <i class="fa fa-trash "></i>*@      @*  fa-2x *@
-                                        @*</a>
-                                    </td>*@
-                                    <td>
-                                        @Html.ActionLink(" ", "AccountsEditLb", "Accounts", new { id = item.Id }, new { @class = "btn  white fa fa-edit" })
-                                    </td>  
-                                    <td>
-                                        @Html.ActionLink(" ", "TransactionDetailsLb", "Accounts", new { id = item.Id }, new { @class = "btn white fa fa-list" })
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink(" ", "AccountsDeleteLb", new { id = item.Id }, new { @class = "btn white fa fa-trash" })
-                                    </td>
-                                    <td>
-                                        @if (item.Balance < 0)
-                                        {
-                                            <button class="btn btn-danger" type="button" title="">Overdraft Warning</button>
-                                        }
-                                           
-                                    </td>
-                                </tr>
+                                    @*</a>
+                                        </td>
+                                        <td>
+                                            <a href="~/Views/Accounts/AccountsDetailsLb.cshtml" title="Transactions">
+                                                <i class="fa fa-list-alt "></i>*@      @*  fa-2x *@
+                                                @*</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="~/Views/Accounts/AccountsDeleteLb.cshtml" title="Transactions">
+                                                            <i class="fa fa-trash "></i>*@      @*  fa-2x *@
+                                                            @*</a>
+                                                                </td>*@
+                                                            <td>
+                                                                @Html.ActionLink(" ", "AccountsEditLb", "Accounts", new { id = item.Id }, new { @class = "btn  white fa fa-edit" })
+                                                            </td>
+                                                            <td>
+                                                                @Html.ActionLink(" ", "TransactionDetailsLb", "Accounts", new { id = item.Id }, new { @class = "btn white fa fa-list" })
+                                                            </td>
+                                                            <td>
+                                                                @Html.ActionLink(" ", "AccountsDeleteLb", new { id = item.Id }, new { @class = "btn white fa fa-trash" })
+                                                            </td>
+                                                            <td>
+                                                                @if (item.Balance < 0)
+                                                                {
+                                                                    <button class="btn btn-danger" type="button" title="">Overdraft Warning</button>
+                                                                }
+
+                                                            </td>
+                                                        </tr>
                             }
                     </table>
                     <div class="clearfix"></div>
