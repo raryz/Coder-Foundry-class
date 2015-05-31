@@ -183,7 +183,7 @@ namespace BudgetToolRAR.Controllers
         {
             if (ModelState.IsValid)
             {
-                var account = db.Accounts.FirstOrDefault(acct => acct.Id == transaction.AccountId)  ;
+                var account = db.Accounts.FirstOrDefault(acct => acct.Id == transaction.AccountId);
 
                 if (transactiontype == "Expense")
                 {
@@ -333,6 +333,7 @@ namespace BudgetToolRAR.Controllers
             ViewBag.BudgetCategoryId = new SelectList(db.BudgetCategories, "Id", "Name", transaction.BudgetCategoryId);
             ViewBag.AccountId = new SelectList(accounts, "Id", "Name", transaction.AccountId);
 
+
             //ViewBag.BudgetCategoryId = new SelectList(db.BudgetCategories, "Id", "Name");
 
             if (transaction == null)
@@ -351,17 +352,25 @@ namespace BudgetToolRAR.Controllers
         {
             if (ModelState.IsValid)
             {
+                var oldtransaction = db.Transactions.AsNoTracking().Where(tr => tr.Id == transaction.Id).FirstOrDefault();
+
                 var account = db.Accounts.FirstOrDefault(acct => acct.Id == transaction.AccountId);
 
                 if (trantype == "Expense")
                 {
                     transaction.TransType = true;
-                    account.Balance = account.Balance - transaction.Amount;
+                    if (transaction.Amount != oldtransaction.Amount)
+                    {
+                        account.Balance = account.Balance - (transaction.Amount - oldtransaction.Amount);
+                    }
                 }
                 else
                 {
                     transaction.TransType = false;
-                    account.Balance = account.Balance + transaction.Amount;
+                    if (transaction.Amount != oldtransaction.Amount)
+                    {
+                        account.Balance = account.Balance + (transaction.Amount - oldtransaction.Amount);
+                    }
                 }
 
                 db.Entry(account).State = EntityState.Modified;
@@ -492,6 +501,20 @@ namespace BudgetToolRAR.Controllers
         public ActionResult TransactionDeleteLb(int id)
         {
             Transaction transaction = db.Transactions.Find(id);
+
+            var account = db.Accounts.FirstOrDefault(acct => acct.Id == transaction.AccountId);
+
+            if (transaction.TransType == true)  // Expense = true
+            {
+                account.Balance = account.Balance + transaction.Amount;   // opposite of create, removing an expense
+            }
+            if (transaction.TransType == false)   // Income = false
+            {
+                account.Balance = account.Balance - transaction.Amount;   // opposite of create, removing income
+            }
+
+            db.Entry(account).State = EntityState.Modified;
+
             db.Transactions.Remove(transaction);
             db.SaveChanges();
             return RedirectToAction("AccountsIndexLb");
