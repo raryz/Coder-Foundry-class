@@ -27,7 +27,7 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-md-6">
+            <div class="col-md-7">
 
 
                 <div class="widget-head br-lblue">
@@ -35,30 +35,46 @@
                 </div>
 
                 <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="width:90px;">Date</th>
+                            <th style="width:100px;">Account</th>
+                            <th style="width:100px;">Description</th>
+                            <th style="width:50px;">Amount</th>
+                        </tr>
+                    </thead>
 
                     @foreach (var tran in Model.transactionInfo)
                     {
                         <tr>
-                            <td class="black">@tran.Date</td>
-                            <td class="black">@tran.AcctName</td>
-                            <td class="black">@tran.Description</td>
-                            <td class="black">@tran.Amount</td>
+                            <td style="width:90px;">@tran.Date</td>
+                            <td style="width:100px;">@tran.AcctName</td>
+                            <td style="width:100px;">@tran.Description</td>
+                            <td style="width:50px;">@tran.Amount</td>
                         </tr>
                     }
                 </table>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
 
                 <div class="widget-head br-lblue">
                     <h3 class="black"> Account Summary </h3>
                 </div>
 
                 <table class="table table-bordered">
+
+                    <thead>
+                        <tr>
+                            <th style="width:200px;">Account</th>
+                            <th style="width:90px;">Balance</th>
+                        </tr>
+                    </thead>
+
                     @foreach (var act in Model.accountInfo)
                     {
                         <tr>
-                            <td class="black">@act.AccountName</td>
-                            <td class="black">@act.AccountBalance</td>
+                            <td style="width:200px;">@act.AccountName</td>
+                            <td style="width:90px;">@act.AccountBalance</td>
                         </tr>
                     }
 
@@ -69,7 +85,7 @@
 
         </div>
         <div class="row">
-            
+
             <div class="col-md-9">
                 <div id="chart2">  </div>
             </div>
@@ -77,18 +93,18 @@
     </div>
     <!-- page specific scripts -->
     <script>
-    $(document).ready(function () {
-        $.post("@Url.Action("GetDataAjax2", "DashBrd")").then(function (response) {
-            console.log(response)
-            new Morris.Bar({
-                element: 'chart2',
-                data: response,
-                xkey: 'y',
-                ykeys: ['a', 'b'],
-                labels: ['Series A', 'Series B']
-            });
+        $(document).ready(function () {
+            $.post("@Url.Action("GetDataAjax2", "DashBrd")").then(function (response) {
+                console.log(response)
+                new Morris.Bar({
+                    element: 'chart2',
+                    data: response,
+                    xkey: 'y',
+                    ykeys: ['a', 'b'],
+                    labels: ['Series A', 'Series B']
+                });
+            })
         })
-    })
     </script>
 
 
@@ -101,18 +117,18 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
         <script>
             $(document).ready(function () {
-                $.post("@Url.Action("GetDataAjax", "DashBrd")").then(function (response){
+                $.post("@Url.Action("GetDataAjax", "DashBrd")").then(function (response) {
                     Console.log(response)
                     new Morris.Bar({
                         element: 'chart',
-                        data:  response,
+                        data: response,
                         xkey: 'x',
                         ykeys: ['y'],
                         labels: ['Amount']
                     });
                 })
-                })
-            </script>
+            })
+        </script>
     }
 
     @section css {

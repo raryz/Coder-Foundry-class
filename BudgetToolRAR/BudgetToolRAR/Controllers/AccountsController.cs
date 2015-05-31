@@ -306,7 +306,7 @@ namespace BudgetToolRAR.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AccountsEditLb([Bind(Include = "Id,Name,Balance")] Account account)
+        public ActionResult AccountsEditLb([Bind(Include = "Id,Name,Balance,ReconciledBalance")] Account account)
         {
             if (ModelState.IsValid)
             {

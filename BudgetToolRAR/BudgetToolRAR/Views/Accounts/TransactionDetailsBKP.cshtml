@@ -61,32 +61,21 @@
             <br />
         </div>
         <div class="col-md-10">
-            <section class="widget">
-                <header>
 
-                    <div class="widget-controls">
-                        @*<a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
-                        <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>*@
-
-                    </div>
-                </header>
-
-                @*<div class="page-tables">*@
+            <div class="page-tables">
                 <!-- Table -->
-                @*<div class="table-responsive">*@
-                <h3>Transactions</h3>
-                @*<table cellpadding="0" cellspacing="0" border="0" id="data-table">*@
-                <div class="mt">
-                    <table id="datatable-table" class="table table-striped table-hover">
+                <div class="table-responsive">
+                    <h3>Transactions</h3>
+                    <table cellpadding="0" cellspacing="0" border="0" id="data-table">
                         <thead>
                             <tr>
-                                <th>Date</th>
-                                <th class="hidden-xs">Description</th>
-                                <th>Category</th>
-                                <th>Amount</th>
-                                <th class="hidden-xs">Reconciled</th>
-                                <th class="no-sort">Edit</th>
-                                <th class="no-sort">Delete</th>
+                                <th style="width:100px;">Date</th>
+                                <th style="width:200px;">Description</th>
+                                <th style="width:150px;">Category</th>
+                                <th style="width:110px;">Amount</th>
+                                <th style="width:110px;">Reconciled</th>
+                                <th style="width: 70px;">Edit</th>
+                                <th style="width:50px;">Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -94,20 +83,20 @@
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>
+                                    <td style="width:100px; overflow:hidden;font-size: 14px;">
                                         @item.Date.ToString("MM/dd/yyyy")
                                         @*@Html.DisplayFor(u => item.Date, "{0:MM/dd/yyyy}")*@
                                     </td>
-                                    <td class="hidden-xs">
+                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
                                         @Html.DisplayFor(u => item.Description)
                                     </td>
-                                    <td>
+                                    <td style="width:150px; overflow:hidden;font-size: 14px;">
                                         @Html.DisplayFor(u => item.BudgetCategory.Name)
                                     </td>
-                                    <td>
+                                    <td style="width:110px; overflow:hidden;font-size: 14px;">
                                         @Html.DisplayFor(u => item.Amount)
                                     </td>
-                                    <td class="hidden-xs">
+                                    <td style="width:110px; overflow:hidden;font-size: 14px;">
                                         @Html.DisplayFor(u => item.ReconciledAmount)
                                     </td>
 
@@ -120,14 +109,10 @@
                                 </tr>
                             }
                     </table>
+                    <div class="clearfix"></div>
                 </div>
-                <div class="clearfix"></div>
-                @*</div>*@
-                @*</div>*@
-            </section>
-
+            </div>
         </div>
-
     </div>
     <div class="row">
         <div class="col-md-12"><br /></div>
@@ -142,23 +127,6 @@
     </div>
 
     <!-- page specific scripts -->
-
 </body>
-@* by putting the following in the section scripts, it will be loaded after the render body in the shared layout *@
-@* this is necessary for the files to be found *@
-@section scripts
-{
-    <!-- page specific scripts -->
-    <!-- page specific libs -->
-    <script src="~/lib/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-
-    <script src="~/lib/datatables/media/js/jquery.dataTables.min.js"></script>
-
-    <!-- page application js -->        @* need this to start datatables to work*@
-    <script>
-        $('#datatable-table').DataTable();
-    </script>
-
-}
 </html>
 
