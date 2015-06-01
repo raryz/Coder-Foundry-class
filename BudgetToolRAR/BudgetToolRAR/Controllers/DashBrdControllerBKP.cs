@@ -11,10 +11,10 @@ using System.Data.Entity;
 
 namespace BudgetToolRAR.Controllers
 {
-    public class DashBrdController : Controller
+    public class DashBrdControllerBKP : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        
+
         //GET: DashBrd
         public ActionResult MainAdmin()
         {
@@ -81,33 +81,7 @@ namespace BudgetToolRAR.Controllers
                                                  select budgetItem.Amount).DefaultIfEmpty().Sum()
 
                                  }).ToList();
-
-            var lastMonDonut = (from category in household.Categories
-                                 select new
-                                 {
-                                     label = category.Name,
-                                     value = (from transaction in category.Transactions
-                                               where transaction.Date.Month == System.DateTime.Now.Month - 1 &&
-                                                     transaction.Date.Year == System.DateTime.Now.Year &&
-                                                     transaction.TransType == true
-                                               select transaction.Amount).DefaultIfEmpty().Sum()
-                                     
-                                 }).ToList();
-
-            var lastMonDonutI = (from category in household.Categories
-                                select new
-                                {
-                                    label = category.Name,
-                                    value = (from transaction in category.Transactions
-                                             where transaction.Date.Month == System.DateTime.Now.Month - 1 &&
-                                                   transaction.Date.Year == System.DateTime.Now.Year &&
-                                                   transaction.TransType == false
-                                             select transaction.Amount).DefaultIfEmpty().Sum()
-
-                                }).ToList();
-
-            return Json(new { lastMonth = lastMonthData, thisMonth = thisMonthData, lastMonthDonut = lastMonDonut, lastMonthDonutI = lastMonDonutI }, JsonRequestBehavior.AllowGet);
-            //return Json(new { lastMonth = lastMonthData, thisMonth = thisMonthData }, JsonRequestBehavior.AllowGet);
+            return Json(new { lastMonth = lastMonthData, thisMonth = thisMonthData }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetChartData()
@@ -117,8 +91,8 @@ namespace BudgetToolRAR.Controllers
     }
     //var data = new[] {
     //            new{ y= "2006", a= 100, b= 90 },
-                //new{ y= "2007", a= 75,  b= 65 },
-                //new{ y= "2007", a= 50,  b= 40}
+    //new{ y= "2007", a= 75,  b= 65 },
+    //new{ y= "2007", a= 50,  b= 40}
 
 }
 

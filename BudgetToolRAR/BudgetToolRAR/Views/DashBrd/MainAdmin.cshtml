@@ -4,136 +4,131 @@
         ViewBag.Title = "Log in";
     }*@
 
+<div class="row">
 
-<!-- light-blue - v3.1.0 - 2014-12-06 -->
+    <div class="col-md-7">
 
-<!DOCTYPE html>
-<html>
-<head>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-    <script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" />
+
+        <div class="widget-head br-lblue">
+            <h3 class="text-align-center"> Recent Transactions</h3>
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="width:90px;">Date</th>
+                    <th style="width:100px;">Account</th>
+                    <th style="width:100px;">Description</th>
+                    <th style="width:50px;">Amount</th>
+                </tr>
+            </thead>
+
+            @foreach (var tran in Model.transactionInfo)
+            {
+                <tr>
+                    <td style="width:90px;">@tran.Date.ToString("MM/dd/yyyy")</td>
+                    <td style="width:100px;">@tran.AcctName</td>
+                    <td style="width:100px;">@tran.Description</td>
+                    <td style="width:50px;">@String.Format("{0,10:c}", @tran.Amount)</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="col-md-3">
+
+        <div class="widget-head br-lblue">
+            <h3 class="text-align-center"> Account Summary </h3>
+        </div>
+
+        <table class="table table-bordered">
+
+            <thead>
+                <tr>
+                    <th style="width:200px;">Account</th>
+                    <th style="width:150px;">Balance</th>
+                </tr>
+            </thead>
+
+            @foreach (var act in Model.accountInfo)
+            {
+                <tr>
+                    <td style="width:200px;">@act.AccountName</td>
+                    <td style="width:150px;">@String.Format("{0,5:c}", @act.AccountBalance)</td>
+                </tr>
+            }
+
+        </table>
+
+
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h3 class="text-align-center">Spending Last Month v.s. Budget</h3>
+        <div id="lastMonth">  </div>
+    </div>
+    <div class="col-md-6">
+        <h3 class="text-align-center">Spending Current Month v.s. Budget</h3>
+        <div id="thisMonth">  </div>
+    </div>
+</div>
+<br/>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <h3 class="text-align-center">Spending Last Month</h3>
+    <div id="lastMonthDonut">  </div>
+    </div>
+    <div class="col-md-6">
+        <h3 class="text-align-center">Income Last Month</h3>
+        <div id="lastMonthDonutI">  </div>
+    </div>
+</div>
+<!-- page specific scripts -->
+@section scripts
+    {
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-    <meta charset=utf-8 />
-    <title></title>
-</head>
-
-<body class="background-dark">
-    <div class="logo">
-        <h3>Budget Tool</h3>
-    </div>
-
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-7">
-
-
-                <div class="widget-head br-lblue">
-                    <h3 class="black"> Recent Transactions</h3>
-                </div>
-
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th style="width:90px;">Date</th>
-                            <th style="width:100px;">Account</th>
-                            <th style="width:100px;">Description</th>
-                            <th style="width:50px;">Amount</th>
-                        </tr>
-                    </thead>
-
-                    @foreach (var tran in Model.transactionInfo)
-                    {
-                        <tr>
-                            <td style="width:90px;">@tran.Date.ToString("MM/dd/yyyy")</td>
-                            <td style="width:100px;">@tran.AcctName</td>
-                            <td style="width:100px;">@tran.Description</td>
-                            <td style="width:50px;">@String.Format("{0,10:c}",@tran.Amount)</td>
-                        </tr>
-                    }
-                </table>
-            </div>
-            <div class="col-md-3">
-
-                <div class="widget-head br-lblue">
-                    <h3 class="black"> Account Summary </h3>
-                </div>
-
-                <table class="table table-bordered">
-
-                    <thead>
-                        <tr>
-                            <th style="width:200px;">Account</th>
-                            <th style="width:150px;">Balance</th>
-                        </tr>
-                    </thead>
-
-                    @foreach (var act in Model.accountInfo)
-                    {
-                        <tr>
-                            <td style="width:200px;">@act.AccountName</td>
-                            <td style="width:150px;">@String.Format("{0,5:c}",@act.AccountBalance)</td>
-                        </tr>
-                    }
-
-                </table>
-
-
-            </div>
-
-        </div>
-        <div class="row">
-
-            <div class="col-md-9">
-                <div id="chart2">  </div>
-            </div>
-        </div>
-    </div>
-    <!-- page specific scripts -->
     <script>
         $(document).ready(function () {
             $.post("@Url.Action("GetDataAjax2", "DashBrd")").then(function (response) {
                 console.log(response)
                 new Morris.Bar({
-                    element: 'chart2',
-                    data: response,
-                    xkey: 'y',
-                    ykeys: ['a', 'b'],
-                    labels: ['Series A', 'Series B']
+                    element: 'lastMonth',
+                    data: response.lastMonth,
+                    xkey: 'category',
+                    ykeys: ['actual', 'budgeted'],
+                    labels: ['Expenses', 'Budgeted']
                 });
+
+                new Morris.Bar({
+                    element: 'thisMonth',
+                    data: response.thisMonth,
+                    xkey: 'category',
+                    ykeys: ['actual', 'budgeted'],
+                    labels: ['Expenses', 'Budgeted']
+                });
+
+                new Morris.Donut({
+                    element: 'lastMonthDonut',
+                    data: response.lastMonthDonut
+                    
+                });
+
+                new Morris.Donut({
+                    element: 'lastMonthDonutI',
+                    data: response.lastMonthDonutI
+
+                });
+
+
             })
         })
     </script>
+}
 
-
-
-
-
-    @section scripts
-    {
-        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $.post("@Url.Action("GetDataAjax", "DashBrd")").then(function (response) {
-                    Console.log(response)
-                    new Morris.Bar({
-                        element: 'chart',
-                        data: response,
-                        xkey: 'x',
-                        ykeys: ['y'],
-                        labels: ['Amount']
-                    });
-                })
-            })
-        </script>
-    }
-
-    @section css {
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" />
-    }
-
-</body>
-</html>
+@section css {
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" />
+}

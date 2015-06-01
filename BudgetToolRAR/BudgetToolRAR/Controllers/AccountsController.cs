@@ -121,7 +121,7 @@ namespace BudgetToolRAR.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateCategoryLb([Bind(Include = "Id,Name")] BudgetCategory budgetcategory)
+        public ActionResult CreateCategoryLb([Bind(Include = "Id,Name,householdId")] BudgetCategory budgetcategory)
         {
             if (ModelState.IsValid)
             {

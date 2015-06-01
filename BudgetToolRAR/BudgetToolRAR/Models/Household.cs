@@ -13,6 +13,7 @@ namespace BudgetToolRAR.Models
             this.Accounts = new HashSet<Account>();
             this.BudgetItems = new HashSet<BudgetItem>();
             this.Users = new HashSet<ApplicationUser>();
+            this.Categories = new HashSet<BudgetCategory>();
         }
 
         public int Id { get; set; }
@@ -23,5 +24,6 @@ namespace BudgetToolRAR.Models
         public  virtual ICollection<ApplicationUser> Users { get; set; }
         public virtual ICollection<Account> Accounts { get; set; }
         public virtual ICollection<BudgetItem> BudgetItems { get; set; }
+        public virtual ICollection<BudgetCategory> Categories { get; set; }
     }
 }
