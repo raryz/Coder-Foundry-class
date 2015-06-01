@@ -47,10 +47,10 @@
                     @foreach (var tran in Model.transactionInfo)
                     {
                         <tr>
-                            <td style="width:90px;">@tran.Date</td>
+                            <td style="width:90px;">@tran.Date.ToString("MM/dd/yyyy")</td>
                             <td style="width:100px;">@tran.AcctName</td>
                             <td style="width:100px;">@tran.Description</td>
-                            <td style="width:50px;">@tran.Amount</td>
+                            <td style="width:50px;">@String.Format("{0,10:c}",@tran.Amount)</td>
                         </tr>
                     }
                 </table>
@@ -66,7 +66,7 @@
                     <thead>
                         <tr>
                             <th style="width:200px;">Account</th>
-                            <th style="width:90px;">Balance</th>
+                            <th style="width:150px;">Balance</th>
                         </tr>
                     </thead>
 
@@ -74,7 +74,7 @@
                     {
                         <tr>
                             <td style="width:200px;">@act.AccountName</td>
-                            <td style="width:90px;">@act.AccountBalance</td>
+                            <td style="width:150px;">@String.Format("{0,5:c}",@act.AccountBalance)</td>
                         </tr>
                     }
 

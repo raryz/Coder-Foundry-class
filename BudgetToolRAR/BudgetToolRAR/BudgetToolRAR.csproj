@@ -2055,6 +2055,7 @@
     <Content Include="Views\Accounts\BudgetEditLb.cshtml" />
     <Content Include="Views\DashBrd\MainAdmin.cshtml" />
     <Content Include="Views\Accounts\TransactionDetailsBKP.cshtml" />
+    <Content Include="Views\Accounts\BudgetDetailsBKP.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
