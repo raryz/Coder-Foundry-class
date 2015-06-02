@@ -5,62 +5,79 @@
     }*@
 
 <div class="row">
-
+    <br/>
     <div class="col-md-7">
+        <section class="widget">
+            <header>
 
+                <div class="widget-controls">
+                    @*<a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                    <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>*@
 
-        <div class="widget-head br-lblue">
-            <h3 class="text-align-center"> Recent Transactions</h3>
-        </div>
+                </div>
+            </header>
 
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th style="width:90px;">Date</th>
-                    <th style="width:100px;">Account</th>
-                    <th style="width:100px;">Description</th>
-                    <th style="width:50px;">Amount</th>
-                </tr>
-            </thead>
+            <div class="widget-head br-lblue">
+                <h3 class="text-align-center"> Recent Transactions</h3>
+            </div>
 
-            @foreach (var tran in Model.transactionInfo)
-            {
-                <tr>
-                    <td style="width:90px;">@tran.Date.ToString("MM/dd/yyyy")</td>
-                    <td style="width:100px;">@tran.AcctName</td>
-                    <td style="width:100px;">@tran.Description</td>
-                    <td style="width:50px;">@String.Format("{0,10:c}", @tran.Amount)</td>
-                </tr>
-            }
-        </table>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-align-center" style="width:90px;">Date</th>
+                        <th style="width:100px;">Account</th>
+                        <th style="width:100px;">Description</th>
+                        <th class="right-J" style="width:30px;">Amount</th>
+                    </tr>
+                </thead>
+
+                @foreach (var tran in Model.transactionInfo)
+                {
+                    <tr>
+                        <td class="text-align-center" style="width:90px;">@tran.Date.ToString("MM/dd/yyyy")</td>
+                        <td style="width:100px;">@tran.AcctName</td>
+                        <td style="width:100px;">@tran.Description</td>
+                        <td class="right-J" style="width:30px;">@String.Format("{0,1:c}", @tran.Amount)</td>
+                    </tr>
+                }
+            </table>
+        </section>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
+        <section class="widget">
+            <header>
 
-        <div class="widget-head br-lblue">
-            <h3 class="text-align-center"> Account Summary </h3>
-        </div>
+                <div class="widget-controls">
+                   
 
-        <table class="table table-bordered">
+                </div>
+            </header>
 
-            <thead>
-                <tr>
-                    <th style="width:200px;">Account</th>
-                    <th style="width:150px;">Balance</th>
-                </tr>
-            </thead>
+            <div class="widget-head br-lblue">
+                <h3 class="text-align-center"> Account Summary </h3>
+            </div>
 
-            @foreach (var act in Model.accountInfo)
-            {
-                <tr>
-                    <td style="width:200px;">@act.AccountName</td>
-                    <td style="width:150px;">@String.Format("{0,5:c}", @act.AccountBalance)</td>
-                </tr>
-            }
+            <table class="table table-bordered">
 
-        </table>
+                <thead>
+                    <tr>
+                        <th style="width:200px;">Account</th>
+                        <th class="right-J" style="width:150px;">Balance</th>
+                    </tr>
+                </thead>
 
+                @foreach (var act in Model.accountInfo)
+                {
+                    <tr>
+                        <td style="width:200px;">@act.AccountName</td>
+                        <td class="right-J" style="width:150px;">@String.Format("{0,5:c}", @act.AccountBalance)</td>
+                    </tr>
+                }
 
-    </div>
+            </table>
+
+            </section>
+</div>
 
 </div>
 <div class="row">
@@ -73,13 +90,13 @@
         <div id="thisMonth">  </div>
     </div>
 </div>
-<br/>
+<br />
 <hr />
 
 <div class="row">
     <div class="col-md-6">
         <h3 class="text-align-center">Spending Last Month</h3>
-    <div id="lastMonthDonut">  </div>
+        <div id="lastMonthDonut">  </div>
     </div>
     <div class="col-md-6">
         <h3 class="text-align-center">Income Last Month</h3>
@@ -114,7 +131,7 @@
                 new Morris.Donut({
                     element: 'lastMonthDonut',
                     data: response.lastMonthDonut
-                    
+
                 });
 
                 new Morris.Donut({

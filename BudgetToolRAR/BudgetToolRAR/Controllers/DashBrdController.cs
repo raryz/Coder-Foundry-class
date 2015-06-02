@@ -65,9 +65,9 @@ namespace BudgetToolRAR.Controllers
                                                  where budgetItem.BudgetType == true
                                                  select budgetItem.Amount).DefaultIfEmpty().Sum()
 
-                                 }).ToList();
+                                 }).Where(d=>d.budgeted != 0 || d.actual != 0).ToList();
 
-            //var nonEmptyThisM = thisMonthData.Where(a => a.budgeted != 0) ;        
+            //var nonEmptyThisM = thisMonthData.Where(a => !(a.budgeted == 0 &&  a.actual == 0) ) ;        
 
             var lastMonthData = (from category in household.Categories
                                  select new
@@ -82,7 +82,7 @@ namespace BudgetToolRAR.Controllers
                                                  where budgetItem.BudgetType == true
                                                  select budgetItem.Amount).DefaultIfEmpty().Sum()
 
-                                 }).ToList();
+                                 }).Where(d=>d.budgeted != 0 || d.actual != 0).ToList();
 
             var lastMonDonut = (from category in household.Categories
                                  select new
