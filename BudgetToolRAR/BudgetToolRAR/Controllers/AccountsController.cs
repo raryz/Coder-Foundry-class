@@ -125,7 +125,9 @@ namespace BudgetToolRAR.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                var user = db.Users.Find(User.Identity.GetUserId());
+                budgetcategory.householdId = user.HouseholdId;
+                
                 db.BudgetCategories.Add(budgetcategory);
 
                 db.SaveChanges();

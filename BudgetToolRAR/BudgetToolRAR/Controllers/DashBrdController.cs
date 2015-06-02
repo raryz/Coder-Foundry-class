@@ -67,6 +67,8 @@ namespace BudgetToolRAR.Controllers
 
                                  }).ToList();
 
+            //var nonEmptyThisM = thisMonthData.Where(a => a.budgeted != 0) ;        
+
             var lastMonthData = (from category in household.Categories
                                  select new
                                  {
