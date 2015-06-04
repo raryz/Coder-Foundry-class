@@ -2,26 +2,31 @@
 
 
 
-    <!-- light-blue - v3.1.0 - 2014-12-06 -->
+<!-- light-blue - v3.1.0 - 2014-12-06 -->
 
-    <!DOCTYPE html>
-    <html>
-    @*<head>
-            <title>Delete Transaction</title>
-
-
-        </head>*@
-    <body class="background-dark">
-        @* <div class="logo">
-                <h3>Delete Transaction Confirmation</h3>
-            </div> *@
+<!DOCTYPE html>
+<html>
+@*<head>
+        <title>Delete Transaction</title>
 
 
-        <div class="row">
-            <div class="col-md-2">
-                <br />
-            </div>
-            <div class="col-md-10">
+    </head>*@
+<body class="background-dark">
+    @* <div class="logo">
+            <h3>Delete Transaction Confirmation</h3>
+        </div> *@
+
+    <br /><br />
+    <div class="row">
+        <div class="col-md-1">
+            <br />
+        </div>
+        <div class="col-md-9">
+            <section class="widget">
+                <header>
+                    <div class="widget-controls">
+                    </div>
+                </header>
                 @using (Html.BeginForm(null, null, FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
@@ -29,7 +34,7 @@
                     <div class="page-tables">
                         <!-- Table -->
                         <div class="table-responsive">
-                            <h3>Transaction to Remove</h3>
+                            <h3>Transaction to Remove</h3><br />
                             <table cellpadding="0" cellspacing="0" border="0" id="data-table">
                                 <thead>
                                     <tr>
@@ -38,14 +43,14 @@
                                         <th style="width:200px;">Category</th>
                                         <th style="width:300px;">Description</th>
                                         <th style="width:200px;">Amount</th>
-                                        <th style="width:200px;">ReconciledAmount</th>
+                                        <th style="width:200px;">Reconciled Amount</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td style="width:200px; overflow:hidden;font-size: 14px;">
-                                            @Html.DisplayFor(model => model.Date)
-                                         
+                                            @Html.DisplayFor(model => model.Date.Date)
+
                                         </td>
                                         <td style="width:200px; overflow:hidden;font-size: 14px;">
                                             @Html.DisplayFor(model => model.Account.Name)
@@ -59,7 +64,7 @@
                                         <td style="width:200px; overflow:hidden;font-size: 14px;">
                                             @Html.DisplayFor(model => model.Amount)
                                         </td>
-                                        <td style="width:200px; overflow:hidden;font-size: 14px;">
+                                        <td class="text-align-center" style="width:200px; overflow:hidden;font-size: 14px;">
                                             @Html.DisplayFor(model => model.ReconciledAmount)
                                         </td>
 
@@ -74,12 +79,13 @@
 
 
                 }
-            </div>
+            </section>
         </div>
+    </div>
 
-        <!-- common libraries. required for every page-->
-        <!-- page specific scripts -->
+    <!-- common libraries. required for every page-->
+    <!-- page specific scripts -->
 
 
-    </body>
+</body>
 </html>

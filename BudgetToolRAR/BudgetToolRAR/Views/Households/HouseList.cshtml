@@ -24,37 +24,43 @@
     </div>
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <br />
         </div>
-        <div class="col-md-8">
-            <div class="page-tables">
-                <!-- Table -->
-                <div class="table-responsive">
-                    <h3>Household Member List</h3>
-                    <table cellpadding="0" cellspacing="0" border="0" id="data-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
+        <div class="col-md-4">
+            <section class="widget">
+                <header>
+                    <div class="widget-controls">
+                    </div>
+                </header>
+                <div class="page-tables">
+                    <!-- Table -->
+                    <div class="table-responsive">
+                        <h3>Household Member List</h3>
+                        <table cellpadding="0" cellspacing="0" border="0" id="data-table">
+                            <thead>
                                 <tr>
-                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
-                                        @Html.DisplayFor(u => item.DisplayName)
-                                    </td>
-                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
-                                        @Html.DisplayFor(u => item.Email)
-                                    </td>
+                                    <th>Name</th>
+                                    <th>Email</th>
                                 </tr>
-                            }
-                    </table>
-                    <div class="clearfix"></div>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td style="width:200px; overflow:hidden;font-size: 14px;">
+                                            @Html.DisplayFor(u => item.DisplayName)
+                                        </td>
+                                        <td style="width:200px; overflow:hidden;font-size: 14px;">
+                                            @Html.DisplayFor(u => item.Email)
+                                        </td>
+                                    </tr>
+                                }
+                        </table>
+                        <div class="clearfix"></div>
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
     </div>
     <div class="row">
@@ -64,14 +70,19 @@
         <div class="col-md-12"><br /></div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <br />
         </div>
-        <div class="col-md-8">
-            <a href="@Url.Action("RemoveUser","Households")"><span class="name h4 btn btn-primary">Leave Current Household</span></a>
+        <div class="col-md-4">
+            <section class="widget">
+                <header>
+                    <div class="widget-controls">
+                    </div>
+                </header>
+                <a href="@Url.Action("RemoveUser","Households")"><span class="name h4 btn btn-primary">Leave Current Household</span></a>
 
-            <p><h5>You will lose access to the current household's accounts.</h5></p>
-
+                <p><h5>You will lose access to the current household's accounts.</h5></p>
+            </section>
         </div>
     </div>
     <div class="row">
@@ -81,17 +92,24 @@
         <div class="col-md-12"><br /></div>
     </div>
     <div class="row">
-        <div class="col-md-12"><br /></div>
+        <div class="col-md-12"></div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <br />
         </div>
-        <div class="col-md-8">
-            <a href="@Url.Action("InviteUser", "Households")"><span class="name h4 btn btn-primary">Invite User to Household</span></a>
+        <div class="col-md-4">
+            <section class="widget">
+                <header>
+                    <div class="widget-controls">
+                    </div>
+                </header>
+                <a href="@Url.Action("InviteUser", "Households")"><span class="name h4 btn btn-primary">Invite User to Household</span></a>
+                <br/><br />
+            </section>
         </div>
-        </div>
-        <!-- page specific scripts -->
+    </div>
+    <!-- page specific scripts -->
 </body>
 </html>
 

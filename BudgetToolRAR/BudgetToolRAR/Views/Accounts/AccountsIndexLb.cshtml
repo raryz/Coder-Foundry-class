@@ -25,83 +25,96 @@
         <div class="col-md-4">
             <br />
         </div>
-        <div class="col-md-8">
-            <a href="@Url.Action("AccountsCreateLb","Accounts")"><span class="name h4 btn btn-primary">Create an Account</span></a>
-        </div>
+        @*<div class="col-md-2">
+            
+                <a href="@Url.Action("AccountsCreateLb","Accounts")"><span class="name h4 btn btn-primary">Create an Account</span></a>
+            
+        </div>*@
     </div>
-    <br /><br />
+   
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-1">
             <br />
         </div>
-        <div class="col-md-10">
-
-            <div class="page-tables">
-                <!-- Table -->
-                <div class="table-responsive">
-                    <h3>List of Accounts</h3>
-                    <table cellpadding="0" cellspacing="0" border="0" id="data-table">
-                        <thead>
-                            <tr>
-                                <th style="width:200px;">Account</th>
-                                <th style="width:200px;">Balance</th>
-                                <th style="width:200px;">Reconciled</th>
-                                <th style="width: 70px;">Edit</th>
-                                <th style="width:100px;">Transactions</th>
-                                <th style="width:50px;">Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @* If there are no accounts, will display the heading but will be blank for data, no errors will occur*@
-                            @foreach (var item in Model)
-                            {
+        <div class="col-md-9">
+            <section class="widget">
+                <header>
+                    <div class="widget-controls">
+                    </div>
+                </header>
+                <div class="page-tables">
+                    <!-- Table -->
+                    <div class="table-responsive">
+                        <a href="@Url.Action("AccountsCreateLb","Accounts")"><span class="name h4 btn btn-primary text-align-center">Create an Account</span></a>
+                        <h3 class="text-align-center">List of Accounts</h3>
+                        <br/>
+                        <table cellpadding="0" cellspacing="0" border="0" id="data-table">
+                            <thead>
                                 <tr>
-                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
-                                        @Html.DisplayFor(u => item.Name)
-                                    </td>
-                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
-                                        @Html.DisplayFor(u => item.Balance)
-                                    </td>
-                                    <td style="width:200px; overflow:hidden;font-size: 14px;">
-                                        @Html.DisplayFor(u => item.ReconciledBalance)
-                                    </td>
-                                    @*<td>
-                                        <a href="~/Views/Accounts/AccountsEditLb.cshtml" title="Edit">
-                                            <i class="fa fa-edit "></i>      @*  fa-2x *@
-                                    @*</a>
+                                    <th style="width:230px;">Account</th>
+                                    <th class="right-J" style="width:150px;">Balance</th>
+                                    <th class="right-J" style="width:150px;">Reconciled</th>
+                                    <th style="width: 70px;">   </th>
+                                    <th style="width: 70px;">Edit</th>
+                                    <th style="width:100px;">Transactions</th>
+                                    <th style="width:50px;">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @* If there are no accounts, will display the heading but will be blank for data, no errors will occur*@
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td style="width:230px; overflow:hidden;font-size: 14px;">
+                                            @Html.DisplayFor(u => item.Name)
                                         </td>
-                                        <td>
-                                            <a href="~/Views/Accounts/AccountsDetailsLb.cshtml" title="Transactions">
-                                                <i class="fa fa-list-alt "></i>*@      @*  fa-2x *@
-                                                @*</a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="~/Views/Accounts/AccountsDeleteLb.cshtml" title="Transactions">
-                                                            <i class="fa fa-trash "></i>*@      @*  fa-2x *@
-                                                            @*</a>
-                                                                </td>*@
-                                                            <td>
-                                                                @Html.ActionLink(" ", "AccountsEditLb", "Accounts", new { id = item.Id }, new { @class = "btn  white fa fa-edit" })
-                                                            </td>
-                                                            <td>
-                                                                @Html.ActionLink(" ", "TransactionDetailsLb", "Accounts", new { id = item.Id }, new { @class = "btn white fa fa-list" })
-                                                            </td>
-                                                            <td>
-                                                                @Html.ActionLink(" ", "AccountsDeleteLb", new { id = item.Id }, new { @class = "btn white fa fa-trash" })
-                                                            </td>
-                                                            <td>
-                                                                @if (item.Balance < 0)
-                                                                {
-                                                                    <button class="btn btn-danger" type="button" title="">Overdraft Warning</button>
-                                                                }
+                                        <td class="right-J" style="width:150px; overflow:hidden;font-size: 14px;">
+                                            @*//@Html.DisplayFor(u => item.Balance)*@
+                                            @String.Format("{0:c}", @item.Balance)
+                                        </td>
+                                        <td class="right-J" style="width:150px; overflow:hidden;font-size: 14px;">
+                                            @* @Html.DisplayFor(u => item.ReconciledBalance)*@
+                                            @String.Format("{0:c}", @item.ReconciledBalance)
+                                        </td>
+                                        <td class="right-J" style="width:70px; overflow:hidden;font-size: 14px;"></td>
+                                        @*<td>
+                                            <a href="~/Views/Accounts/AccountsEditLb.cshtml" title="Edit">
+                                                <i class="fa fa-edit "></i>      @*  fa-2x *@
+                                        @*</a>
+                                            </td>
+                                            <td>
+                                                <a href="~/Views/Accounts/AccountsDetailsLb.cshtml" title="Transactions">
+                                                    <i class="fa fa-list-alt "></i>*@      @*  fa-2x *@
+                                                    @*</a>
+                                                        </td>
+                                                        <td>
+                                                            <a href="~/Views/Accounts/AccountsDeleteLb.cshtml" title="Transactions">
+                                                                <i class="fa fa-trash "></i>*@      @*  fa-2x *@
+                                                                @*</a>
+                                                                    </td>*@
+                                                                <td>
+                                                                    @Html.ActionLink(" ", "AccountsEditLb", "Accounts", new { id = item.Id }, new { @class = "btn  white fa fa-edit" })
+                                                                </td>
+                                                                <td>
+                                                                    @Html.ActionLink(" ", "TransactionDetailsLb", "Accounts", new { id = item.Id }, new { @class = "btn white fa fa-list" })
+                                                                </td>
+                                                                <td>
+                                                                    @Html.ActionLink(" ", "AccountsDeleteLb", new { id = item.Id }, new { @class = "btn white fa fa-trash" })
+                                                                </td>
+                                                                <td>
+                                                                    @if (item.Balance < 0)
+                                                                    {
+                                                                        <button class="btn btn-danger" type="button" title="">Overdraft Warning</button>
+                                                                    }
 
-                                                            </td>
-                                                        </tr>
-                            }
-                    </table>
-                    <div class="clearfix"></div>
+                                                                </td>
+                                                            </tr>
+                                }
+                        </table>
+                        <div class="clearfix"></div>
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
     </div>
     <div class="row">
