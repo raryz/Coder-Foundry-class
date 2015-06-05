@@ -32,7 +32,7 @@ namespace BudgetToolRAR.Controllers
 
             foreach (var trx in transactions)
             {
-                model.transactionInfo.Add(new TransactionInfo { AcctName = trx.Account.Name, Amount = trx.Amount, Date = trx.Date, Description = trx.Description });
+                model.transactionInfo.Add(new TransactionInfo { AcctName = trx.Account.Name, Amount = trx.Amount, Date = trx.TransDate, Description = trx.Description });
             }
 
             model.transactionInfo = model.transactionInfo.OrderByDescending(d => d.Date).Take(4).ToList();
@@ -57,8 +57,8 @@ namespace BudgetToolRAR.Controllers
                                  {
                                      category = category.Name,
                                      actual = (from transaction in category.Transactions
-                                               where transaction.Date.Month == System.DateTime.Now.Month &&
-                                                     transaction.Date.Year == System.DateTime.Now.Year &&
+                                               where transaction.TransDate.Month == System.DateTime.Now.Month &&
+                                                     transaction.TransDate.Year == System.DateTime.Now.Year &&
                                                      transaction.TransType == true
                                                select transaction.Amount).DefaultIfEmpty().Sum(),
                                      budgeted = (from budgetItem in category.BudgetItems
@@ -74,8 +74,8 @@ namespace BudgetToolRAR.Controllers
                                  {
                                      category = category.Name,
                                      actual = (from transaction in category.Transactions
-                                               where transaction.Date.Month == System.DateTime.Now.Month - 1 &&
-                                                     transaction.Date.Year == System.DateTime.Now.Year &&
+                                               where transaction.TransDate.Month == System.DateTime.Now.Month - 1 &&
+                                                     transaction.TransDate.Year == System.DateTime.Now.Year &&
                                                      transaction.TransType == true
                                                select transaction.Amount).DefaultIfEmpty().Sum(),
                                      budgeted = (from budgetItem in category.BudgetItems
@@ -89,8 +89,8 @@ namespace BudgetToolRAR.Controllers
                                  {
                                      label = category.Name,
                                      value = (from transaction in category.Transactions
-                                               where transaction.Date.Month == System.DateTime.Now.Month - 1 &&
-                                                     transaction.Date.Year == System.DateTime.Now.Year &&
+                                               where transaction.TransDate.Month == System.DateTime.Now.Month - 1 &&
+                                                     transaction.TransDate.Year == System.DateTime.Now.Year &&
                                                      transaction.TransType == true
                                                select transaction.Amount).DefaultIfEmpty().Sum()
                                      
@@ -101,8 +101,8 @@ namespace BudgetToolRAR.Controllers
                                 {
                                     label = category.Name,
                                     value = (from transaction in category.Transactions
-                                             where transaction.Date.Month == System.DateTime.Now.Month - 1 &&
-                                                   transaction.Date.Year == System.DateTime.Now.Year &&
+                                             where transaction.TransDate.Month == System.DateTime.Now.Month - 1 &&
+                                                   transaction.TransDate.Year == System.DateTime.Now.Year &&
                                                    transaction.TransType == false
                                              select transaction.Amount).DefaultIfEmpty().Sum()
 

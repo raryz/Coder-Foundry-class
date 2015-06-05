@@ -102,7 +102,7 @@
                             {
                                 <tr>
                                     <td style="width:130px;">
-                                        @item.Date.ToString("MM/dd/yyyy")
+                                        @item.TransDate.ToString("MM/dd/yyyy")
                                         @*@Html.DisplayFor(u => item.Date, "{0:MM/dd/yyyy}")*@
                                     </td>
                                     <td class="hidden-xs" style="width:200px;">
@@ -112,7 +112,7 @@
                                         @Html.DisplayFor(u => item.BudgetCategory.Name)
                                     </td>
                                     @*<td style="width:100px;">*@
-                                    @* @Html.DisplayFor(u => item.Amount)*@
+                                    @* @Html.DisplayFor u => item.Amount)*@
                                     <td class="right-J" style="width:100px;">@String.Format("{0:c}", @item.Amount)</td>
                                     
                                     @*<td class="hidden-xs" style="width:150px;">*@

@@ -14,79 +14,88 @@
         <div class="col-md-12"><br /></div>
     </div>
     <div class="row">
-        <div class="col-md-offset-2 col-md-10"><h4>Edit Budget Item</h4></div>
-    </div>
+        <div class="col-md-offset-1 col-md-9">
+            <section class="widget">
+                <header>
+                    <div class="widget-controls">
+                    </div>
+                </header>
+                @*<div class="col-md-offset-2 col-md-10"><h4>Edit Budget Item</h4></div>*@
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
 
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.Name, "Budget Item Name", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control-create" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                    <div class="form-horizontal">
+                        <h4>Edit Budget Item</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, "Budget Item Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control-create" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Amount, "Amount per Month", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control-create" } })
-                    @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Amount, "Amount per Month", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control-create" } })
+                                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.BudgetCategoryId, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("BudgetCategoryId", null, htmlAttributes: new { @class = "form-control-create" })
-                    @Html.ValidationMessageFor(model => model.BudgetCategoryId, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.BudgetCategoryId, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("BudgetCategoryId", null, htmlAttributes: new { @class = "form-control-create" })
+                                @Html.ValidationMessageFor(model => model.BudgetCategoryId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-            @*@if (Model.BudgetType == true)
-            {
-                var setexpense = true;
-            }
-            else
-            {
-                var setexpense = false;
-            }*@
+                        @*@if (Model.BudgetType == true)
+                            {
+                                var setexpense = true;
+                            }
+                            else
+                            {
+                                var setexpense = false;
+                            }*@
 
-            <div class="form-group">
-                <div class="col-md-2">
-                    <br />
-                </div>
-                <div class="col-md-10">
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                <br />
+                            </div>
+                            <div class="col-md-10">
 
-                    <input type="radio" name="budtype" value="Expense" @if (Model.BudgetType == true) { <text> checked</text>}>Expense
-                    <br>
-                    <input type="radio" name="budtype" value="Income" @if (Model.BudgetType != true)  { <text> checked</text>}>Income
+                                <input type="radio" name="budtype" value="Expense" @if (Model.BudgetType == true) { <text> checked</text>}>Expense
+                                <br>
+                                <input type="radio" name="budtype" value="Income" @if (Model.BudgetType != true) { <text> checked</text>}>Income
 
-                </div>
-            </div>
+                            </div>
+                        </div>
 
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.Id)
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Id)
 
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.HouseholdId)
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.HouseholdId)
 
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.BudgetType)
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.BudgetType)
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Edit Budget Item" class="h4 btn btn-primary" />
-                </div>
-            </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Edit Budget Item" class="h4 btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </section>
         </div>
-    }
+    </div>
 
 
     @section Scripts {
@@ -95,4 +104,3 @@
 
 </body>
 </html>
-

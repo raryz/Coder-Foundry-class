@@ -59,10 +59,10 @@
                     <table id="datatable-table" class="table table-striped table-hover datatable-table">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Category</th>
-                                <th>Amount</th>
-                                <th class="no-sort">Edit</th>
+                                <th style="width:200px;">Name</th>
+                                <th style="width:200px;">Category</th>
+                                <th class="right-J" style="width:100px;">Amount</th>
+                                <th class="no-sort text-align-center" style="width:200px;">Edit</th>
                                 <th class="no-sort">Delete</th>
                             </tr>
                         </thead>
@@ -74,19 +74,20 @@
                                 if (item.BudgetType == false)
                                 {      @* Income item = false *@
                                 <tr>
-                                    <td>
+                                    <td style="width:200px;">
                                         @Html.DisplayFor(u => item.Name)
                                     </td>
-                                    <td>
+                                    <td style="width:200px;">
                                         @Html.DisplayFor(u => item.BudgetCategory.Name)
                                     </td>
-                                    <td>
-                                        @Html.DisplayFor(u => item.Amount)
-                                    </td>
+                                    
+                                       @* @Html.DisplayFor(u => item.Amount)*@
+                                    <td class="right-J" style="width:100px;">@String.Format("{0:c}", @item.Amount)</td>
+                                   
 
 
                                     <td>
-                                        @Html.ActionLink(" ", "BudgetEditLb", "Accounts", new { id = item.Id }, new { @class = "btn  white fa fa-edit" })
+                                        @Html.ActionLink(" ", "BudgetEditLb", "Accounts", new { id = item.Id }, new { @class = "btn  white fa fa-edit", @style = "width:200px;"})
                                     </td>
                                     <td>
                                         @Html.ActionLink(" ", "BudgetDeleteLb", new { id = item.Id }, new { @class = "btn white fa fa-trash" })
@@ -128,10 +129,10 @@
                     <table id="datatable-table2" class="table table-striped table-hover datatable-table">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Category</th>
-                                <th>Amount</th>
-                                <th class="no-sort">Edit</th>
+                                <th style="width:200px;">Name</th>
+                                <th style="width:200px;">Category</th>
+                                <th class="right-J" style="width:100px;">Amount</th>
+                                <th class="no-sort text-align-center" style="width:200px;">Edit</th>
                                 <th class="no-sort">Delete</th>
                             </tr>
                         </thead>
@@ -142,19 +143,18 @@
                                 if (item.BudgetType == true)
                                 {      @* Expense item = true *@
                                 <tr>
-                                    <td>
+                                    <td style="width:200px;">
                                         @Html.DisplayFor(u => item.Name)
                                     </td>
-                                    <td>
+                                    <td style="width:200px;">
                                         @Html.DisplayFor(u => item.BudgetCategory.Name)
                                     </td>
+                                  
+                                        @*@Html.DisplayFor(u => item.Amount)*@
+                                    <td class="right-J" style="width:100px;">@String.Format("{0:c}", @item.Amount)</td>
+                                    
                                     <td>
-                                        @Html.DisplayFor(u => item.Amount)
-                                    </td>
-
-
-                                    <td>
-                                        @Html.ActionLink(" ", "BudgetEditLb", "Accounts", new { id = item.Id }, new { @class = "btn  white fa fa-edit" })
+                                        @Html.ActionLink(" ", "BudgetEditLb", "Accounts", new { id = item.Id }, new { @class = "btn  white fa fa-edit", @style = "width:200px;" })
                                     </td>
                                     <td>
                                         @Html.ActionLink(" ", "BudgetDeleteLb", new { id = item.Id }, new { @class = "btn white fa fa-trash" })

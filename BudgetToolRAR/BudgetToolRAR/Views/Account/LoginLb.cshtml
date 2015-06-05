@@ -28,7 +28,7 @@
     </script>
 </head>
 <body class="background-dark">
-    <div class="single-widget-container">
+    <div class="single-widget-container" style="top:35%">
         <section class="widget login-widget">
             <header class="text-align-center">
                 <h4>Login to your account</h4>
@@ -72,20 +72,32 @@
                             <span class="small-circle"><i class="fa fa-caret-right"></i></span>
                             <small>Sign In</small>
                         </button>
-                        <br />
+                      @*  <br />
+    <button type="submit" class="btn btn-block btn-lg btn-danger">
+        <span class="small-circle"><i class="fa fa-caret-right"></i></span>
+        <small>Login as Guest</small>
+    </button>*@
+    <br />  
                         @Html.ActionLink("Forgot your password?", "ForgotPasswordLb", "Account")
                         <br /><br />
                         @Html.ActionLink("Register as a new user", "RegisterLb")
                         <br /><br />
                     </div>
-                 
-                }
+               }
             </div>
             <footer>
                 <section id="socialLoginForm">
                     @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
                 </section>
             </footer>
+            @using (Html.BeginForm("LoginAsAdmin", "Account", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-block btn-lg btn-danger">
+       <span class="small-circle"><i class="fa fa-caret-right"></i></span>
+                <small> Login as Guest</small></button>
+            }
+            <br />
         </section>
     </div>
     <!-- common libraries. required for every page-->

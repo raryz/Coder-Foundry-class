@@ -8,6 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="/css/less-style.css" rel="stylesheet" />
     @*<link href="/css/style.css" rel="stylesheet" />*@
+    @RenderSection("css", false)
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -22,7 +23,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="@Url.Action("Main","Home")"></a></li>
+                    <li><a href="@Url.Action("Main","Home")">Home</a></li>
 
                 </ul>
                 @Html.Partial("_LoginPartial")

@@ -141,7 +141,8 @@
                     data: response.lastMonth,
                     xkey: 'category',
                     ykeys: ['actual', 'budgeted'],
-                    labels: ['Expenses', 'Budgeted']
+                    labels: ['Expenses', 'Budgeted'],
+                    xLabelMargin: 5
                 });
 
                 new Morris.Bar({
@@ -149,7 +150,8 @@
                     data: response.thisMonth,
                     xkey: 'category',
                     ykeys: ['actual', 'budgeted'],
-                    labels: ['Expenses', 'Budgeted']
+                    labels: ['Expenses', 'Budgeted'],
+                    xLabelMargin: 5
                 });
 
                 new Morris.Donut({

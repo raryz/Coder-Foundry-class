@@ -16,7 +16,8 @@ namespace BudgetToolRAR.Models
         public Boolean TransType { get; set; }
 
         [Required]
-        public DateTimeOffset Date { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString="{0:MM/dd/yyyy}")]
+        public DateTimeOffset TransDate { get; set; }
 
         [Required]
         public Decimal Amount { get; set; }
