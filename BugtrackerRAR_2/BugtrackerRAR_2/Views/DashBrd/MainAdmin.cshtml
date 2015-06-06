@@ -4,7 +4,7 @@
     ViewBag.Title = "Main";
 }
 
-<!DOCTYPE html>
+@*<!DOCTYPE html>
 <html>
 <head>
     <!-- Title here -->
@@ -14,23 +14,18 @@
     <meta name="keywords" content="Your,Keywords">
     <meta name="author" content="ResponsiveWebInc">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">*@
 
-    <!-- Styles -->
-    <!-- Bootstrap CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font awesome CSS -->
+    
+    @*<link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/font-awesome.min.css" rel="stylesheet">
-    <!-- jQuery gritter -->
     <link href="/css/jquery.gritter.css" rel="stylesheet">
-    <!-- Custom Color CSS -->
     <link href="/css/less-style.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">*@
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="#">
-</head>
+@*</head>*@
 
 <body>
 
@@ -219,7 +214,7 @@
   
     <!-- Javascript files -->
     <!-- jQuery -->
-    <script src="/js/jquery.js"></script>
+    @*<script src="/js/jquery.js"></script>
     <!-- Bootstrap JS -->
     <script src="/js/bootstrap.min.js"></script>
     <!-- jQuery UI -->
@@ -251,7 +246,7 @@
     <!-- jQuery gritter notification -->
     @*<script src="/js/custom.notification.js"></script>*@
     <!-- Respond JS for IE8 -->
-    <script src="/js/respond.min.js"></script>
+   @* <script src="/js/respond.min.js"></script>
     <!-- HTML5 Support for IE -->
     <script src="/js/html5shiv.js"></script>
     <!-- Custom JS -->
@@ -260,8 +255,20 @@
     <!-- Javascript for this page -->
 
     <script type="text/javascript">
-    </script>
+    </script>*@
 
 </body>
-</html>
+@*</html>*@
+
+@section css {
+   <link href="/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font awesome CSS -->
+<link href="/css/font-awesome.min.css" rel="stylesheet">
+<!-- jQuery gritter -->
+<link href="/css/jquery.gritter.css" rel="stylesheet">
+<!-- Custom Color CSS -->
+<link href="/css/less-style.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="/css/style.css" rel="stylesheet">
+}
 
