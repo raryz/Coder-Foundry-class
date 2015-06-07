@@ -14,10 +14,10 @@
             <table>
                 <thead>
                     <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>actions</th>
+                        <th style="width:150px;">First Name</th>
+                        <th style="width:150px;">Last Name</th>
+                        <th style="width:250px;">Email</th>
+                        <th style="width:120px;">Action</th>
                     </tr>
 
                 </thead>
@@ -25,10 +25,10 @@
                     @foreach (var user in Model)
                     {
                         <tr>
-                            <td> @user.FirstName</td>
-                            <td> @user.LastName</td>
-                            <td> @user.Email</td>
-                            <td>
+                            <td style="width:150px;"> @user.FirstName</td>
+                            <td style="width:150px;"> @user.LastName</td>
+                            <td style="width:250px;"> @user.Email</td>
+                            <td style="width:120px;">
                                 @Html.ActionLink("Edit Role", "EditUser", new { id = user.Id })
                             </td>
                         </tr>

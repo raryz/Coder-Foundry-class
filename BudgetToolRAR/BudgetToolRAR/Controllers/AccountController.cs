@@ -133,6 +133,26 @@ namespace BudgetToolRAR.Controllers
             }
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> LoginAsAdmin()
+        {
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var result = await SignInManager.PasswordSignInAsync("raryz@twc.com", "Vbn456!", false, shouldLockout: false);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    return RedirectToAction("MainAdmin", "DashBrd");
+                //return RedirectToLocal(returnUrl);
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.Failure:
+                default:
+                    return RedirectToAction("LoginLb");
+            }
+        }
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]

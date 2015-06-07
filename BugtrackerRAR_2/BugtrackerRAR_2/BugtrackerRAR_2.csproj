@@ -463,7 +463,7 @@
     <Content Include="Views\ProjectUsers\UnassignUser.cshtml" />
     <Content Include="Views\Tickets\AddComment.cshtml" />
     <Content Include="Views\Tickets\Details before Attachment added.cshtml" />
-    <Content Include="Views\Tickets\IndexB.cshtml" />
+    <Content Include="Views\Tickets\IndexB652015.cshtml" />
     <Content Include="Views\Account\ResendEmailConfirmation.cshtml" />
     <Content Include="Views\Account\ConfirmationSent.cshtml" />
     <Content Include="Views\Projects\Index2.cshtml" />
@@ -480,6 +480,7 @@
     <Content Include="Views\Home\MainAdmin.cshtml" />
     <Content Include="Views\DashBrd\MainAdmin.cshtml" />
     <Content Include="Views\Projects\IndexBd.cshtml" />
+    <Content Include="Views\Tickets\IndexB.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

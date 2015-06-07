@@ -182,7 +182,7 @@ namespace BudgetToolRAR.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult TransactionCreateLb([Bind(Include = "Id,Date,Description,Amount,ReconciledAmount,BudgetCategoryId,AccountId")] Transaction transaction, string transactiontype)
+        public ActionResult TransactionCreateLb([Bind(Include = "Id,TransDate,Description,Amount,ReconciledAmount,BudgetCategoryId,AccountId")] Transaction transaction, string transactiontype)
         {
             if (ModelState.IsValid)
             {
@@ -353,7 +353,7 @@ namespace BudgetToolRAR.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult TransactionEditLb([Bind(Include = "Id,Date,Description,Amount,ReconciledAmount,BudgetCategoryId,AccountId")] Transaction transaction, string trantype)
+        public ActionResult TransactionEditLb([Bind(Include = "Id,TransDate,Description,Amount,ReconciledAmount,BudgetCategoryId,AccountId")] Transaction transaction, string trantype)
         {
             if (ModelState.IsValid)
             {

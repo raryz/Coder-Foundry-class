@@ -31,48 +31,53 @@
                 {
                     @Html.AntiForgeryToken()
 
-                    <div class="page-tables">
+                    @*<div class="page-tables">*@
                         <!-- Table -->
-                        <div class="table-responsive">
-                            <h3>Transaction to Remove</h3><br />
-                            <table cellpadding="0" cellspacing="0" border="0" id="data-table">
-                                <thead>
-                                    <tr>
-                                        <th style="width:220px;">Date</th>
-                                        <th style="width:200px;">Account</th>
-                                        <th style="width:200px;">Category</th>
-                                        <th style="width:300px;">Description</th>
-                                        <th style="width:200px;">Amount</th>
-                                        <th style="width:200px;">Reconciled Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td style="width:200px; overflow:hidden;font-size: 14px;">
-                                            @Html.DisplayFor(model => model.TransDate)
-
-                                        </td>
-                                        <td style="width:200px; overflow:hidden;font-size: 14px;">
-                                            @Html.DisplayFor(model => model.Account.Name)
-                                        </td>
-                                        <td style="width:200px; overflow:hidden;font-size: 14px;">
-                                            @Html.DisplayFor(model => model.BudgetCategory.Name)
-                                        </td>
-                                        <td style="width:200px; overflow:hidden;font-size: 14px;">
-                                            @Html.DisplayFor(model => model.Description)
-                                        </td>
-                                        <td style="width:200px; overflow:hidden;font-size: 14px;">
-                                            @Html.DisplayFor(model => model.Amount)
-                                        </td>
-                                        <td class="text-align-center" style="width:200px; overflow:hidden;font-size: 14px;">
-                                            @Html.DisplayFor(model => model.ReconciledAmount)
-                                        </td>
-
-                                    </tr>
-                            </table>
-                            <div class="clearfix"></div>
+                    @*<div class="table-responsive">*@
+                    <div class="row">
+                        <div class="col-md-offset-4 col-md-9">
+                            <h3>Transaction to Remove</h3>
                         </div>
                     </div>
+                    <br />
+                    <table cellpadding="0" cellspacing="0" border="0" id="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width:190px;">Date</th>
+                                <th style="width:200px;">Account</th>
+                                <th style="width:200px;">Category</th>
+                                <th style="width:300px;">Description</th>
+                                <th style="width:200px;">Amount</th>
+                                <th style="width:200px;">Reconciled Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="width:190px; overflow:hidden;font-size: 14px;">
+                                    @Html.DisplayFor(model => model.TransDate)
+
+                                </td>
+                                <td style="width:200px; overflow:hidden;font-size: 14px;">
+                                    @Html.DisplayFor(model => model.Account.Name)
+                                </td>
+                                <td style="width:200px; overflow:hidden;font-size: 14px;">
+                                    @Html.DisplayFor(model => model.BudgetCategory.Name)
+                                </td>
+                                <td style="width:300px; overflow:hidden;font-size: 14px;">
+                                    @Html.DisplayFor(model => model.Description)
+                                </td>
+                                <td style="width:200px; overflow:hidden;font-size: 14px;">
+                                    @Html.DisplayFor(model => model.Amount)
+                                </td>
+                                <td class="text-align-center" style="width:200px; overflow:hidden;font-size: 14px;">
+                                    @Html.DisplayFor(model => model.ReconciledAmount)
+                                </td>
+
+                            </tr>
+                    </table>
+                    <div class="clearfix"></div>
+                    @*</div>
+                        </div>*@
                     <br /><br /><br />
                     <button class="name h4 btn btn-primary" type="submit">Delete Confirmation</button>
 

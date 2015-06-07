@@ -29,31 +29,39 @@
 </head>
 <body class="background-dark">
     <div class="logo">
-        <h3>Budget Tool</h3>
+        <h3 class="aux-text hidden-xs">Budget Tool</h3>
     </div>
+
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+
     <nav id="sidebar" class="sidebar nav-collapse collapse">
+
         <ul id="side-nav" class="side-nav">
             <li class="active">
                 @*<a href="index.html"><i class="fa fa-home"></i> <span class="name">Dashboard</span></a>*@
                 @*<h3>Dashboard</h3>*@
             </li>
             <li class="panel ">
-              
+
                 <a class="toggle"
                    data-parent="#side-nav" href="@Url.Action("MainAdmin","DashBrd")"><i class="fa fa-bar-chart"></i><span class="name h4">Dashboard</span></a>
-                
+
             </li>
             <li class="panel ">
-                
+
                 <a class="toggle"
                    data-parent="#side-nav" href="@Url.Action("HouseList","Households")"><i class="fa fa-home"></i><span class="name h4">Household</span></a>
-                
+
             </li>
             <li class="panel ">
                 <a class="toggle"
                    data-parent="#side-nav" href="@Url.Action("AccountsIndexLb","Accounts")"><i class="fa fa-money"></i><span class="name h4">Accounts</span></a>
                 @*<a class="toggle"
-                   data-parent="#side-nav" href="#accounts-collapse"><i class="fa fa-money"></i><span class="name h4">Accounts</span></a>*@
+                    data-parent="#side-nav" href="#accounts-collapse"><i class="fa fa-money"></i><span class="name h4">Accounts</span></a>*@
                 @*<a class="accordion-toggle collapsed" data-toggle="collapse"
                        data-parent="#side-nav" href="#stats-collapse"><i class="fa fa-area-chart"></i><span class="name">Statistics</span></a>
                     <ul id="stats-collapse" class="panel-collapse collapse ">
@@ -61,7 +69,7 @@
                         <li class=""><a href="stat_charts.html">Charts</a></li>
                         <li class=""><a href="stat_realtime.html">Realtime</a></li>
                     </ul>*@
-            </li>     
+            </li>
             <li class="panel ">
                 <a class="toggle"
                    data-parent="#side-nav" href="@Url.Action("BudgetDetailsLb","Accounts")"><i class="fa fa-usd"></i><span class="name h4">Budget</span></a>
@@ -81,7 +89,7 @@
                    data-parent="#side-nav" href="@Url.Action("CreateCategoryLb","Accounts")"><i class="fa fa-folder-open"></i><span class="name h4">Categories</span></a>
 
             </li>
-</ul>
+        </ul>
 
 
     </nav>
@@ -270,11 +278,19 @@
             </header>*@
 
         <div class="container">
-
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               
+            </div>
+            <div class="navbar-collapse collapse">
                 <div class="nav navbar-nav navbar-right">
                     @Html.Partial("_LoginPartial")
                 </div>
-
+            </div>
         </div>
         @RenderBody()
     </div>
