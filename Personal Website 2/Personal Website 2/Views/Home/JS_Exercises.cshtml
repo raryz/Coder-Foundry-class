@@ -322,24 +322,9 @@ function factorial(value1, resultElementName) {
                     <pre class="brush: jstext">
 function happy_test(resultElementName) {
     var resultElement = document.getElementById(resultElementName);
-    var isHappy = false;
-    var number = 1;
-    var found5 = false;
-    var happyCount = 0;
-    var holdHappy = [];
-    var digitcount = 0;
-    while (!found5) {
-        isHappy = checkHappy(number);
-        if (isHappy) {
-            holdHappy[happyCount] = number.toString();
-            happyCount += 1;
-        }
-        if (happyCount == 5) {
-            found5 = true;
-        }
-        number++;
-        isHappy = false;
-    }                       // end while !found5
+    
+// code continued :
+    
     function checkHappy(number) {
         var i = 0;
         var j = 0;
@@ -411,23 +396,9 @@ function happy_test(resultElementName) {
                 <div class="col-md-8">
                     <pre class="brush: jstext">
 function findLongestWord(evt) {      
-    var output = [];
- var resultElement = document.getElementById('ResultLW');
-    var f = evt.target.files[0];    
-    
-    if (f) {
-        var reader = new FileReader();         
-        reader.onload = function (e) {  
-            alert(reader.result);      
-           
-            var fullText = reader.result;
-            var fullLength = fullText.length;
-            var countLength = 0;
-            var startPos = 0;
-            var stopPos = 0;
-   var max = 0, maxstart = 0, maxstop = 0, i = 0, j = 0;
-            while (i < fullLength) {
-                j = startPos;
+     
+ // code continued  
+  
  while ((fullText.charAt(j) != " ") && (j < fullLength)) {
                     countLength += 1;
                     stopPos += 1;
