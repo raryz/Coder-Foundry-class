@@ -10,17 +10,25 @@
         <div ng-controller="ctrl as c">
             <div>
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-xs-3">
                         <select ng-options="year for year in c.options.years" ng-model="c.selected.year" ng-change="c.getMakes()"></select>
                     </div>
-                    <div class="col-xs-4">
-                        <select ng-options="make for make in c.options.makes" ng-model="c.selected.make"></select>
+                    <div class="col-xs-3">
+                        <select ng-options="make for make in c.options.makes" ng-model="c.selected.make" ng-change="c.getModels()"></select>
+                    </div>
+                    <div class="col-xs-3">
+                        <select ng-options="model for model in c.options.models" ng-model="c.selected.model" ng-change="c.getTrims()"></select>
+                    </div>
+                    <div class="col-xs-3">
+                        <select ng-options="trim for trim in c.options.trims" ng-model="c.selected.trim" ></select>
                     </div>
                 </div>
             </div>
             <div class="row">
                 Year: {{c.selected.year}}<br />
-                Make: {{c.selected.make}}
+                Make: {{c.selected.make}}<br />
+                Model: {{c.selected.model}}<br />
+                Trim: {{c.selected.trim}}
             </div>
         </div>
     </div>

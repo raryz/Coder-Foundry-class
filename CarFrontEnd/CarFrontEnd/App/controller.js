@@ -6,13 +6,15 @@
         scope.selected = {
             year: '',
             make: '',
-            model: ''
+            model: '',
+            trim:''
         };
 
         scope.options = {
             years: [],
             makes: [],
-            models: []
+            models: [],
+            trims:[]
         }
 
         scope.getYears = function () {
@@ -22,8 +24,32 @@
         }
 
         scope.getMakes = function () {
+
+            scope.selected.make = '';
+            scope.selected.model = '';
+            scope.selected.trim = '';
+                           
             svc.getMakes(scope.selected.year).then(function (result) {
                 scope.options.makes = result;
+            })
+        }
+
+        scope.getModels = function () {
+
+            scope.selected.model = '';
+            scope.selected.trim = '';
+
+            svc.getModels(scope.selected.year, scope.selected.make).then(function (result) {
+                scope.options.models = result;
+            })
+        }
+
+        scope.getTrims = function () {
+
+            scope.selected.trim = '';
+
+            svc.getTrims(scope.selected.year, scope.selected.make, scope.selected.model).then(function (result) {
+                scope.options.trims = result;
             })
         }
 
