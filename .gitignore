@@ -196,3 +196,19 @@ FakesAssemblies/
 *.opt
 BugtrackerRAR_2/BugtrackerRAR_2/Web.config
 BugtrackerRAR_2/BugtrackerRAR_2/Web.config
+BudgetToolRAR/BudgetToolRAR/App_Start/Startup.Auth.cs
+BudgetToolRAR/BudgetToolRAR/Views/Web.config
+BugtrackerRAR_2/BugtrackerRAR_2/Web.config
+CarFinderRAR/CarFinderRAR/Views/Web.config
+CarFinderRAR/CarFinderRAR/Web.config
+CarFrontEnd/CarFrontEnd/scripts/jquery-1.9.1.intellisense.js
+CarFrontEnd/CarFrontEnd/scripts/jquery-1.9.1.js
+CarFrontEnd/CarFrontEnd/scripts/jquery-1.9.1.min.js
+CarFrontEnd/CarFrontEnd/scripts/jquery-1.9.1.min.map
+CarFrontEnd/CarFrontEnd/Web.config
+Maps1/Maps1/scripts/angular.js
+Maps1/Maps1/scripts/bootstrap.js
+Maps1/Maps1/scripts/jquery-1.9.1.js
+Maps1/Maps1/Web.config
+Personal Website 2/Personal Website 2/Web.config
+Maps1/Maps1/scripts/lodash.js

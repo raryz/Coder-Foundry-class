@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container" ng-app="app">
+        <div ng-controller="ctrl as c">
+            <div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <select ng-options="year for year in c.options.years" ng-model="c.selected.year" ng-change="c.getMakes()"></select>
+                    </div>
+                    <div class="col-xs-4">
+                        <select ng-options="make for make in c.options.makes" ng-model="c.selected.make"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                Year: {{c.selected.year}}<br />
+                Make: {{c.selected.make}}
+            </div>
+        </div>
+    </div>
+
+
+    <script src="/Scripts/angular.min.js"></script>
+    <script src="/App/app.js"></script>
+    <script src="/App/service.js"></script>
+    <script src="/App/controller.js"></script>
+</body>
+</html>
