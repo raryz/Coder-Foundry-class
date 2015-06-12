@@ -41,5 +41,38 @@ namespace CarFinderRAR.Models
         {
             return new ApplicationDbContext();
         }
+
+        public async Task<List<string>> GetYears()              // need to define the stored procedure on the database
+        {
+            return await this.Database
+                .SqlQuery<string>("GetYears").ToListAsync();
+        }
+
+        public async Task<List<string>> GetMakes(int year)   
+        {
+            var yearParam = new SqlParameter("@year", year);
+
+            return await this.Database
+                .SqlQuery<string>("GetMakes @year", yearParam).ToListAsync();
+        }
+
+        public async Task<List<string>> GetModels(int year, string make)   // need to define the stored procedure on the database
+        {
+            var yearParam = new SqlParameter("@year", year);
+            var makeParam = new SqlParameter("@make", make);
+
+            return await this.Database
+                .SqlQuery<string>("GetModels @year, @make", yearParam, makeParam).ToListAsync();
+        }
+
+        public async Task<List<string>> GetTrims(int year, string make, string model)
+        {
+            var yearParam = new SqlParameter("@year", year);
+            var makeParam = new SqlParameter("@make", make);
+            var modelParam = new SqlParameter("@model", model);
+
+            return await this.Database
+                .SqlQuery<string>("GetTrims @year, @make @model", yearParam, makeParam, modelParam).ToListAsync();
+        }
     }
 }
