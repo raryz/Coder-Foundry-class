@@ -29,7 +29,7 @@
             scope.selected.model = '';
             scope.selected.trim = '';
 
-            svc.getMakes(scope.selected.year).then(function (result) {
+            svc.getMakes(scope.selected).then(function (result) {
                 scope.options.makes = result;
             })
         }
@@ -39,7 +39,7 @@
             scope.selected.model = '';
             scope.selected.trim = '';
 
-            svc.getModels(scope.selected.year, scope.selected.make).then(function (result) {
+            svc.getModels(scope.selected).then(function (result) {
                 scope.options.models = result;
             })
         }
@@ -48,7 +48,7 @@
 
             scope.selected.trim = '';
 
-            svc.getTrims(scope.selected.year, scope.selected.make, scope.selected.model).then(function (result) {
+            svc.getTrims(scope.selected).then(function (result) {
                 scope.options.trims = result;
             })
         }

@@ -72,7 +72,7 @@ namespace CarFinderRAR.Models
             var modelParam = new SqlParameter("@model", model);
 
             return await this.Database
-                .SqlQuery<string>("GetTrims @year, @make @model", yearParam, makeParam, modelParam).ToListAsync();
+                .SqlQuery<string>("GetTrims @year, @make, @model", yearParam, makeParam, modelParam).ToListAsync();
         }
     }
 }

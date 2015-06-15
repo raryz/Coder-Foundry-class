@@ -8,38 +8,39 @@
 
         service.getYears = function () {
             var deferred = $q.defer();
-            return $http.get('api/Car/GetYears')
+            $http.get('api/Cars/GetYears')
                    .then(function (response) {
-                       return response.data;
+                       deferred.resolve(response.data);
                    })
 
-            //return deferred.promise;
+            return deferred.promise;
 
         }
 
-        service.getMakes = function (year) {
-            var deferred = $q.defer();
-            return $http.get('api/Car/GetMakes/year')
+        service.getMakes = function (selected) {
+            var options = {
+                params: {
+                    year: selected.year
+                }
+            }
+
+            return $http.get('api/Cars/GetMakes', options)
                    .then(function (response) {
                        return response.data;
                    })
             }
-
-            //return deferred.promise;
         
 
-        service.getModels = function (year, make) {
-            var deferred = $q.defer();
-            return $http.get('api/Car/getModels/year/make')
+        service.getModels = function (selected) {
+            return $http.post('api/Cars/GetModels', selected)
                    .then(function (response) {
                        return response.data;
                    })
             
         }
 
-        service.getTrims = function (year, make, model) {
-            var deferred = $q.defer();
-            return $http.get('api/Car/getTrims/year/make/model')
+        service.getTrims = function (selected) {
+            return $http.post('api/Cars/GetTrims', selected)
                    .then(function (response) {
                        return response.data;
                    })

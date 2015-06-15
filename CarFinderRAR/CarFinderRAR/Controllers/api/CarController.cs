@@ -14,6 +14,14 @@ namespace CarFinderRAR.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public class SelectedOptions
+        {
+            public int year {get; set;}
+            public string make { get; set; }
+            public string model { get; set; }
+            public string trim { get; set; }
+        }
+
         [HttpGet]                                 // have to use HttpGet because the stored procedure
         [Route("MakesForYear")]                   // does not start with the name with "Get"
         public async Task<List<string>> MakesForYear(string year)
@@ -30,28 +38,28 @@ namespace CarFinderRAR.Controllers
             return await db.GetYears();
         }
 
-        [HttpGet]                             // optional use of HttpGet since the stored procedure
+        [HttpPost, HttpGet]                             // optional use of HttpGet since the stored procedure
         [Route("GetMakes")]                   // starts with the name with "Get"
-        public async Task<List<string>> GetMakes(int year)
+        public async Task<List<string>> GetMakes([FromUri] SelectedOptions selected)
         {
 
-            return await db.GetMakes(year);
+            return await db.GetMakes(selected.year);
         }
 
-        [HttpGet]                             // optional use of HttpGet since the stored procedure
+        [HttpPost]                             // optional use of HttpGet since the stored procedure
         [Route("GetModels")]                   // starts with the name with "Get"
-        public async Task<List<string>> GetModels(int year, string make)
+        public async Task<List<string>> GetModels(SelectedOptions selected)
         {
 
-            return await db.GetModels(year, make);
+            return await db.GetModels(selected.year, selected.make);
         }
 
-        [HttpGet]                             // optional use of HttpGet since the stored procedure
+        [HttpPost]                             // optional use of HttpGet since the stored procedure
         [Route("GetTrims")]                   // starts with the name with "Get"
-        public async Task<List<string>> GetModels(int year, string make, string model)
+        public async Task<List<string>> GetTrims(SelectedOptions selected)
         {
 
-            return await db.GetTrims(year, make, model);
+            return await db.GetTrims(selected.year, selected.make, selected.model);
         }
     }
 }
