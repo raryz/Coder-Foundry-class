@@ -134,13 +134,56 @@
     </div>
 </div>
 
+
+<script>
+    try {
+        $.post("@Url.Action("GetDataAjax2", "DashBrd")").then(function (response) {
+            console.log(response)
+            new Morris.Bar({
+                element: 'lastMonth',
+                data: response.lastMonth,
+                xkey: 'category',
+                ykeys: ['actual', 'budgeted'],
+                labels: ['Expenses', 'Budgeted'],
+                xLabelMargin: 5
+            });
+
+            new Morris.Bar({
+                element: 'thisMonth',
+                data: response.thisMonth,
+                xkey: 'category',
+                ykeys: ['actual', 'budgeted'],
+                labels: ['Expenses', 'Budgeted'],
+                xLabelMargin: 5
+            });
+
+            new Morris.Donut({
+                element: 'lastMonthDonut',
+                data: response.lastMonthDonut
+
+            });
+
+            new Morris.Donut({
+                element: 'lastMonthDonutI',
+                data: response.lastMonthDonutI
+
+            });
+
+
+        })
+    }
+    catch (e) { };
+</script>
+
+
+
 <!-- page specific scripts -->
 @section scripts
     {
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
     <script>
-        $(document).ready(function () {
+
             $.post("@Url.Action("GetDataAjax2", "DashBrd")").then(function (response) {
                 console.log(response)
                 new Morris.Bar({
@@ -175,7 +218,7 @@
 
 
             })
-        })
+        
     </script>
 }
 
