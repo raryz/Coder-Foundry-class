@@ -28,45 +28,22 @@
     </script>
 </head>
 <body class="background-dark">
-    <div class="row">
-        <div class="col-md-12 col-md-offset-5">
-            <div class="logo">
-                <h3 class="aux-text hidden-xs text-left">Budget Tool</h3>
-            </div>
-        </div>
+    <div class="logo">
+        <h3 class="aux-text hidden-xs">Budget Tool</h3>
     </div>
 
-    <div class="navbar">
-        <ul class="nav navbar-nav navbar-right pull-right">
+    <nav id="sidebar" class="sidebar nav-collapse collapse">
 
-            <li class="visible-xs">
-                <a href="#"
-                   class="btn-navbar"
-                   data-toggle="collapse"
-                   data-target=".sidebar"
-                   title="">
-                    <i class="fa fa-bars"></i>
-                </a>
-            </li>
-            @*<li class="visible-xs">
-                <a href="#"
-                   class="btn-navbar"
-                   data-toggle="collapse"
-                   data-target=".loginbar"
-                   title="">
-                    <i class="fa fa-bars"></i>
-                </a>
-            </li>*@
-        </ul>
-    </div>
-
-
-    <nav id="sidebar" class="sidebar nav-collapse collapse" aria-expanded="false" style="height: 0px;">
         <ul id="side-nav" class="side-nav">
+            <li class="active">
+                @*<a href="index.html"><i class="fa fa-home"></i> <span class="name">Dashboard</span></a>*@
+                @*<h3>Dashboard</h3>*@
+            </li>
             <li class="panel ">
-                <br/><br/><br />
+
                 <a class="toggle"
                    data-parent="#side-nav" href="@Url.Action("MainAdmin","DashBrd")"><i class="fa fa-bar-chart"></i><span class="name h4">Dashboard</span></a>
+
             </li>
             <li class="panel ">
 
@@ -77,11 +54,29 @@
             <li class="panel ">
                 <a class="toggle"
                    data-parent="#side-nav" href="@Url.Action("AccountsIndexLb","Accounts")"><i class="fa fa-money"></i><span class="name h4">Accounts</span></a>
+                @*<a class="toggle"
+                    data-parent="#side-nav" href="#accounts-collapse"><i class="fa fa-money"></i><span class="name h4">Accounts</span></a>*@
+                @*<a class="accordion-toggle collapsed" data-toggle="collapse"
+                       data-parent="#side-nav" href="#stats-collapse"><i class="fa fa-area-chart"></i><span class="name">Statistics</span></a>
+                    <ul id="stats-collapse" class="panel-collapse collapse ">
+                        <li class=""><a href="stat_statistics.html">Stats</a></li>
+                        <li class=""><a href="stat_charts.html">Charts</a></li>
+                        <li class=""><a href="stat_realtime.html">Realtime</a></li>
+                    </ul>*@
             </li>
             <li class="panel ">
                 <a class="toggle"
                    data-parent="#side-nav" href="@Url.Action("BudgetDetailsLb","Accounts")"><i class="fa fa-usd"></i><span class="name h4">Budget</span></a>
-
+                @*<a class="accordion-toggle collapsed" data-toggle="collapse"
+                       data-parent="#side-nav" href="#ui-collapse"><i class="fa fa-magic"></i><span class="name">User Interface</span></a>
+                    <ul id="ui-collapse" class="panel-collapse collapse ">
+                        <li class=""><a href="ui_buttons.html">Buttons</a></li>
+                        <li class=""><a href="ui_dialogs.html">Dialogs</a></li>
+                        <li class=""><a href="ui_notifications.html">Notifications</a></li>
+                        <li class=""><a href="ui_icons.html">Icons</a></li>
+                        <li class=""><a href="ui_tabs.html">Tabs</a></li>
+                        <li class=""><a href="ui_accordion.html">Accordion</a></li>
+                    </ul>*@
             </li>
             <li class="panel ">
                 <a class="toggle"
@@ -92,130 +87,207 @@
 
 
     </nav>
-    <nav id="loginbar" class="sidebar nav-collapse navbar-nav navbar-right collapse" aria-expanded="false" style="height: 0px;">
-        <ul id="" class="">
-            <li class="panel">
-                <div class="nav ">
-                    @Html.Partial("_LoginPartial")
-                </div>
-            </li>
-        </ul>
-    </nav>
-    <nav class="wrap">
+    <div class="wrap">
+        <header class="page-header">
+            <div class="navbar">
+                <ul class="nav navbar-nav navbar-right pull-right">
+                    <li>
+                        @*<div class="container">*@
 
+                        @*</div>*@
+                    </li>
 
-        <div class="content container">
-            @RenderBody()
+                    <li class="divider"></li>
+                    @*<li class="hidden-xs">
+                            <a href="#" id="settings"
+                               title="Settings"
+                               data-toggle="popover"
+                               data-placement="bottom">
+                                <i class="fa fa-cog"></i>
+                            </a>
+                        </li>*@
+                    <li class=" dropdown">
+                        <a href="#" title="Account" id="account"
+                           class="dropdown-toggle"
+                           data-toggle="dropdown">
+                            <i class="fa fa-user"></i>
+                        </a>
+                        <ul id="account-menu" class="dropdown-menu account" role="menu">
+
+                            @using Microsoft.AspNet.Identity
+                            @if (Request.IsAuthenticated)
+                            {
+                                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", style = "padding-left: 10px" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <li role="presentation">
+                                        <a href=""><i class="fa fa-user" style="color: lightblue"></i>&nbsp;&nbsp;@Html.ActionLink(User.Identity.GetUserName(), "IndexLb", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</a>
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                <li role="presentation">
+                                    <a href=""><i class="fa fa-book" style="color: lightblue"></i>&nbsp;&nbsp;@Html.ActionLink("Register", "RegisterLb", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href=""><i class="fa fa-sign-in" style="color: lightblue"></i>&nbsp;&nbsp;@Html.ActionLink("Log in", "LoginLb", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</a>
+                                </li>
+                            }
+
+                            @*<li role="presentation">
+                                    <a href="component_calendar.html" class="link">
+                                        <i class="fa fa-calendar"></i>
+                                        Calendar
+                                    </a>
+                                </li>*@
+                            <li role="presentation">
+                                <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i> Log Out</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="visible-xs">
+                        <a href="#"
+                           class="btn-navbar"
+                           data-toggle="collapse"
+                           data-target=".sidebar"
+                           title="Menu">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </li>
+                    @*<li class="hidden-xs"><a href="login.html"><i class="fa fa-sign-out"></i></a></li>*@
+                </ul>
+                @*<form id="search-form" class="navbar-form pull-right" role="search">
+                        <input type="search" class="form-control search-query" placeholder="Search...">
+                    </form>*@
+            </div>
+        </header>
+
+        <div class="container">
+            @*<div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>*@
+            @*<div class="navbar-collapse collapse">
+                    <div class="nav navbar-nav navbar-right">
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                </div>*@
         </div>
-        </nav>
-        @*<div class="loader-wrap hiding hide">
-                <i class="fa fa-circle-o-notch fa-spin"></i>
-            </div>*@
-        @*<div class="loader-wrap hiding hide">
-                <i class="fa fa-circle-o-notch fa-spin"></i>
-            </div>*@
+        @RenderBody()
+    </div>
+    <div class="loader-wrap hiding hide">
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+    </div>
+    <div class="loader-wrap hiding hide">
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+    </div>
 
-        <!-- common libraries. required for every page-->
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        <script src="/lib/jquery-pjax/jquery.pjax.js"></script>
-        <script src="/lib/widgster/widgster.js"></script>
-        <script src="/lib/underscore/underscore.js"></script>
+    <!-- common libraries. required for every page-->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="/lib/jquery-pjax/jquery.pjax.js"></script>
+    <script src="/lib/widgster/widgster.js"></script>
+    <script src="/lib/underscore/underscore.js"></script>
 
-        <!-- common application js -->
-        <script src="/js/app.js"></script>
-        <script src="/js/settings.js"></script>
-        @RenderSection("scripts", required: false)
-        @RenderSection("css", required: false)
+    <!-- common application js -->
+    <script src="~/js/app.js"></script>
+    <script src="~/js/settings.js"></script>
+    @RenderSection("scripts", required: false)
+    @RenderSection("css", required: false)
 
-        <!-- common templates -->
-        <script type="text/template" id="settings-template">
-            <div class="setting clearfix">
-                <div>Background</div>
-                <div id="background-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
-                    <% dark = background == 'dark'; light = background == 'light';%>
-                    <button type="button" data-value="dark" class="btn btn-sm btn-default <%= dark? 'active' : '' %>">Dark</button>
-                    <button type="button" data-value="light" class="btn btn-sm btn-default <%= light? 'active' : '' %>">Light</button>
-                </div>
+    <!-- common templates -->
+    <script type="text/template" id="settings-template">
+        <div class="setting clearfix">
+            <div>Background</div>
+            <div id="background-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+                <% dark = background == 'dark'; light = background == 'light';%>
+                <button type="button" data-value="dark" class="btn btn-sm btn-default <%= dark? 'active' : '' %>">Dark</button>
+                <button type="button" data-value="light" class="btn btn-sm btn-default <%= light? 'active' : '' %>">Light</button>
             </div>
-            <div class="setting clearfix">
-                <div>Sidebar on the</div>
-                <div id="sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
-                    <% onRight = sidebar == 'right'%>
-                    <button type="button" data-value="left" class="btn btn-sm btn-default <%= onRight? '' : 'active' %>">Left</button>
-                    <button type="button" data-value="right" class="btn btn-sm btn-default <%= onRight? 'active' : '' %>">Right</button>
-                </div>
+        </div>
+        <div class="setting clearfix">
+            <div>Sidebar on the</div>
+            <div id="sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+                <% onRight = sidebar == 'right'%>
+                <button type="button" data-value="left" class="btn btn-sm btn-default <%= onRight? '' : 'active' %>">Left</button>
+                <button type="button" data-value="right" class="btn btn-sm btn-default <%= onRight? 'active' : '' %>">Right</button>
             </div>
-            <div class="setting clearfix">
-                <div>Sidebar</div>
-                <div id="display-sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
-                    <% display = displaySidebar%>
-                    <button type="button" data-value="true" class="btn btn-sm btn-default <%= display? 'active' : '' %>">Show</button>
-                    <button type="button" data-value="false" class="btn btn-sm btn-default <%= display? '' : 'active' %>">Hide</button>
-                </div>
+        </div>
+        <div class="setting clearfix">
+            <div>Sidebar</div>
+            <div id="display-sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+                <% display = displaySidebar%>
+                <button type="button" data-value="true" class="btn btn-sm btn-default <%= display? 'active' : '' %>">Show</button>
+                <button type="button" data-value="false" class="btn btn-sm btn-default <%= display? '' : 'active' %>">Hide</button>
             </div>
-            <div class="setting clearfix">
-                <div>White Version</div>
-                <div>
-                    <a href="../white/index.html" class="btn btn-sm btn-default">&nbsp; Switch &nbsp;   <i class="fa fa-angle-right"></i></a>
-                </div>
+        </div>
+        <div class="setting clearfix">
+            <div>White Version</div>
+            <div>
+                <a href="../white/index.html" class="btn btn-sm btn-default">&nbsp; Switch &nbsp;   <i class="fa fa-angle-right"></i></a>
             </div>
-        </script>
+        </div>
+    </script>
 
-        <script type="text/template" id="sidebar-settings-template">
-            <% auto = sidebarState == 'auto'%>
-            <% if (auto) {%>
-            <button type="button"
-                    data-value="icons"
-                    class="btn-icons btn btn-transparent btn-sm">
-                Icons
-            </button>
-            <button type="button"
-                    data-value="auto"
-                    class="btn-auto btn btn-transparent btn-sm">
-                Auto
-            </button>
-            <%} else {%>
-            <button type="button"
-                    data-value="auto"
-                    class="btn btn-transparent btn-sm">
-                Auto
-            </button>
-            <% } %>
-        </script>
+    <script type="text/template" id="sidebar-settings-template">
+        <% auto = sidebarState == 'auto'%>
+        <% if (auto) {%>
+        <button type="button"
+                data-value="icons"
+                class="btn-icons btn btn-transparent btn-sm">
+            Icons
+        </button>
+        <button type="button"
+                data-value="auto"
+                class="btn-auto btn btn-transparent btn-sm">
+            Auto
+        </button>
+        <%} else {%>
+        <button type="button"
+                data-value="auto"
+                class="btn btn-transparent btn-sm">
+            Auto
+        </button>
+        <% } %>
+    </script>
 
-        <!-- page specific scripts -->
-        <!-- page libs -->
-        <script src="/lib/slimScroll/jquery.slimscroll.min.js"></script>
-        <script src="/lib/jquery.sparkline/index.js"></script>
+    <!-- page specific scripts -->
+    <!-- page libs -->
+    <script src="~/lib/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="~/lib/jquery.sparkline/index.js"></script>
 
-        <script src="/lib/backbone/backbone.js"></script>
-        <script src="/lib/backbone.localStorage/backbone.localStorage-min.js"></script>
+    <script src="~/lib/backbone/backbone.js"></script>
+    <script src="~/lib/backbone.localStorage/backbone.localStorage-min.js"></script>
 
-        <script src="/lib/d3/d3.min.js"></script>
-        <script src="/lib/nvd3/nv.d3.min.js"></script>
+    <script src="~/lib/d3/d3.min.js"></script>
+    <script src="~/lib/nvd3/nv.d3.min.js"></script>
 
-        <!-- page application js -->
-        <script src="/js/index.js"></script>
-        <script src="/js/chat.js"></script>
+    <!-- page application js -->
+    <script src="~/js/index.js"></script>
+    <script src="~/js/chat.js"></script>
 
-        <!-- page template -->
-        <script type="text/template" id="message-template">
-            <div class="sender pull-left">
-                <div class="icon">
-                    <img src="/img/2.jpg" class="img-circle" alt="">
-                </div>
-                <div class="time">
-                    just now
-                </div>
+    <!-- page template -->
+    <script type="text/template" id="message-template">
+        <div class="sender pull-left">
+            <div class="icon">
+                <img src="/img/2.jpg" class="img-circle" alt="">
             </div>
-            <div class="chat-message-body">
-                <span class="arrow"></span>
-                <div class="sender"><a href="#">Tikhon Laninga</a></div>
-                <div class="text">
-                    <%- text %>
-                </div>
+            <div class="time">
+                just now
             </div>
-        </script>
+        </div>
+        <div class="chat-message-body">
+            <span class="arrow"></span>
+            <div class="sender"><a href="#">Tikhon Laninga</a></div>
+            <div class="text">
+                <%- text %>
+            </div>
+        </div>
+    </script>
 </body>
 </html>

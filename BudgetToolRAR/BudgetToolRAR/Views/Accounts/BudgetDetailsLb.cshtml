@@ -23,170 +23,179 @@
 
 
     <br />
-    <div class="row">
-        <div class="col-md-1">
-            <br />
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-1">
+                <br />
+            </div>
+
+            <div class="col-md-10">
+                <a href="@Url.Action("BudgetCreateLb","Accounts")"><span class="name h4 btn btn-primary">Create a Budget Item</span></a>
+            </div>
         </div>
+        <br />
 
-        <div class="col-md-10">
-            <a href="@Url.Action("BudgetCreateLb","Accounts")"><span class="name h4 btn btn-primary">Create a Budget Item</span></a>
-        </div>
-    </div>
-    <br />
+        <div class="row">
+            <div class="col-md-1">
+                <br />
+            </div>
+            <div class="col-md-10">
+                <section class="widget">
+                    <header>
 
-    <div class="row">
-        <div class="col-md-1">
-            <br />
-        </div>
-        <div class="col-md-10">
-            <section class="widget">
-                <header>
+                        <div class="widget-controls">
+                            @*<a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                                <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>*@
 
-                    <div class="widget-controls">
-                        @*<a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
-                            <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>*@
+                        </div>
+                    </header>
+                    @*<div class="page-tables">*@
+                    <!-- Table -->
+                    @*<div class="table-responsive">*@
 
-                    </div>
-                </header>
-                @*<div class="page-tables">*@
-                <!-- Table -->
-                @*<div class="table-responsive">*@
+                    <h3 class="text-align-center">Income</h3>
 
-                <h3 class="text-align-center">Income</h3>
-
-                @*<table cellpadding="0" cellspacing="0" border="0" id="data-table">*@
-                <div class="mt">
-                    <table id="datatable-table" class="table table-striped table-hover datatable-table">
-                        <thead>
-                            <tr>
-                                <th style="width:200px;">Name</th>
-                                <th style="width:200px;">Category</th>
-                                <th class="right-J" style="width:100px;">Amount</th>
-                                <th class="no-sort text-align-center" style="width:200px;">Edit</th>
-                                <th class="no-sort">Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @* If there are no budget items, will display the heading but will be blank for data, no errors will occur*@
-
-                            @foreach (var item in Model)
-                            {
-                                if (item.BudgetType == false)
-                                {      @* Income item = false *@
+                    @*<table cellpadding="0" cellspacing="0" border="0" id="data-table">*@
+                    <div class="mt">
+                        <table id="datatable-table" class="table table-striped table-hover datatable-table" style="width:100%">
+                            <thead>
                                 <tr>
-                                    <td style="width:200px;">
-                                        @Html.DisplayFor(u => item.Name)
-                                    </td>
-                                    <td style="width:200px;">
-                                        @Html.DisplayFor(u => item.BudgetCategory.Name)
-                                    </td>
-                                    
-                                       @* @Html.DisplayFor(u => item.Amount)*@
-                                    <td class="right-J" style="width:100px;">@String.Format("{0:c}", @item.Amount)</td>
-                                   
-
-
-                                    <td>
-                                        @Html.ActionLink(" ", "BudgetEditLb", "Accounts", new { id = item.Id }, new { @class = "btn  white fa fa-edit", @style = "width:200px;"})
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink(" ", "BudgetDeleteLb", new { id = item.Id }, new { @class = "btn white fa fa-trash" })
-                                    </td>
+                                    <th style="">Name</th>
+                                    <th style="">Category</th>
+                                    <th class="right-J" style="">Amount</th>
+                                    <th > </th>
+                                    <th class="no-sort ">Edit</th>
+                                    <th class="no-sort">Delete</th>
                                 </tr>
+                            </thead>
+                            <tbody>
+                                @* If there are no budget items, will display the heading but will be blank for data, no errors will occur*@
+
+                                @foreach (var item in Model)
+                                {
+                                    if (item.BudgetType == false)
+                                    {      @* Income item = false *@
+                                    <tr>
+                                        <td width="30%">
+                                            @Html.DisplayFor(u => item.Name)
+                                        </td>
+                                        <td width="30%">
+                                            @Html.DisplayFor(u => item.BudgetCategory.Name)
+                                        </td>
+
+                                        @* @Html.DisplayFor(u => item.Amount)*@
+                                        <td  align="right" width="10%">@String.Format("{0:c}", @item.Amount)</td>
+                                        <td width="10%">
+                                            &nbsp;
+                                        </td>
+
+                                        <td>
+                                            @Html.ActionLink(" ", "BudgetEditLb", "Accounts", new { id = item.Id }, new { @class = "btn  white fa fa-edit", @width = "15%" })
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink(" ", "BudgetDeleteLb", new { id = item.Id }, new { @class = "btn white fa fa-trash", @width = "3%" })
+                                        </td>
+                                    </tr>
+                                    }
                                 }
-                            }
-                    </table>
-                </div>
-                <div class="clearfix"></div>
-                @*</div>*@
-                @*</div>*@
-            </section>
-        </div>
-        <div class="col-md-1">
-            <br />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-1">
-            <br />
-        </div>
-        <div class="col-md-10">
-            <section class="widget">
-                <header>
-
-                    <div class="widget-controls">
-                        @*<a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
-                            <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>*@
-
+                        </table>
                     </div>
-                </header>
-                @*<div class="page-tables">*@
-                <!-- Table -->
-                @*<div class="table-responsive">*@
-                <h3 class="text-align-center">Expenses</h3>
-                @*<table cellpadding="0" cellspacing="0" border="0" id="data-table">*@
-                <div class="mt">
-                    <table id="datatable-table2" class="table table-striped table-hover datatable-table">
-                        <thead>
-                            <tr>
-                                <th style="width:200px;">Name</th>
-                                <th style="width:200px;">Category</th>
-                                <th class="right-J" style="width:100px;">Amount</th>
-                                <th class="no-sort text-align-center" style="width:200px;">Edit</th>
-                                <th class="no-sort">Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @* If there are no budget items, will display the heading but will be blank for data, no errors will occur*@
-                            @foreach (var item in Model)
-                            {
-                                if (item.BudgetType == true)
-                                {      @* Expense item = true *@
+                    <div class="clearfix"></div>
+                    @*</div>*@
+                    @*</div>*@
+                </section>
+            </div>
+            <div class="col-md-1">
+                <br />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <br />
+            </div>
+            <div class="col-md-10">
+                <section class="widget">
+                    <header>
+
+                        <div class="widget-controls">
+                            @*<a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                                <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>*@
+
+                        </div>
+                    </header>
+                    @*<div class="page-tables">*@
+                    <!-- Table -->
+                    @*<div class="table-responsive">*@
+                    <h3 class="text-align-center">Expenses</h3>
+                    @*<table cellpadding="0" cellspacing="0" border="0" id="data-table">*@
+                    <div class="mt">
+                        <table id="datatable-table2" class="table table-striped table-hover datatable-table" style="width:100%">
+                            <thead>
                                 <tr>
-                                    <td style="width:200px;">
-                                        @Html.DisplayFor(u => item.Name)
-                                    </td>
-                                    <td style="width:200px;">
-                                        @Html.DisplayFor(u => item.BudgetCategory.Name)
-                                    </td>
-                                  
+                                    <th style="">Name</th>
+                                    <th style="">Category</th>
+                                    <th class="right-J" style="">Amount</th>
+                                    <th> </th>
+                                    <th class="no-sort" style="">Edit</th>
+                                    <th class="no-sort">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @* If there are no budget items, will display the heading but will be blank for data, no errors will occur*@
+                                @foreach (var item in Model)
+                                {
+                                    if (item.BudgetType == true)
+                                    {      @* Expense item = true *@
+                                    <tr>
+                                        <td width="30%" >
+                                            @Html.DisplayFor(u => item.Name)
+                                        </td>
+                                        <td width="30%">
+                                            @Html.DisplayFor(u => item.BudgetCategory.Name)
+                                        </td>
+
                                         @*@Html.DisplayFor(u => item.Amount)*@
-                                    <td class="right-J" style="width:100px;">@String.Format("{0:c}", @item.Amount)</td>
-                                    
-                                    <td>
-                                        @Html.ActionLink(" ", "BudgetEditLb", "Accounts", new { id = item.Id }, new { @class = "btn  white fa fa-edit", @style = "width:200px;" })
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink(" ", "BudgetDeleteLb", new { id = item.Id }, new { @class = "btn white fa fa-trash" })
-                                    </td>
-                                </tr>
+                                        <td class="right-J" width="10%">@String.Format("{0:c}", @item.Amount)</td>
+
+                                        <td width="10%">
+                                            &nbsp;
+                                        </td>
+
+                                        <td>
+                                            @Html.ActionLink(" ", "BudgetEditLb", "Accounts", new { id = item.Id }, new { @class = "btn  white fa fa-edit", @width = "3%" })
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink(" ", "BudgetDeleteLb", new { id = item.Id }, new { @class = "btn white fa fa-trash", @width = "3%" })
+                                        </td>
+                                    </tr>
+                                    }
                                 }
-                            }
-                    </table>
-                </div>
-                <div class="clearfix"></div>
-                @*</div>
-                    </div>*@
-            </section>
+                        </table>
+                    </div>
+                    <div class="clearfix"></div>
+                    @*</div>
+                        </div>*@
+                </section>
 
+            </div>
+            <div class="col-md-1">
+                <br />
+            </div>
         </div>
-        <div class="col-md-1">
-            <br />
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12"><br /></div>
-    </div>
-    <div class="row">
-        <div class="col-md-12"><br /></div>
-    </div>
+        <div class="row">
+            <div class="col-md-12"><br /></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12"><br /></div>
+        </div>
 
 
-    <div class="row">
-        <div class="col-md-12"><br /></div>
-    </div>
+        <div class="row">
+            <div class="col-md-12"><br /></div>
+        </div>
 
-    <!-- page specific scripts -->
+        <!-- page specific scripts -->
 </body>
 
 </html>

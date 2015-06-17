@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href="img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta charset="utf-8">
+    <script>
+        /* yeah we need this empty stylesheet here. It's cool chrome & chromium fix
+           chrome fix https://code.google.com/p/chromium/issues/detail?id=167083
+                      https://code.google.com/p/chromium/issues/detail?id=332189
+        */
+    </script>
+    <title>@ViewBag.Budget Tool</title>
+    <link href="~/css/application.css" rel="stylesheet">
+    <link href="~/Content/Site.css" rel="stylesheet">
+
+    <script type="text/javascript">
+        var appInsights = window.appInsights || function (config) {
+            function s(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } } var t = { config: config }, r = document, f = window, e = "script", o = r.createElement(e), i, u; for (o.src = config.url || "//az416426.vo.msecnd.net/scripts/a/ai.0.js", r.getElementsByTagName(e)[0].parentNode.appendChild(o), t.cookie = r.cookie, t.queue = [], i = ["Event", "Exception", "Metric", "PageView", "Trace"]; i.length;) s("track" + i.pop()); return config.disableExceptionTracking || (i = "onerror", s("_" + i), u = f[i], f[i] = function (config, r, f, e, o) { var s = u && u(config, r, f, e, o); return s !== !0 && t["_" + i](config, r, f, e, o), s }), t
+        }({
+            instrumentationKey: "4548f86c-9a71-424a-a91f-4daa9b932d45"
+        });
+
+        window.appInsights = appInsights;
+        appInsights.trackPageView();
+    </script>
+</head>
+<body class="background-dark">
+    <div class="row">
+        <div class="col-md-12 col-md-offset-5">
+            <div class="logo">
+                <h3 class="aux-text hidden-xs text-left">Budget Tool</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar">
+        <ul class="nav navbar-nav navbar-right pull-right">
+
+            <li class="visible-xs">
+                <a href="#"
+                   class="btn-navbar"
+                   data-toggle="collapse"
+                   data-target=".sidebar"
+                   title="">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </li>
+            @*<li class="visible-xs">
+                <a href="#"
+                   class="btn-navbar"
+                   data-toggle="collapse"
+                   data-target=".loginbar"
+                   title="">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </li>*@
+        </ul>
+    </div>
+
+
+    <nav id="sidebar" class="sidebar nav-collapse collapse" aria-expanded="false" style="height: 0px;">
+        <ul id="side-nav" class="side-nav">
+            <li class="panel ">
+                <br/><br/><br />
+                <a class="toggle"
+                   data-parent="#side-nav" href="@Url.Action("MainAdmin","DashBrd")"><i class="fa fa-bar-chart"></i><span class="name h4">Dashboard</span></a>
+            </li>
+            <li class="panel ">
+
+                <a class="toggle"
+                   data-parent="#side-nav" href="@Url.Action("HouseList","Households")"><i class="fa fa-home"></i><span class="name h4">Household</span></a>
+
+            </li>
+            <li class="panel ">
+                <a class="toggle"
+                   data-parent="#side-nav" href="@Url.Action("AccountsIndexLb","Accounts")"><i class="fa fa-money"></i><span class="name h4">Accounts</span></a>
+            </li>
+            <li class="panel ">
+                <a class="toggle"
+                   data-parent="#side-nav" href="@Url.Action("BudgetDetailsLb","Accounts")"><i class="fa fa-usd"></i><span class="name h4">Budget</span></a>
+
+            </li>
+            <li class="panel ">
+                <a class="toggle"
+                   data-parent="#side-nav" href="@Url.Action("CreateCategoryLb","Accounts")"><i class="fa fa-folder-open"></i><span class="name h4">Categories</span></a>
+
+            </li>
+        </ul>
+
+
+    </nav>
+    <nav id="loginbar" class="sidebar nav-collapse navbar-nav navbar-right collapse" aria-expanded="false" style="height: 0px;">
+        <ul id="" class="">
+            <li class="panel">
+                <div class="nav ">
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <nav class="wrap">
+
+
+        <div class="content container">
+            @RenderBody()
+        </div>
+        </nav>
+        @*<div class="loader-wrap hiding hide">
+                <i class="fa fa-circle-o-notch fa-spin"></i>
+            </div>*@
+        @*<div class="loader-wrap hiding hide">
+                <i class="fa fa-circle-o-notch fa-spin"></i>
+            </div>*@
+
+        <!-- common libraries. required for every page-->
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        <script src="/lib/jquery-pjax/jquery.pjax.js"></script>
+        <script src="/lib/widgster/widgster.js"></script>
+        <script src="/lib/underscore/underscore.js"></script>
+
+        <!-- common application js -->
+        <script src="/js/app.js"></script>
+        <script src="/js/settings.js"></script>
+        @RenderSection("scripts", required: false)
+        @RenderSection("css", required: false)
+
+        <!-- common templates -->
+        <script type="text/template" id="settings-template">
+            <div class="setting clearfix">
+                <div>Background</div>
+                <div id="background-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+                    <% dark = background == 'dark'; light = background == 'light';%>
+                    <button type="button" data-value="dark" class="btn btn-sm btn-default <%= dark? 'active' : '' %>">Dark</button>
+                    <button type="button" data-value="light" class="btn btn-sm btn-default <%= light? 'active' : '' %>">Light</button>
+                </div>
+            </div>
+            <div class="setting clearfix">
+                <div>Sidebar on the</div>
+                <div id="sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+                    <% onRight = sidebar == 'right'%>
+                    <button type="button" data-value="left" class="btn btn-sm btn-default <%= onRight? '' : 'active' %>">Left</button>
+                    <button type="button" data-value="right" class="btn btn-sm btn-default <%= onRight? 'active' : '' %>">Right</button>
+                </div>
+            </div>
+            <div class="setting clearfix">
+                <div>Sidebar</div>
+                <div id="display-sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+                    <% display = displaySidebar%>
+                    <button type="button" data-value="true" class="btn btn-sm btn-default <%= display? 'active' : '' %>">Show</button>
+                    <button type="button" data-value="false" class="btn btn-sm btn-default <%= display? '' : 'active' %>">Hide</button>
+                </div>
+            </div>
+            <div class="setting clearfix">
+                <div>White Version</div>
+                <div>
+                    <a href="../white/index.html" class="btn btn-sm btn-default">&nbsp; Switch &nbsp;   <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/template" id="sidebar-settings-template">
+            <% auto = sidebarState == 'auto'%>
+            <% if (auto) {%>
+            <button type="button"
+                    data-value="icons"
+                    class="btn-icons btn btn-transparent btn-sm">
+                Icons
+            </button>
+            <button type="button"
+                    data-value="auto"
+                    class="btn-auto btn btn-transparent btn-sm">
+                Auto
+            </button>
+            <%} else {%>
+            <button type="button"
+                    data-value="auto"
+                    class="btn btn-transparent btn-sm">
+                Auto
+            </button>
+            <% } %>
+        </script>
+
+        <!-- page specific scripts -->
+        <!-- page libs -->
+        <script src="/lib/slimScroll/jquery.slimscroll.min.js"></script>
+        <script src="/lib/jquery.sparkline/index.js"></script>
+
+        <script src="/lib/backbone/backbone.js"></script>
+        <script src="/lib/backbone.localStorage/backbone.localStorage-min.js"></script>
+
+        <script src="/lib/d3/d3.min.js"></script>
+        <script src="/lib/nvd3/nv.d3.min.js"></script>
+
+        <!-- page application js -->
+        <script src="/js/index.js"></script>
+        <script src="/js/chat.js"></script>
+
+        <!-- page template -->
+        <script type="text/template" id="message-template">
+            <div class="sender pull-left">
+                <div class="icon">
+                    <img src="/img/2.jpg" class="img-circle" alt="">
+                </div>
+                <div class="time">
+                    just now
+                </div>
+            </div>
+            <div class="chat-message-body">
+                <span class="arrow"></span>
+                <div class="sender"><a href="#">Tikhon Laninga</a></div>
+                <div class="text">
+                    <%- text %>
+                </div>
+            </div>
+        </script>
+</body>
+</html>

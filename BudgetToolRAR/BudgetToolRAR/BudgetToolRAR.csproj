@@ -235,6 +235,7 @@
     <Content Include="Content\css\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\css\font-awesome\font\fontawesome-webfont.svg" />
     <Content Include="css\application.css" />
+    <Content Include="css\_application.css" />
     <Content Include="css\fonts\bootstrap\glyphicons-halflings-regular.svg" />
     <Content Include="css\fonts\font-awesome\fontawesome-webfont.svg" />
     <Content Include="favicon.ico" />
@@ -1983,7 +1984,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\__Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Indexbkp.cshtml" />
@@ -2059,6 +2060,7 @@
     <Content Include="Views\DashBrd\MainAdmin.cshtml" />
     <Content Include="Views\Accounts\TransactionDetailsBKP.cshtml" />
     <Content Include="Views\Accounts\BudgetDetailsBKP.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
