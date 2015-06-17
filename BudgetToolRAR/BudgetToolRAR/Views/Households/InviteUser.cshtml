@@ -17,58 +17,58 @@
 <body class="background-dark">
     <br />
     <div class="row">
-       
+
         <div class="col-md-8 col-md-offset-0">
             <h3 class="text-align-right">Enter the Email of the person you would like to invite.</h3>
         </div>
-       
+
     </div>
-    
-    
+
+
     <div class="row">
-        
-            <div class="col-md-8 col-md-offset-2 invite-widget-container2">
-                <section class="widget login-widget">
-                    <header class="text-align-center">
-                        <h4>Invite User</h4>
-                    </header>
-                    <div class="body">
-                        @using (Html.BeginForm("InviteUser", "Households", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <fieldset>
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.Email)
+        <div class="col-md-8 col-md-offset-2 invite-widget-container2">
+            <section class="widget login-widget">
+                <header class="text-align-center">
+                    <h4>Invite User</h4>
+                </header>
+                <div class="body">
+                    @using (Html.BeginForm("InviteUser", "Households", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <fieldset style="padding:15px;">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-user"></i>
-                                        </span>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Email)
 
-                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg input-transparent" })
-                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-user"></i>
+                                    </span>
 
-                                    </div>
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg input-transparent" })
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
                                 </div>
-
-                            </fieldset>
-                            <div class="form-actions">
-                                <button type="submit" class="btn btn-block btn-lg btn-danger">
-                                    <span class="small-circle"><i class="fa fa-caret-right"></i></span>
-                                    <small>Send email</small>
-                                </button>
-                                <br />
                             </div>
 
-                        }
-                    </div>
-                </section>
-            </div>
-        
+                        </fieldset>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-block btn-lg btn-danger">
+                                <span class="small-circle"><i class="fa fa-caret-right"></i></span>
+                                <small>Send email</small>
+                            </button>
+                            <br />
+                        </div>
+
+                    }
+                </div>
+            </section>
+        </div>
+
     </div>
-    
+
 
     <!-- page specific scripts -->
 
